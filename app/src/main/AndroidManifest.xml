@@ -25,7 +25,7 @@
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage"/>
         <activity android:name=".CourseCreatingActivity"/>
-        
+        // I was here
         <activity android:name=".Login_form">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
