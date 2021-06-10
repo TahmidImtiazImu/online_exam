@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".teacher_homepage">
+    <!--        android:layout_marginTop="200dp"-->
+    <!--        android:layout_marginLeft="150dp"-->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="courses"
+        android:textSize="32dp"
+        android:layout_marginLeft="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/coursesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:nestedScrollingEnabled="true"/>
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:onClick="btn_logout" />
+
+    <Button
+        android:id="@+id/go_to_assignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assignment"
+        android:onClick="btn_assignment" />
+
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Create_course"
+        android:id="@+id/course_create"
+        android:icon="@drawable/ic_baseline_add_circle"
+        app:showAsAction="ifRoom"/>
+
+    <item android:title="edit profile"
+        android:id="@+id/profile_edit"
+        android:icon="@drawable/ic_baseline_person"
+        app:showAsAction="ifRoom" />
+
+    <item android:title="Instruction"
+        android:id="@+id/inst"
+        app:showAsAction="never" />
+
+    <item android:title="Log Out"
+        android:id="@+id/log"
+        app:showAsAction="never" />
+
+</menu>
