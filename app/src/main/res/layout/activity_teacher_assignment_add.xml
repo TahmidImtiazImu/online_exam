@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teacher_assignment_add">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Create New Assignment"
+        android:textSize="20dp"
+        android:textColor="@color/purple_500"
+        android:id="@+id/create_assignment"
+        >
+    </TextView>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="@color/material_on_background_disabled"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/create_assignment"
+        android:id="@+id/assignment_topic"
+        >
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="Assignment Topic"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:id="@+id/enter_name"
+            android:layout_marginLeft="25dp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/assignment_topic"
+        android:id="@+id/select_file"
+        android:textColor="@color/black"
+        android:hint="Select file from storage"
+        >
+
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_file"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/material_on_surface_stroke"
+        android:text="Upload File"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:id="@+id/upload_file"
+        >
+
+    </Button>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemBackground="@color/cardview_light_background"
+
+        app:menu="@menu/stream_navigation"
+        android:layout_alignParentBottom="true"
+        >
+<!--        app:itemTextColor="@drawable/selector"-->
+<!--        app:itemIconTint="@drawable/selector"-->
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

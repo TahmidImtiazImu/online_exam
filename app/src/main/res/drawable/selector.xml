@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_selected="true"
+        android:color="@color/common_google_signin_btn_text_dark_disabled"/>
+    <item
+        android:state_selected="false"
+        android:color="@android:color/black"/>
+
+</selector>

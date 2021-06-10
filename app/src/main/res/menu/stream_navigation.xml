@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+      <item
+          android:id="@+id/dashboard"
+          android:title="@string/dashboard"
+          android:icon="@drawable/ic_baseline_dashboard"/>
+      <item
+          android:id="@+id/add_assignment"
+          android:title="@string/add"
+          android:icon="@drawable/ic_baseline_add"/>
+
+      <item
+          android:id="@+id/people"
+          android:title="@string/people"
+          android:icon="@drawable/ic_baseline_people"/>
+
+</menu>

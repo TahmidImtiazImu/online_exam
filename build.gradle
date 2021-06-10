@@ -1,0 +1,67 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+buildscript {
+    repositories {
+        google()
+       // mavenCentral()
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://maven.springframework.org/release"
+        }
+        maven {
+            url "https://maven.restlet.com"
+        }
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.1'
+         classpath 'com.google.gms:google-services:4.3.8'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
+     //   classpath 'com.google.gms:google-services:4.3.8'
+
+        //   classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral { url "https://jcenter.bintray.com/"}
+       // mavenCentral()
+       // jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+
+//task clean(type: Delete) {
+  //  delete rootProject.buildDir
+//}
+
+//buildscript {
+//    repositories {
+//        // Check that you have the following line (if not, add it):
+//        google()  // Google's Maven repository
+//    }
+//    dependencies {
+//        ...
+//        // Add this line
+//        classpath 'com.google.gms:google-services:4.3.8'
+//    }
+//}
+//
+//allprojects {
+//    ...
+//    repositories {
+//        // Check that you have the following line (if not, add it):
+//        google()  // Google's Maven repository
+//        ...
+//    }
+//}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

@@ -1,0 +1,123 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+//    id "com.google.protobuf" version "0.8.14"
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    useLibrary  'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.example.online_exam"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+}
+
+
+
+
+apply plugin: 'com.android.application'
+// Add this line
+//apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+}
+dependencies {
+    implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.firebase:firebase-firestore:23.0.1'
+}
+//testImplementation 'junit:junit:4.13.2.'
+// androidTestImplementation "com.adnroid.support.test.runner:1.0.2"
+dependencies {
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
+
+    implementation 'com.google.protobuf:protobuf-javalite:3.15.6'
+    //implementation 'com.google.firebase:firebase-database'
+    //implementation 'io.grpc:grpc-okhttp:1.38.0'
+    implementation 'io.grpc:grpc-protobuf-lite:1.38.0'
+    implementation 'io.grpc:grpc-stub:1.38.0'
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+//   implementation  "com.google.firebase.database.DataSnapshot"
+
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "com.google.android.material:material:1.3.0"
+}
+
+android{
+    defaultConfig {
+
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+dependencies {
+
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+    //...
+    implementation 'com.android.support:multidex:1.0.3'
+}
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.10.0"
+//    }
+//
+//    generateProtoTasks {
+//        all().each { task ->
+//            task.builtins {
+//                java {
+//                    option 'lite'
+//                }
+//            }
+//        }
+//    }
+//}

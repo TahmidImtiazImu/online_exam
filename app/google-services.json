@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561324252920",
+    "project_id": "du-3idiots",
+    "storage_bucket": "du-3idiots.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561324252920:android:86e1aa864f67c20099250d",
+        "android_client_info": {
+          "package_name": "com.example.online_exam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561324252920-tj697jaqsg8n2lk61qifskdvss31shoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACOSKoZugaEXPXog2Njjn4_ChBN5hJhxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561324252920-tj697jaqsg8n2lk61qifskdvss31shoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

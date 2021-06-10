@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_shadow_start_color"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".Login_form">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/log"
+        android:padding="15dp"
+        >
+    </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="@color/material_on_background_disabled"
+        android:layout_margin="10dp"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:id="@+id/username"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/emailinput"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:textColorHint="@color/material_on_background_disabled"-->
+<!--        android:layout_margin="10dp"-->
+<!--        >-->
+
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Email"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="text"-->
+<!--            android:textSize="20sp"-->
+<!--            android:id="@+id/email"-->
+<!--            />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="@color/material_on_background_disabled"
+        android:layout_margin="10dp"
+        app:passwordToggleEnabled="true"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            android:id="@+id/password"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+<!--    <RadioGroup-->
+<!--        android:id="@+id/role"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        >-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/teacher"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Teacher"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginLeft="5dp"-->
+
+<!--            />-->
+<!--        <RadioButton-->
+<!--            android:id="@+id/student"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Student"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            />-->
+
+<!--    </RadioGroup>-->
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:text="LOG IN"
+        android:textSize="22dp"
+        android:textColor="@color/material_on_primary_emphasis_medium"
+        android:layout_marginTop="10dp"
+        android:onClick="btn_login"
+        >
+
+    </Button>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/material_on_background_disabled"
+        android:text="NO ACCOUNT? REGISTER"
+        android:textSize="22dp"
+        android:textColor="@color/material_on_primary_emphasis_medium"
+        android:layout_marginTop="10dp"
+        android:onClick="btn_RegisterForm"
+        >
+
+    </Button>
+
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="10dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/black"
+        />
+</LinearLayout>
