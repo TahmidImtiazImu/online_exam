@@ -23,6 +23,9 @@
         <activity android:name=".student_homepage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
+        <activity android:name=".teacher_homepage"/>
+        <activity android:name=".CourseCreatingActivity"/>
+        
         <activity android:name=".Login_form">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
