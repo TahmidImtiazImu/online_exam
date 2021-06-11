@@ -25,7 +25,7 @@
         android:textColorHint="@color/material_on_background_disabled"
         android:layout_margin="10dp"
         android:layout_below="@+id/create_assignment"
-        android:id="@+id/assignment_topic"
+        android:id="@+id/assignment_topic_input"
         >
 
         <EditText
@@ -35,7 +35,7 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="20sp"
-            android:id="@+id/enter_name"
+            android:id="@+id/assignment_topic"
             android:layout_marginLeft="25dp"
 
             />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/assignment_topic"
+        android:layout_below="@+id/assignment_topic_input"
         android:id="@+id/select_file"
         android:textColor="@color/black"
         android:hint="Select file from storage"

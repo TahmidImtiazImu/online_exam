@@ -26,7 +26,7 @@ public class teacher_assignment_page extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
 
-       bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override
            public boolean onNavigationItemSelected(@NonNull  MenuItem menuItem) {
                switch(menuItem.getItemId()) {
