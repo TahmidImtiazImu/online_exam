@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+
 public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.ViewHolder> {
 
     private final List<ModelCourseList>coursesList;

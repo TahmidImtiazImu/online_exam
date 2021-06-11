@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class teacher_assignment_add extends AppCompatActivity {
 
-    EditText select_file;
+    EditText select_file,assignment_topic;
     Button upload_file ;
 
     StorageReference storageReference ;
@@ -65,6 +65,7 @@ public class teacher_assignment_add extends AppCompatActivity {
         });
 
         select_file = findViewById(R.id.select_file) ;
+        assignment_topic = findViewById(R.id.assignment_topic) ;
         upload_file = findViewById(R.id.upload_file) ;
 
         storageReference = FirebaseStorage.getInstance().getReference() ;
