@@ -12,6 +12,8 @@ import com.example.online_exam.course_helper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+//here my comment
+
 public class CourseCreatingActivity extends AppCompatActivity {
 
     private String course_name;
