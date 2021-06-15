@@ -9,14 +9,17 @@
 
 
     <LinearLayout
+        android:id="@+id/single_course_display"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="vertical"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/purple_200"
+        android:background="@color/gray"
         android:padding="8dp"
-        android:onClick="single_course_click">
+        android:onClick="single_course_clicked"
+        android:clickable="true">
+
 
         <LinearLayout
             android:layout_width="wrap_content"

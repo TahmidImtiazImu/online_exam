@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Objects;
+
 public class student_homepage extends AppCompatActivity {
 
     Button logout ;
@@ -14,7 +16,7 @@ public class student_homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_homepage);
-        getSupportActionBar().setTitle("Student_Homepage");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Student_Homepage");
         logout = (Button)findViewById(R.id.logout) ;
 
     }

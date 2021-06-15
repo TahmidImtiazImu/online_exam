@@ -9,7 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,8 @@ import java.util.Objects;
 
 public class teacher_assignment_add extends AppCompatActivity {
 
+    String teacher_username;
+
     EditText select_file,assignment_topic;
     Button upload_file ;
 
@@ -38,6 +42,10 @@ public class teacher_assignment_add extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_add);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        teacher_username = sp.getString("UserName", "");
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation) ;
