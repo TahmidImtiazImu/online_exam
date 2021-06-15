@@ -23,11 +23,5 @@ public class putPdf {
         this.name = name;
     }
 
-    public String getUrl() {
-        return Url;
-    }
 
-    public void setUrl(String url) {
-        Url = url;
-    }
 }
