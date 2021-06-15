@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class InstructActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class InstructActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.instruction);
         this.setTitle("Instruction");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         textView = findViewById(R.id.instruction_show);
 

@@ -4,9 +4,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+<<<<<<< HEAD
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+>>>>>>> 441dcd3d58d2e6c92f45c508dd89e8f92297674d
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,11 +30,18 @@ import java.util.Objects;
 
 public class teacher_assignment_add extends AppCompatActivity {
 
+<<<<<<< HEAD
     EditText select_file, assignment_topic;
     Button upload_file;
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
+=======
+    String teacher_username;
+
+    EditText select_file,assignment_topic;
+    Button upload_file ;
+>>>>>>> 441dcd3d58d2e6c92f45c508dd89e8f92297674d
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -36,6 +49,10 @@ public class teacher_assignment_add extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_add);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        teacher_username = sp.getString("UserName", "");
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

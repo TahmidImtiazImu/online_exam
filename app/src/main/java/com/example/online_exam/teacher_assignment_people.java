@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,12 +16,18 @@ import java.util.Objects;
 
 public class teacher_assignment_people extends AppCompatActivity {
 
+    String teacher_username;
+
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_people);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        teacher_username = sp.getString("UserName", "");
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation) ;

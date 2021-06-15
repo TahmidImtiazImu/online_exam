@@ -7,11 +7,12 @@
     tools:context=".teacher_assignment_page">
 
     <TextView
+        android:id="@+id/current_courseName"
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Username"
+        android:text="CourseName"
         android:textSize="20dp"
         android:textColor="@color/purple_500"
         >

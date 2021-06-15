@@ -3,7 +3,9 @@
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,12 @@ import java.util.Objects;
     Button log_in ;
     ProgressBar progressBar ;
     FirebaseAuth fauth ;
+
+    Intent usernameIntent;
+
+    SharedPreferences sp;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +62,7 @@ import java.util.Objects;
         progressBar = (ProgressBar) findViewById(R.id.simpleProgressBar) ;
         fauth = FirebaseAuth.getInstance() ;
 
+        sp = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
             log_in.setOnClickListener(v -> {
             String Userentername = Objects.requireNonNull(usernameinput.getEditText()).getText().toString() ;
@@ -103,18 +112,36 @@ import java.util.Objects;
                         usernameinput.setError(null);
                         usernameinput.setErrorEnabled(false);
                         String passdb = dataSnapshot.child(Userentername).child("Password").getValue(String.class) ;
+                        assert passdb != null;
                         if(passdb.equals(UserenterPassword)){
 
                             usernameinput.setError(null);
                             usernameinput.setErrorEnabled(false);
 
+                            SharedPreferences.Editor editor = sp.edit();
+
                             String Role = dataSnapshot.child(Userentername).child("Role").getValue(String.class) ;
-                            if(Role.equals("Teacher"))    {startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
-                            Toast.makeText(Login_form.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                            assert Role != null;
+                            if(Role.equals("Teacher"))    {
+                                usernameIntent = new Intent(getApplicationContext(),teacher_homepage.class);
+                                startActivity(usernameIntent);
+
+                                editor.putString("UserName", Userentername);
+                                editor.commit();
+                                //usernameIntent.putExtra("currentUsername",Userentername);
+
+                                Toast.makeText(Login_form.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 
                             }
-                            else    {startActivity(new Intent(getApplicationContext(),student_homepage.class));
-                             Toast.makeText(Login_form.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                            else    {
+                                usernameIntent = new Intent(getApplicationContext(),student_homepage.class);
+                                startActivity(usernameIntent);
+
+                                editor.putString("UserName", Userentername);
+                                editor.commit();
+                                //usernameIntent.putExtra("currentUsername",Userentername);
+
+                                Toast.makeText(Login_form.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 
                             }
                         }

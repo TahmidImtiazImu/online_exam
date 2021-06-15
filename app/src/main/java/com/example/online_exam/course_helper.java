@@ -2,14 +2,15 @@ package com.example.online_exam;
 
 public class course_helper {
 
-    private String courseName, courseCode;
+    private String courseName, courseCode, currentUser;
 
     public course_helper() {
     }
 
-    public course_helper(String courseName, String courseCode) {
+    public course_helper(String courseName, String courseCode, String currentUser) {
         this.courseName = courseName;
         this.courseCode = courseCode;
+        this.currentUser = currentUser;
     }
 
     public String getCourseName() {
@@ -26,5 +27,13 @@ public class course_helper {
 
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
 }

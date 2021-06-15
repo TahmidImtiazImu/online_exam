@@ -4,97 +4,148 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+//import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class teacher_homepage extends AppCompatActivity {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    List<ModelCourseList>coursesList;
+    public List<ModelCourseList>coursesList;
     AdapterCourseList adapter;
-    Button logout ;
+    //Button logout ;
+
+    //Intent userIntent = getIntent();
+    //Intent intent;
+
+    public FirebaseDatabase db = FirebaseDatabase.getInstance();
+    public DatabaseReference root = db.getReference("courses");
 
     String Course_name;
     String Course_code;
+    String teacher_username;
+    String current_userName;
 
-    int course_count;
+    //int course_count;
 
-    String[] courseNameArray, courseCodeArray;
+    //String[] courseNameArray, courseCodeArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_homepage);
         // this.setTitle("Homepage");
-        getSupportActionBar().setTitle("Teacher_Homepage");
-        logout = (Button)findViewById(R.id.logout) ;
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Teacher Homepage");
+        //logout = (Button)findViewById(R.id.logout) ;
+        //teacher_username = userIntent.getStringExtra("currentUsername");
 
-        initData();
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        teacher_username = sp.getString("UserName", "");
+
+        //initData();
         initRecyclerView();
 
     }
 
-    private void new_created_course() {
+//    private void new_created_course() {
 
-        boolean isItHere = getIntent().getBooleanExtra("isThereCourse",false);
+//        boolean isItHere = getIntent().getBooleanExtra("isThereCourse",false);
 
-        if(isItHere == true) {
+//        if(isItHere == true) {
 
-            Course_name = getIntent().getStringExtra("passed_course_name");
-            Course_code = getIntent().getStringExtra("passed_course_code");
+//            Course_name = getIntent().getStringExtra("passed_course_name");
+//            Course_code = getIntent().getStringExtra("passed_course_code");
 
-            courseNameArray[course_count] = Course_name;
-            courseCodeArray[course_count] = Course_code;
+ //           courseNameArray[course_count] = Course_name;
+//            courseCodeArray[course_count] = Course_code;
 
-            coursesList.add(new ModelCourseList(Course_name,Course_code));
-        }
+//            coursesList.add(new ModelCourseList(Course_name,Course_code));
+//        }
 
-    }
+//    }
 
-    private void initData() {
+//    private void initData() {
 
-        coursesList = new ArrayList<>();
+//
 
-        courseNameArray = new String[100];
-        courseCodeArray = new String[100];
+ //       courseNameArray = new String[100];
+ //       courseCodeArray = new String[100];
 
-        //coursesList.add(new ModelCourseList("CSE","4321"));
+//        coursesList.add(new ModelCourseList("CSE","4321"));
 
-        int travers = 0;
+//        int travers = 0;
 
-        course_count = 0;
+//        course_count = 0;
 
-        while(courseNameArray[travers] != null) {
+ //       while(courseNameArray[travers] != null) {
 
-            travers++;
-            course_count++;
+ //           travers++;
+ //           course_count++;
 
-            coursesList.add(new ModelCourseList(courseNameArray[travers],courseCodeArray[travers]));
-        }
+ //           coursesList.add(new ModelCourseList(courseNameArray[travers],courseCodeArray[travers]));
+//        }
 
-        new_created_course();
+//        new_created_course();
 
-    }
+ //   }
 
     private void initRecyclerView() {
+
+        coursesList = new ArrayList<>();
 
         recyclerView=findViewById(R.id.coursesRecyclerView);
         layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter= new AdapterCourseList(coursesList);
+        adapter= new AdapterCourseList(coursesList, this);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    current_userName = dataSnapshot.child("currentUser").getValue(String.class);
+
+                    if(teacher_username.equals(current_userName)) {
+
+                        Course_code = dataSnapshot.child("courseCode").getValue(String.class);
+                        Course_name = dataSnapshot.child("courseName").getValue(String.class);
+                        coursesList.add(new ModelCourseList(Course_name, Course_code));
+                    }
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //coursesList.add(new ModelCourseList("CSE", "12346753"));
+        //adapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -110,7 +161,7 @@ public class teacher_homepage extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.course_create:
-                Toast.makeText(this, "Create you course", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Create your course", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),CourseCreatingActivity.class));
                 return true;
 
@@ -121,18 +172,13 @@ public class teacher_homepage extends AppCompatActivity {
 
             case R.id.log:
                 Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
+                current_userName = "";
+                startActivity(new Intent(getApplicationContext(),Login_form.class));
                 return true;
         }
 
 
         return super.onOptionsItemSelected(item);
-    }
-    public void btn_logout(View view) {
-        startActivity(new Intent(getApplicationContext(),Login_form.class));
-    }
-
-    public void btn_assignment(View view) {
-        startActivity(new Intent(getApplicationContext(),teacher_assignment_page.class));
     }
 
 }
