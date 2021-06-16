@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTintMode="screen"
+    tools:context=".LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/gradv2"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/ic_wave_grad"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:text="Hello there, \nWelcome back"
+            android:textSize="33sp"
+            android:textColor="@color/black"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your username"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPersonName">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your Password"
+            android:drawableLeft="@drawable/ic_outline_lock_24"
+            android:drawableStart="@drawable/ic_outline_lock_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPassword">
+
+        </EditText>
+        <TextView
+            android:id="@+id/txtForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="forgot Password?"
+            android:clickable="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            />
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="LOG IN"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/round_bg">
+
+        </Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Here? Then"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:textColor="@color/black"/>
+
+        <ProgressBar
+            android:id="@+id/simpleProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/black"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

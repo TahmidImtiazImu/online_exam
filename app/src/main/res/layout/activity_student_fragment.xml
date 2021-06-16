@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/regNameS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your Full Name"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPersonName">
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/regUserS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your username"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPersonName">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regEmailS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your Email"
+            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="5dp"
+            android:inputType="textEmailAddress">
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/regPasswordS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Type your Password"
+            android:drawableLeft="@drawable/ic_outline_lock_24"
+            android:drawableStart="@drawable/ic_outline_lock_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPassword">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regConfirmPasswordS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Confirm Password"
+            android:drawableLeft="@drawable/ic_outline_lock_24"
+            android:drawableStart="@drawable/ic_outline_lock_24"
+            android:drawablePadding="5dp"
+            android:inputType="textPassword">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regInstitutionS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Institution "
+            android:drawablePadding="5dp"
+            android:inputType="text">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regBatchS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Batch "
+            android:drawablePadding="5dp"
+            android:inputType="text">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regAC_yearS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Academic Year"
+            android:drawablePadding="5dp"
+            android:inputType="text">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/btnSignUpStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="SIGN UP"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/round_bg">
+
+        </Button>
+
+        <Button
+            android:id="@+id/backToLoginStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="OOPS! I'VE AN Account"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/round_bg">
+
+        </Button>
+    </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/full_name"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Full Name"-->
+    <!--                android:inputType="text"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/username"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Username(Unique)"-->
+    <!--                android:inputType="text"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/Email"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Email(Unique)"-->
+    <!--                android:inputType="textEmailAddress"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/Pass"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Password"-->
+    <!--                android:inputType="textPassword"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/Pass_confirm"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Confirm Password"-->
+    <!--                android:inputType="textPassword"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/institution"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Institution"-->
+    <!--                android:inputType="text"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/batch"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Batch"-->
+    <!--                android:inputType="text"/>-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <Button-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="15dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_marginLeft="20dp"-->
+    <!--            android:text="Sign Up"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            android:background="@drawable/round_bg">-->
+
+    <!--        </Button>-->
+    <!--    </LinearLayout>-->
+</ScrollView>
