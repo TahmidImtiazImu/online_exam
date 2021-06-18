@@ -79,12 +79,46 @@
 
         </EditText>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/male_femaleS">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/blue" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="male"
+                android:textSize="20sp"
+                android:textColor="@color/gray"
+                android:paddingRight="10dp"
+                android:id="@+id/maleS"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="female"
+                android:textSize="20sp"
+                android:textColor="@color/gray"
+                android:id="@+id/femaleS"/>
+        </RadioGroup>
+
         <EditText
             android:id="@+id/regInstitutionS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:hint="Institution "
+            android:hint="Institution"
             android:drawablePadding="5dp"
             android:inputType="text">
 
@@ -107,6 +141,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="Academic Year"
+            android:drawablePadding="5dp"
+            android:inputType="text">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/regCurrentSemS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Current Semester (Optional)"
             android:drawablePadding="5dp"
             android:inputType="text">
 
@@ -141,6 +186,19 @@
             android:background="@drawable/round_bg">
 
         </Button>
+
+        <ProgressBar
+            android:id="@+id/simpleProgressBarS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/blue"
+            />
+
     </LinearLayout>
 
     <!--    <LinearLayout-->
