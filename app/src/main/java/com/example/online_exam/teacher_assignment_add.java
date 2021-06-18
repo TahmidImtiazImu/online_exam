@@ -31,14 +31,14 @@ import java.util.Objects;
 public class teacher_assignment_add extends AppCompatActivity {
 
 
-    EditText select_file, assignment_topic;
+    EditText select_file, assignment_topic, assignment_time;
     Button upload_file;
-
     StorageReference storageReference;
     DatabaseReference databaseReference;
 
-    String teacher_username;
-
+    public String teacher_username;
+    SharedPreferences course_code_sp ;
+    public  String current_course_code;
 
 
     @SuppressLint("NonConstantResourceId")
@@ -51,6 +51,10 @@ public class teacher_assignment_add extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         teacher_username = sp.getString("UserName", "");
+
+        course_code_sp = getApplicationContext().getSharedPreferences("course_code_prefs", Context.MODE_PRIVATE);
+
+        current_course_code = course_code_sp.getString("Teacher_Course_Code", "");
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -76,6 +80,7 @@ public class teacher_assignment_add extends AppCompatActivity {
 
         select_file = findViewById(R.id.select_file);
         assignment_topic = findViewById(R.id.assignment_topic);
+        assignment_time = findViewById(R.id.time_duration) ;
         upload_file = findViewById(R.id.upload_file);
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -119,13 +124,29 @@ public class teacher_assignment_add extends AppCompatActivity {
                     while(!uriTask.isComplete()) ;
                     Uri uri = uriTask.getResult() ;
 
+                    String Assignment_topic = assignment_topic.getText().toString();
+                    String Assignment_time = assignment_time.getText().toString();
                     String name = select_file.getText().toString();
                     String Url = Objects.requireNonNull(uri).toString() ;
+                    String unique_assignment = current_course_code+Assignment_topic;
+                    if(Assignment_topic.isEmpty()) {
+                        assignment_topic.setError("Topic name is required");
+                        Toast.makeText(teacher_assignment_add.this, "Topic name is empty", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(Assignment_time.isEmpty()) {
+                        assignment_time.setError("Time is required");
+                        Toast.makeText(teacher_assignment_add.this, "Time is empty", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                    // putPdf putPdf = new putPdf(select_file.getText().toString(), Objects.requireNonNull(uri).toString());
                     HashMap<String, String> hashMap = new HashMap<>() ;
+                    hashMap.put("Assignment_topic",Assignment_topic) ;
+                    hashMap.put("Assignment_time",Assignment_time) ;
                     hashMap.put("pdf_file_name",name);
                     hashMap.put("pdf_file_url",Url) ;
-                    databaseReference.child(name).setValue(hashMap);
+                    hashMap.put("Course_code",current_course_code) ;
+                    databaseReference.child(unique_assignment).setValue(hashMap);
                     Toast.makeText(teacher_assignment_add.this,"File uploaded",Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
 

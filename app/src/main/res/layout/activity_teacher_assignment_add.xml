@@ -41,12 +41,36 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="@color/material_on_background_disabled"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/assignment_topic_input"
+        android:id="@+id/time_duration_input"
+        >
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="Time duration"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:id="@+id/time_duration"
+            android:layout_marginLeft="25dp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <EditText
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/assignment_topic_input"
+        android:layout_below="@+id/time_duration_input"
         android:id="@+id/select_file"
         android:textColor="@color/black"
         android:hint="Select file from storage"

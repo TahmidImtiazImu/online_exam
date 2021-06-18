@@ -3,7 +3,7 @@
     package="com.example.online_exam">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
+        <activity android:name=".teacher_assignment_pageview"></activity>
         <activity
             android:name=".InstructActivity"
-            android:parentActivityName=".teacher_homepage"/>
+            android:parentActivityName=".teacher_homepage" />
         <activity android:name=".teacher_assignment_people" />
         <activity android:name=".teacher_assignment_add" />
         <activity
@@ -27,9 +28,7 @@
         <activity android:name=".student_homepage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
-        <activity android:name=".teacher_homepage"/>
-
-
+        <activity android:name=".teacher_homepage" />
         <activity android:name=".Login_form">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
