@@ -16,7 +16,7 @@ public class student_homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_homepage);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Student_Homepage");
+        //Objects.requireNonNull(getSupportActionBar()).setTitle("Student_Homepage");
         logout = (Button)findViewById(R.id.logout) ;
 
     }

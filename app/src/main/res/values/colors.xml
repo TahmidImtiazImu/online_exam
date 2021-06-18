@@ -9,4 +9,18 @@
     <color name="gray">#808080</color>
     <color name="dark_gray">#A9A9A9</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="address">#2F7092</color>
+    <color name="followers">#0D5D98</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#80FFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="followersBg">#65DCE5</color>
+    <color name="followingBg">#49BEFF</color>
+    <color name="grey">#E5E5E5</color>
+    <color name="blue">#0099ff</color>
+    <color name="myblue">#002BDC</color>
+    <color name="mypurple">#FF00FF</color>
 </resources>

@@ -13,7 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-        <activity android:name=".teacher_assignment_pageview"></activity>
+
+        <activity android:name=".SignUp" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".InstructActivity"
             android:parentActivityName=".teacher_homepage" />
@@ -30,11 +38,6 @@
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
         <activity android:name=".Login_form">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
