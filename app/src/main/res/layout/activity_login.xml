@@ -30,11 +30,18 @@
 
         </TextView>
 
-        <EditText
-            android:id="@+id/username"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_margin="20dp">
+        <EditText
+            android:id="@+id/logUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:hint="Type your username"
             android:drawableLeft="@drawable/ic_baseline_person_outline_24"
             android:drawableStart="@drawable/ic_baseline_person_outline_24"
@@ -42,19 +49,31 @@
             android:inputType="textPersonName">
 
         </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/password"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_margin="20dp"
-            android:hint="Type your Password"
-            android:drawableLeft="@drawable/ic_outline_lock_24"
-            android:drawableStart="@drawable/ic_outline_lock_24"
-            android:drawablePadding="5dp"
-            android:inputType="textPassword">
+            app:passwordToggleEnabled="true">
+            <EditText
+                android:id="@+id/logPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Type your Password"
+                android:drawableLeft="@drawable/ic_outline_lock_24"
+                android:drawableStart="@drawable/ic_outline_lock_24"
+                android:drawablePadding="5dp"
+                android:inputType="textPassword">
 
-        </EditText>
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/txtForgotPassword"
             android:layout_width="wrap_content"
@@ -68,7 +87,7 @@
             android:textSize="15sp"
             />
         <Button
-            android:id="@+id/login"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -108,7 +127,7 @@
             android:indeterminate="true"
             android:visibility="invisible"
             android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/black"
+            android:indeterminateTint="@color/blue"
             />
 
     </LinearLayout>

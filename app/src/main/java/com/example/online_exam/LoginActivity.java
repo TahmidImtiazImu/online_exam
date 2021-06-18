@@ -101,6 +101,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -119,9 +120,10 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //TextInputLayout usernameinput, password_input,email_input ;
+    TextInputLayout usernameinput, password_input,email_input ;
     EditText username,password,email ;
-    RadioButton teacher,student;
+    TextView txtSignUp;
+    //RadioButton teacher,student;
     RadioGroup role ;
     Button log_in ;
     ProgressBar progressBar ;
@@ -136,27 +138,36 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Log In");
+        //Objects.requireNonNull(getSupportActionBar()).setTitle("Log In"); //maybe smth wrong
 
-        //usernameinput = (TextInputLayout)findViewById(R.id.usernameinput) ;
-        //password_input = (TextInputLayout)findViewById(R.id.passwordinput) ;
+        usernameinput = (TextInputLayout)findViewById(R.id.layoutUser) ;
+        password_input = (TextInputLayout)findViewById(R.id.layoutPass) ;
         // email_input = (TextInputLayout)findViewById(R.id.emailinput);
-        username = (EditText)findViewById(R.id.username) ;
+        //username = (EditText)findViewById(R.id.username) ;
         //email = (EditText)findViewById(R.id.email) ;
-        password = (EditText)findViewById(R.id.password) ;
+        //password = (EditText)findViewById(R.id.password) ;
         //teacher = (RadioButton) findViewById(R.id.teacher) ;
         //student = (RadioButton) findViewById(R.id.student) ;
-        log_in = (Button) findViewById(R.id.login) ;
+        txtSignUp = findViewById(R.id.txtSignUp);
+        log_in = (Button) findViewById(R.id.btnLogin) ;
         progressBar = (ProgressBar) findViewById(R.id.simpleProgressBar) ;
         fauth = FirebaseAuth.getInstance() ;
 
         sp = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
+        txtSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignUp.class));
+                finish();
+            }
+        });
+
         log_in.setOnClickListener(v -> {
-            String Userentername = Objects.requireNonNull(username.getText().toString()) ;
+            String Userentername = Objects.requireNonNull(usernameinput.getEditText()).getText().toString() ;
             // String Userenteremail = email_input.getEditText().getText().toString();
 
-            String UserenterPassword = Objects.requireNonNull(password.getText().toString());
+            String UserenterPassword = Objects.requireNonNull(password_input.getEditText()).getText().toString();
 
             if(Userentername.isEmpty()) {
                 username.setError("Username is required");
@@ -197,21 +208,21 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
-                        username.setError(null);
-                        //username.setErrorEnabled(false);
+                        usernameinput.setError(null);
+                        usernameinput.setErrorEnabled(false);
                         String passdb = dataSnapshot.child(Userentername).child("Password").getValue(String.class) ;
                         assert passdb != null;
                         if(passdb.equals(UserenterPassword)){
 
-                            username.setError(null);
-                            //usernameinput.setErrorEnabled(false);
+                            usernameinput.setError(null);
+                            usernameinput.setErrorEnabled(false);
 
                             SharedPreferences.Editor editor = sp.edit();
 
                             String Role = dataSnapshot.child(Userentername).child("Role").getValue(String.class) ;
                             assert Role != null;
                             if(Role.equals("Teacher"))    {
-                                usernameIntent = new Intent(LoginActivity.this ,teacher_homepage.class);
+                                usernameIntent = new Intent( LoginActivity.this,teacher_homepage.class);
                                 startActivity(usernameIntent);
 
                                 editor.putString("UserName", Userentername);
@@ -222,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             else    {
-                                usernameIntent = new Intent(LoginActivity.this,student_homepage.class);
+                                usernameIntent = new Intent( LoginActivity.this,student_homepage.class);
                                 startActivity(usernameIntent);
 
                                 editor.putString("UserName", Userentername);
@@ -235,13 +246,13 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            password.setError("Wrong Password");
+                            password_input.setError("Wrong Password");
                         }
                     }
                     else
                     {
-                        username.setError("No such User exist");
-                        username.requestFocus() ;
+                        usernameinput.setError("No such User exist");
+                        usernameinput.requestFocus() ;
                     }
                 }
 

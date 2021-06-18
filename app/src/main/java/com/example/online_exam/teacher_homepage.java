@@ -52,7 +52,7 @@ public class teacher_homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_homepage);
         // this.setTitle("Homepage");
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Teacher Homepage");
+        //Objects.requireNonNull(getSupportActionBar()).setTitle("Teacher Homepage");
         //logout = (Button)findViewById(R.id.logout) ;
         //teacher_username = userIntent.getStringExtra("currentUsername");
 
