@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-
+        <activity android:name=".EditProfile"></activity>
         <activity android:name=".SignUp" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -37,8 +37,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
-        <activity android:name=".Login_form">
-        </activity>
+        <activity android:name=".Login_form"></activity>
     </application>
 
 </manifest>

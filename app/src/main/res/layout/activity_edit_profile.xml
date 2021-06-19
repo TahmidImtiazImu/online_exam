@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTintMode="screen"
+    tools:context=".EditProfile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradv2">
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_border">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="15dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/circlev2"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_user">
+
+            </ImageView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/edit_pen"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+            </ImageView>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--1. email(Fixed)
+        2. Username(fixed)
+        3. Name
+        4. Password
+        5. Confirm password
+        6. Phone no.(Optional)
+        7. Save Button
+
+        #Back button at top left corner
+       -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/bg_silver"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Email"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:hint="ds.partho1998@gmail.com"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Username"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:hint="Partho_34"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Full Name"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:hint="Partho Sarker"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Password"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:hint="947298374"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Confirm Passoword"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:hint="643871264"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start">
+
+        </EditText>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="160dp"
+            android:text="save">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
