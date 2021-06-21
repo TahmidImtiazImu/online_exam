@@ -13,14 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-        <activity android:name=".EditProfile"></activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".EditProfile" />
+        <activity android:name=".SignUp" />
+        <activity android:name=".LoginActivity">
+
         </activity>
         <activity
             android:name=".InstructActivity"
@@ -37,7 +40,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
-        <activity android:name=".Login_form"></activity>
+        <activity android:name=".Login_form" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreen"
+    android:background="@drawable/gradv2"
+    android:id="@+id/layoutSplash"
+    >
+
+    <ImageView
+        android:id="@+id/imgSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_splash"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/txtSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgSplash"
+        android:layout_alignEnd="@id/imgSplash"
+        android:layout_alignStart="@id/imgSplash"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center_horizontal"
+        android:text="Online Exam"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:layout_alignRight="@id/imgSplash"
+        android:layout_alignLeft="@id/imgSplash" />
+
+    <TextView
+        android:id="@+id/txtSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teach and Learn"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/txtSplash"
+        android:layout_alignRight="@id/txtSplash"/>
+</RelativeLayout>
