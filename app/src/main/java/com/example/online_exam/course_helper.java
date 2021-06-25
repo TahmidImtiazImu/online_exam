@@ -6,6 +6,11 @@ public class course_helper {
 
     public course_helper() {
     }
+    public course_helper(String courseCode, String currentUser) {
+        //this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.currentUser = currentUser;
+    }
 
     public course_helper(String courseName, String courseCode, String currentUser) {
         this.courseName = courseName;

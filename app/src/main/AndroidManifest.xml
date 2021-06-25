@@ -4,8 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
+        android:launchMode="standard"
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-
+        <activity android:name=".JoinCourseActivity"
+            android:parentActivityName=".student_homepage" />
         <activity android:name=".SignUp" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -37,8 +42,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
-        <activity android:name=".Login_form">
-        </activity>
+        <activity android:name=".Login_form"/>
     </application>
 
 </manifest>

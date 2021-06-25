@@ -121,7 +121,7 @@ public class teacher_assignment_add extends AppCompatActivity {
                 .addOnSuccessListener(taskSnapshot -> {
 
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while(!uriTask.isComplete()) ;
+                    while(!uriTask.isComplete());
                     Uri uri = uriTask.getResult() ;
 
                     String Assignment_topic = assignment_topic.getText().toString();
