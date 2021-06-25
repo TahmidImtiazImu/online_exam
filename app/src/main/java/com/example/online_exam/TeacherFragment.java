@@ -228,6 +228,7 @@ public class TeacherFragment extends Fragment {
                             usermap.put("Institution", institution);
                             if(maleBtn.isChecked()) usermap.put("Gender",male) ;
                             if(femaleBtn.isChecked()) usermap.put("Gender",female) ;
+                            usermap.put("Picture URL", "");
 
                             reference.child(userName).setValue(usermap);
 

@@ -219,6 +219,7 @@ public class StudentFragment extends Fragment {
                             usermap.put("Batch", batch);
                             usermap.put("Academic Year", academicYear);
                             usermap.put("Current Semester", currentSem);
+                            usermap.put("Picture URL", "");
 
                             reference.child(userName).setValue(usermap);
 

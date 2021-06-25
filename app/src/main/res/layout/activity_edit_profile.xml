@@ -18,25 +18,26 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/circle_border">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgDP"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_margin="15dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/circlev2"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_user">
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white">
 
-            </ImageView>
+            </de.hdodenhof.circleimageview.CircleImageView>
 
             <ImageView
+                android:id="@+id/imgChooseDP"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/edit_pen"
                 android:layout_gravity="bottom"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:clickable="true">
             </ImageView>
 
 
@@ -62,8 +63,8 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="350dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Email"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="40dp"
@@ -73,6 +74,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/editEmail"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
@@ -97,6 +99,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/editUser"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
@@ -121,6 +124,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/editFullName"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
@@ -169,6 +173,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/txtEditPass"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
@@ -182,11 +187,15 @@
         </EditText>
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="160dp"
-            android:text="save">
+            android:text="save"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_bg">
 
         </Button>
 

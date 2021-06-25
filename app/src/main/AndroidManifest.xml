@@ -19,6 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
 
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".student_question_viewpdf"></activity>
         <activity android:name=".student_answer_submit_page" />
         <activity android:name=".student_assignment_page" />
@@ -34,12 +42,10 @@
 
         <activity android:name=".SignUp" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+
         <activity
             android:name=".InstructActivity"
             android:parentActivityName=".teacher_homepage" />
@@ -54,13 +60,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
         <activity android:name=".student_homepage"/>
-
-        <activity android:name=".Login_form" />
-
-
-
-
 
 
     </application>
