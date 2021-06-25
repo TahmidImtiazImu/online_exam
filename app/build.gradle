@@ -136,11 +136,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-<<<<<<< HEAD
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-=======
->>>>>>> 8a7d4a03eb4698be67440fc7afe11517f9c6ec97
+
 }
 //protobuf {
 //    protoc {
