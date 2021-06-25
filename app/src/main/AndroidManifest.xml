@@ -10,10 +10,15 @@
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-
+        <activity android:name=".student_question_viewpdf"></activity>
+        <activity android:name=".student_answer_submit_page" />
+        <activity android:name=".student_assignment_page" />
+        <activity android:name=".teacher_question_viewpdf" />
+        <activity android:name=".teacher_assignment_pageview" />
         <activity android:name=".SignUp" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -33,12 +38,10 @@
         <activity
             android:name=".CourseCreatingActivity"
             android:parentActivityName=".teacher_homepage" />
-        <activity android:name=".student_homepage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
-        <activity android:name=".Login_form">
-        </activity>
+        <activity android:name=".Login_form" />
     </application>
 
 </manifest>

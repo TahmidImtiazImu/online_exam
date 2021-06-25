@@ -173,7 +173,7 @@ public class teacher_homepage extends AppCompatActivity {
             case R.id.log:
                 Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
                 current_userName = "";
-                startActivity(new Intent(getApplicationContext(),Login_form.class));
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 return true;
         }
 

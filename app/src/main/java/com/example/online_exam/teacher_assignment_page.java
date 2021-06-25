@@ -46,7 +46,7 @@ public class teacher_assignment_page extends AppCompatActivity {
 
     String teacher_assignment_topic;
     String teacher_assignment_duration;
-
+    String name_merge ;
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +132,8 @@ public class teacher_assignment_page extends AppCompatActivity {
 
                         teacher_assignment_topic = dataSnapshot.child("Assignment_topic").getValue(String.class);
                         teacher_assignment_duration = dataSnapshot.child("Assignment_time").getValue(String.class);
+                        name_merge = teacher_assignment_topic+course_code ;
+
                         assignment_lists.add(new teacher_model_assignmentlist(teacher_assignment_topic, teacher_assignment_duration));
                     }
 
@@ -146,4 +148,5 @@ public class teacher_assignment_page extends AppCompatActivity {
         });
 
     }
+    
 }
