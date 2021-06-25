@@ -170,10 +170,15 @@ public class teacher_homepage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),InstructActivity.class));
                 return true;
 
+            case R.id.profile_edit:
+                Toast.makeText(this, "Edit Profile selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), EditProfile.class));
+                return true;
+
             case R.id.log:
                 Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
                 current_userName = "";
-                startActivity(new Intent(getApplicationContext(),Login_form.class));
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 return true;
         }
 
