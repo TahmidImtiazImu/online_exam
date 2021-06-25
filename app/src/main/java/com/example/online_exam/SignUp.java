@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
@@ -38,6 +38,11 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        getSupportActionBar().hide();
+
+        getSupportActionBar().hide();   // to Hide action bar
+
 
         tabLayout=findViewById(R.id.tab_layout);
         pager2=findViewById(R.id.view_pager2);
@@ -109,14 +114,14 @@ public class SignUp extends AppCompatActivity {
             if(!pass.isEmpty() ) {
                 mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(SignUp.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignUp.this, LoginActivity.class));
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
+                    public void onFailure(@NonNull Exception e) {
                         Toast.makeText(SignUp.this, "Registration Error", Toast.LENGTH_SHORT);
                     }
                 });

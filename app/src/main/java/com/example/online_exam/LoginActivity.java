@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
         //Objects.requireNonNull(getSupportActionBar()).setTitle("Log In"); //maybe smth wrong
 
         usernameinput = (TextInputLayout)findViewById(R.id.layoutUser) ;
@@ -170,12 +171,16 @@ public class LoginActivity extends AppCompatActivity {
             String UserenterPassword = Objects.requireNonNull(password_input.getEditText()).getText().toString();
 
             if(Userentername.isEmpty()) {
-                username.setError("Username is required");
+                usernameinput.setError("Username is required");
+
+                Toast.makeText(LoginActivity.this, "Username is empty", Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(LoginActivity.this, "Email is empty", Toast.LENGTH_SHORT).show();
+
                 return ;
             }
             if (UserenterPassword.isEmpty()) {
-                password.setError("Password is required");
+                password_input.setError("Password is required");
                 Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
             }
 //            if(UserenterPassword.isEmpty()){

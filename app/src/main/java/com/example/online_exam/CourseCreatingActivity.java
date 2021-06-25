@@ -48,10 +48,19 @@ public class CourseCreatingActivity extends AppCompatActivity {
         if( courseName.getText().toString().length() == 0 ) {
             courseName.setError("Course name is required!");
         }
-        else if (courseCode.getText().toString().length() == 0) {
+        else if(courseCode.getText().toString().length() < 10) {
 
-            courseCode.setError("Course code is required!");
-            Toast.makeText(this, "Give a 10 digit code", Toast.LENGTH_SHORT).show();
+            if (courseCode.getText().toString().length() == 0) {
+
+                courseCode.setError("Course code is required!");
+                Toast.makeText(this, "Give a 10 digit code", Toast.LENGTH_SHORT).show();
+            }
+
+            else if(courseCode.getText().toString().length() < 10) {
+
+                courseCode.setError("Too short!");
+                Toast.makeText(this, "Give a 10 digit code", Toast.LENGTH_SHORT).show();
+            }
         }
 
         else {
@@ -69,6 +78,8 @@ public class CourseCreatingActivity extends AppCompatActivity {
             CourseReference.child(course_code).setValue(courseHelper);
 
             Toast.makeText(this, "New course has been created", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
 
         }
     }
