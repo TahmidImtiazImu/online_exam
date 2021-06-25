@@ -38,7 +38,11 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         getSupportActionBar().hide();
+
+        getSupportActionBar().hide();   // to Hide action bar
+
 
         tabLayout=findViewById(R.id.tab_layout);
         pager2=findViewById(R.id.view_pager2);
