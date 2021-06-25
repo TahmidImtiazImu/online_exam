@@ -4,16 +4,40 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
+        android:launchMode="standard"
+
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
+<<<<<<< HEAD
         <activity android:name=".SplashScreen">
+=======
+
+        <activity android:name=".student_question_viewpdf"></activity>
+        <activity android:name=".student_answer_submit_page" />
+        <activity android:name=".student_assignment_page" />
+        <activity android:name=".teacher_question_viewpdf" />
+        <activity android:name=".teacher_assignment_pageview" />
+
+
+        <activity android:name=".JoinCourseActivity"
+            android:parentActivityName=".student_homepage" />
+
+        <activity android:name=".EditProfile"></activity>
+
+
+        <activity android:name=".SignUp" />
+        <activity android:name=".LoginActivity">
+>>>>>>> 8a7d4a03eb4698be67440fc7afe11517f9c6ec97
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,15 +60,26 @@
         <activity
             android:name=".CourseCreatingActivity"
             android:parentActivityName=".teacher_homepage" />
-        <activity android:name=".student_homepage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
+<<<<<<< HEAD
         <activity android:name=".Login_form" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+=======
+        <activity android:name=".student_homepage"/>
+
+        <activity android:name=".Login_form" />
+
+
+
+
+
+
+>>>>>>> 8a7d4a03eb4698be67440fc7afe11517f9c6ec97
     </application>
 
 </manifest>

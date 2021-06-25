@@ -116,12 +116,12 @@ public class teacher_assignment_add extends AppCompatActivity {
         progressDialog.setTitle("File is loading....");
         progressDialog.show() ;
 
-        StorageReference reference = storageReference.child("upload"+System.currentTimeMillis()+".pdf");
+        StorageReference reference = storageReference.child("upload/"+System.currentTimeMillis()+".pdf");
         reference.putFile(data)
                 .addOnSuccessListener(taskSnapshot -> {
 
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while(!uriTask.isComplete()) ;
+                    while(!uriTask.isComplete());
                     Uri uri = uriTask.getResult() ;
 
                     String Assignment_topic = assignment_topic.getText().toString();
@@ -143,7 +143,7 @@ public class teacher_assignment_add extends AppCompatActivity {
                     HashMap<String, String> hashMap = new HashMap<>() ;
                     hashMap.put("Assignment_topic",Assignment_topic) ;
                     hashMap.put("Assignment_time",Assignment_time) ;
-                    hashMap.put("pdf_file_name",name);
+                    hashMap.put("pdf_file_name",unique_assignment);
                     hashMap.put("pdf_file_url",Url) ;
                     hashMap.put("Course_code",current_course_code) ;
                     databaseReference.child(unique_assignment).setValue(hashMap);

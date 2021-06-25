@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".student_answer_submit_page">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="25dp"
+        android:text="Assignment 1"
+        android:textStyle="bold"
+        android:id="@+id/student_assignment_topic_name2"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp"
+        android:text="2 hours"
+        android:textStyle="italic"
+        android:id="@+id/student_assignment_duration"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="25dp"
+        android:text="Question :"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/pdf_img"
+        android:id="@+id/student_loading_ques"
+        >
+
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="25dp"
+        android:text="My answer : "
+        android:textStyle="bold">
+
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="45dp"
+            android:src="@drawable/ic_baseline_attach_file"
+            android:id="@+id/student_browse_answer"
+
+            >
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/pdf_img"
+            android:id="@+id/student_ans"
+
+            >
+
+        </ImageView>
+        <ImageView
+            android:layout_alignRight="@+id/student_ans"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/cancel_icon"
+            android:id="@+id/cancel_icon"
+
+            >
+
+        </ImageView>
+
+
+    </RelativeLayout>
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="15dp"
+        android:text="Submit"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="@color/black"
+        >
+
+    </Button>
+
+
+
+</LinearLayout>

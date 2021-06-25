@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:layout_marginLeft="150dp"
-        android:text="Log out"
+        android:text="assignment_page"
         android:onClick="btn_logout"
 
         />

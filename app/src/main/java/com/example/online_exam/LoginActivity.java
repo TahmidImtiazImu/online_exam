@@ -172,7 +172,11 @@ public class LoginActivity extends AppCompatActivity {
 
             if(Userentername.isEmpty()) {
                 usernameinput.setError("Username is required");
+
+                Toast.makeText(LoginActivity.this, "Username is empty", Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(LoginActivity.this, "Email is empty", Toast.LENGTH_SHORT).show();
+
                 return ;
             }
             if (UserenterPassword.isEmpty()) {

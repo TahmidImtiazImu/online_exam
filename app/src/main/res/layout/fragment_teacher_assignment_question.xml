@@ -1,17 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
     tools:context=".teacher_assignment_question">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Question_pdf"
-        android:layout_centerInParent="true"
-        android:textSize="50dp"
-        />
 
-</RelativeLayout>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/pdf_logo"
+        android:src="@drawable/pdf_img"
+        android:layout_marginTop="15dp"
+        >
+
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ques_assignment_topic"
+        android:layout_margin="20dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp" >
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ques_assignment_time"
+        android:layout_marginTop="10dp" >
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ques_course_code"
+        android:layout_marginTop="10dp" >
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ques_pdf_file_url"
+        android:layout_marginTop="10dp" >
+
+    </TextView>
+
+</LinearLayout>
