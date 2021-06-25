@@ -70,7 +70,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="45dp"
@@ -80,7 +80,7 @@
 
             >
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+        </ImageView>
 
         <ImageView
             android:layout_width="150dp"
@@ -89,6 +89,7 @@
             android:layout_marginLeft="15dp"
             android:src="@drawable/pdf_img"
             android:id="@+id/student_ans"
+            android:visibility="invisible"
 
             >
 
@@ -101,7 +102,7 @@
             android:layout_marginLeft="15dp"
             android:src="@drawable/cancel_icon"
             android:id="@+id/cancel_icon"
-
+            android:visibility="invisible"
             >
 
         </ImageView>
@@ -117,6 +118,7 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:backgroundTint="@color/black"
+        android:id="@+id/ans_sub_button"
         >
 
     </Button>

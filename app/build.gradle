@@ -99,6 +99,8 @@ dependencies {
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:6.3.0'
 
+    implementation "com.karumi:dexter:6.2.1"
+
 }
 
 android{
