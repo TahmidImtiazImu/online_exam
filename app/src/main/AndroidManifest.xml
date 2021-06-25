@@ -54,6 +54,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".teacher_homepage" />
+        <activity android:name=".student_homepage"/>
 
         <activity android:name=".Login_form" />
 

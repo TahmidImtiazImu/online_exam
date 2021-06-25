@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.online_exam.student_adapter_assignmentlist.context;
 
 public class student_assignment_page extends AppCompatActivity {
 
@@ -51,17 +54,20 @@ public class student_assignment_page extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                SharedPreferences sp =getApplicationContext().getSharedPreferences("student_course_prefs",context.MODE_PRIVATE);
+                String student_course_code = sp.getString("Student_Course_Code","");
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
+                       String course_code = dataSnapshot.child("Course_code").getValue(String.class);
 
+                        if(course_code.equals(student_course_code)) {
+                            student_assignment_topic = dataSnapshot.child("Assignment_topic").getValue(String.class);
+                            student_assignment_duration = dataSnapshot.child("Assignment_time").getValue(String.class);
+                            ques_pdf_url = dataSnapshot.child("pdf_file_url").getValue(String.class);
 
-                        student_assignment_topic = dataSnapshot.child("Assignment_topic").getValue(String.class);
-                        student_assignment_duration = dataSnapshot.child("Assignment_time").getValue(String.class);
-                        ques_pdf_url = dataSnapshot.child("pdf_file_url").getValue(String.class);
+                            assignment_lists.add(new student_model_assignmentlist(student_assignment_topic, student_assignment_duration, ques_pdf_url));
 
-                        assignment_lists.add(new student_model_assignmentlist(student_assignment_topic, student_assignment_duration,ques_pdf_url));
-
-
+                        }
                 }
                 adapter.notifyDataSetChanged();
             }

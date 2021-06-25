@@ -98,7 +98,7 @@ class StudentHompepageAdapter extends RecyclerView.Adapter<StudentHompepageAdapt
 
                     Toast.makeText(context, course_name+"  "+course_code, Toast.LENGTH_SHORT).show();
 
-                    //context.startActivity(new Intent(context,teacher_assignment_page.class));
+                    context.startActivity(new Intent(context,student_assignment_page.class));
 
                     //
                 }
