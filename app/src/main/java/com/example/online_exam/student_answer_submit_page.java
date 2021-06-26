@@ -96,11 +96,12 @@ public class student_answer_submit_page extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                   node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
-                   String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
+
                    pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
                    if(Unique_answer_upload.equals(pdf_file_name)) {
-                       if(handed=="true"){
+                       node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+                       String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
+                       if(handed.equals("true")){
                            student_sub_cancel.setVisibility(View.INVISIBLE);
                            student_ans_pdf.setVisibility(View.VISIBLE);
                            ans_submit.setVisibility(View.GONE);
