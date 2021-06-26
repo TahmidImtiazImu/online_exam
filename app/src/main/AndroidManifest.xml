@@ -9,7 +9,6 @@
 
     <application
         android:launchMode="standard"
-
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@drawable/ic_splash"
