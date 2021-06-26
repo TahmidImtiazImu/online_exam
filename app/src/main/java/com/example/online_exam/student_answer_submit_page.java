@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -93,6 +94,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         Unique_answer_upload = student_username + student_course_code + assignment_topic ;
 
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -111,7 +113,10 @@ public class student_answer_submit_page extends AppCompatActivity {
                            student_ans_pdf.setVisibility(View.VISIBLE);
                            ans_submit.setVisibility(View.GONE);
                            hand_in.setVisibility(View.VISIBLE);
+
                            hand_in.setEnabled(false);
+                           hand_in.setText("Done");
+                           hand_in.setTextColor(0xFF00FF00);
                        }
                        else{
                            student_sub_cancel.setVisibility(View.VISIBLE);
@@ -205,6 +210,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         hand_in.setOnClickListener(v -> {
             student_sub_cancel.setVisibility(View.INVISIBLE);
             ans_submit.setVisibility(View.GONE);
+            hand_in.setText("Submitted");
             hand_in.setEnabled(false);
             is_handed_in="true" ;
 
