@@ -18,8 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -79,7 +82,26 @@ public class student_answer_submit_page extends AppCompatActivity {
         SharedPreferences user_sp =getApplicationContext().getSharedPreferences("UserPrefs",context.MODE_PRIVATE);
         student_username = user_sp.getString("UserName","");
 
+        String Unique_answer_upload = student_username + student_course_code + assignment_topic ;
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                   String node = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
+                   if(Unique_answer_upload.equals(node)) {
+                       student_sub_cancel.setVisibility(View.INVISIBLE);
+                       student_ans_pdf.setVisibility(View.VISIBLE);
+                       ans_submit.setEnabled(false);
+                      student_browse_pdf.setVisibility(View.INVISIBLE);
+                   }
+               }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         student_loading_ques.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(),student_question_viewpdf.class) ;
@@ -118,6 +140,31 @@ public class student_answer_submit_page extends AppCompatActivity {
         );
         ans_submit.setOnClickListener(v -> process_upload(student_answer_url));
 
+        student_ans_pdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String node = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
+                            if(Unique_answer_upload.equals(node)) {
+                                String pdf_url = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+                                Intent intent = new Intent(context,student_answer_view.class) ;
+                                intent.putExtra("my_answer",pdf_url) ;
+                                context.startActivity(intent);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
 
     }
 
@@ -155,9 +202,10 @@ public class student_answer_submit_page extends AppCompatActivity {
                     pd.dismiss();
                     Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
 
-                    student_sub_cancel.setVisibility(View.VISIBLE);
-                    student_ans_pdf.setVisibility(View.VISIBLE);
-                    student_browse_pdf.setVisibility(View.INVISIBLE);
+                    //  student_sub_cancel.setVisibility(View.VISIBLE);
+                      student_ans_pdf.setVisibility(View.VISIBLE);
+                      ans_submit.setEnabled(false);
+//                    student_browse_pdf.setVisibility(View.INVISIBLE);
                 }))
                 .addOnProgressListener(tasksnapshot -> {
                   float percent = 100*tasksnapshot.getBytesTransferred()/tasksnapshot.getTotalByteCount() ;
