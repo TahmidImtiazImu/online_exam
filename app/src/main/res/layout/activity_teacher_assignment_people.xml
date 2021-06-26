@@ -8,14 +8,53 @@
 
     <TextView
         android:layout_width="200dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="People"
-        android:textSize="20dp"
+        android:text="Teacher"
+        android:textSize="30dp"
         android:textColor="@color/purple_500"
+        android:id="@+id/Teacher"
         >
     </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/Teacher"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Ami teacher"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:id="@+id/teacher_name"
+        >
+
+    </TextView>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Student"
+        android:textSize="30dp"
+        android:textColor="@color/purple_500"
+        android:id="@+id/Student"
+        android:layout_below="@+id/teacher_name"
+        >
+    </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:layout_below="@+id/Student"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/student_name_recycleview"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
