@@ -60,7 +60,7 @@ public class student_answer_submit_page extends AppCompatActivity {
     public String unique_answer_upload;
     public String node ;
     public String pdf_file_name ;
-    String Unique_answer_upload;
+    public String Unique_answer_upload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,9 +98,14 @@ public class student_answer_submit_page extends AppCompatActivity {
                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                    pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
+                   System.out.println(pdf_file_name);
                    if(Unique_answer_upload.equals(pdf_file_name)) {
                        node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+                       System.out.println(pdf_file_name);
+                       System.out.println(node);
                        String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
+                       System.out.println(handed);
+                       assert handed != null;
                        if(handed.equals("true")){
                            student_sub_cancel.setVisibility(View.INVISIBLE);
                            student_ans_pdf.setVisibility(View.VISIBLE);
@@ -197,15 +202,22 @@ public class student_answer_submit_page extends AppCompatActivity {
                 });
             }
         });
-        hand_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                student_sub_cancel.setVisibility(View.INVISIBLE);
-                ans_submit.setVisibility(View.GONE);
-                hand_in.setEnabled(false);
-                is_handed_in="true" ;
-                process_upload(student_answer_url,is_handed_in);
-            }
+        hand_in.setOnClickListener(v -> {
+            student_sub_cancel.setVisibility(View.INVISIBLE);
+            ans_submit.setVisibility(View.GONE);
+            hand_in.setEnabled(false);
+            is_handed_in="true" ;
+
+            HashMap<String, String> hashMap = new HashMap<>() ;
+
+            hashMap.put("Student_answer_url",node) ;
+            hashMap.put("pdf_file_name",pdf_file_name) ;
+            hashMap.put("is_handed_in",is_handed_in);
+
+
+            databaseReference.child(pdf_file_name).setValue(hashMap);
+
+
         });
 
 
@@ -226,7 +238,7 @@ public class student_answer_submit_page extends AppCompatActivity {
 
     private void process_upload(Uri student_answer_url,String Is_handed_in) {
            ProgressDialog pd = new ProgressDialog(this);
-        if(Is_handed_in=="false") {
+          if(Is_handed_in.equals("false")) {
             pd.setTitle("File uploading ...");
             pd.show();
             StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
@@ -265,11 +277,12 @@ public class student_answer_submit_page extends AppCompatActivity {
         }
         else
         {
-
+            String is_handed_in = "true" ;
             HashMap<String, String> hashMap = new HashMap<>() ;
-            hashMap.put("is_handed_in",Is_handed_in);
+
             hashMap.put("Student_answer_url",node) ;
             hashMap.put("pdf_file_name",pdf_file_name) ;
+            hashMap.put("is_handed_in",is_handed_in);
 
 
             databaseReference.child(unique_answer_upload).setValue(hashMap);
