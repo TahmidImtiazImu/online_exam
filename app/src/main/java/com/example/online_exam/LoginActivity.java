@@ -209,13 +209,14 @@ public class LoginActivity extends AppCompatActivity {
 
             Query checkuser = reference.orderByChild("Username").equalTo(Userentername) ;
 
-            checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
+            checkuser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
                         usernameinput.setError(null);
                         usernameinput.setErrorEnabled(false);
                         String passdb = dataSnapshot.child(Userentername).child("Password").getValue(String.class) ;
+                        String name = dataSnapshot.child(Userentername).child("Enter_name").getValue(String.class);
                         assert passdb != null;
                         if(passdb.equals(UserenterPassword)){
 
@@ -242,6 +243,9 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(usernameIntent);
 
                                 editor.putString("UserName", Userentername);
+                                editor.commit();
+
+                                editor.putString("Student_name", name);
                                 editor.commit();
                                 //usernameIntent.putExtra("currentUsername",Userentername);
 

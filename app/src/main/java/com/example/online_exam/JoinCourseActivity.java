@@ -28,7 +28,8 @@ public class JoinCourseActivity extends AppCompatActivity {
     String student_username;
     String course_code;
     String merged_key;
-    String checked_code;
+    String Name;
+    //String checked_code;
     Boolean is_there_course;
 
     FirebaseDatabase CourseRootNode;
@@ -46,6 +47,10 @@ public class JoinCourseActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         student_username = sp.getString("UserName", "");
+
+        Name = sp.getString("Student_name", "");
+
+        System.out.println(Name);
 
         CourseCode = (EditText) findViewById(R.id.requested_code);
 
@@ -83,7 +88,7 @@ public class JoinCourseActivity extends AppCompatActivity {
                         CourseRootNode = FirebaseDatabase.getInstance();
                         CourseReference = CourseRootNode.getReference("joined_courses");
 
-                        course_helper courseHelper = new course_helper(course_code,student_username);
+                        student_helper courseHelper = new student_helper(course_code,student_username, Name);
 
                         CourseReference.child(merged_key).setValue(courseHelper);
 
