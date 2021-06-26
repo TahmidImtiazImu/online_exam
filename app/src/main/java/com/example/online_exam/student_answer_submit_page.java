@@ -13,6 +13,7 @@ import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +47,20 @@ public class student_answer_submit_page extends AppCompatActivity {
     TextView student_assignment_topic, student_assignment_duration ;
     ImageView student_loading_ques ;
     ImageView student_browse_pdf, student_ans_pdf,student_sub_cancel ;
-
+    TextView ans_submit ;
     StorageReference storageReference ;
     DatabaseReference databaseReference ;
     Uri student_answer_url ;
-    Button ans_submit ;
+    Button  hand_in;
     public String student_course_code ;
     public String student_username ;
     public String assignment_topic ;
+    public String is_handed_in = "false";
+    public String Answer_Url ;
+    public String unique_answer_upload;
+    public String node ;
+    public String pdf_file_name ;
+    String Unique_answer_upload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +77,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         student_ans_pdf = findViewById(R.id.student_ans) ;
         student_sub_cancel = findViewById(R.id.cancel_icon);
         ans_submit = findViewById(R.id.ans_sub_button) ;
+        hand_in = findViewById(R.id.hand_in) ;
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("student_upload_answer") ;
 
@@ -82,17 +90,38 @@ public class student_answer_submit_page extends AppCompatActivity {
         SharedPreferences user_sp =getApplicationContext().getSharedPreferences("UserPrefs",context.MODE_PRIVATE);
         student_username = user_sp.getString("UserName","");
 
-        String Unique_answer_upload = student_username + student_course_code + assignment_topic ;
+        Unique_answer_upload = student_username + student_course_code + assignment_topic ;
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                   String node = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
-                   if(Unique_answer_upload.equals(node)) {
-                       student_sub_cancel.setVisibility(View.INVISIBLE);
-                       student_ans_pdf.setVisibility(View.VISIBLE);
-                       ans_submit.setEnabled(false);
-                      student_browse_pdf.setVisibility(View.INVISIBLE);
+                   node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+                   String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
+                   pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
+                   if(Unique_answer_upload.equals(pdf_file_name)) {
+                       if(handed=="true"){
+                           student_sub_cancel.setVisibility(View.INVISIBLE);
+                           student_ans_pdf.setVisibility(View.VISIBLE);
+                           ans_submit.setVisibility(View.GONE);
+                           hand_in.setVisibility(View.VISIBLE);
+                           hand_in.setEnabled(false);
+                       }
+                       else{
+                           student_sub_cancel.setVisibility(View.VISIBLE);
+                           ans_submit.setVisibility(View.VISIBLE);
+                           student_ans_pdf.setVisibility(View.VISIBLE);
+                           student_browse_pdf.setVisibility(View.INVISIBLE);
+                           ans_submit.setEnabled(false);
+                           hand_in.setVisibility(View.VISIBLE);
+                           hand_in.setEnabled(true);
+                       }
+//                       student_sub_cancel.setVisibility(View.INVISIBLE);
+//                       student_ans_pdf.setVisibility(View.VISIBLE);
+//                       ans_submit.setEnabled(false);
+//                       student_browse_pdf.setVisibility(View.INVISIBLE);
+//                       hand_in.setVisibility(View.VISIBLE);
+//                       hand_in.setEnabled(false);
                    }
                }
             }
@@ -113,6 +142,7 @@ public class student_answer_submit_page extends AppCompatActivity {
             student_sub_cancel.setVisibility(View.INVISIBLE);
             student_ans_pdf.setVisibility(View.INVISIBLE);
             student_browse_pdf.setVisibility(View.VISIBLE);
+            ans_submit.setEnabled(true);
         });
 
         student_browse_pdf.setOnClickListener(v ->
@@ -138,7 +168,7 @@ public class student_answer_submit_page extends AppCompatActivity {
                     }
                 }).check()
         );
-        ans_submit.setOnClickListener(v -> process_upload(student_answer_url));
+        ans_submit.setOnClickListener(v -> process_upload(student_answer_url,is_handed_in));
 
         student_ans_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +180,8 @@ public class student_answer_submit_page extends AppCompatActivity {
                             String node = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
                             if(Unique_answer_upload.equals(node)) {
                                 String pdf_url = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+
+
                                 Intent intent = new Intent(context,student_answer_view.class) ;
                                 intent.putExtra("my_answer",pdf_url) ;
                                 context.startActivity(intent);
@@ -162,6 +194,16 @@ public class student_answer_submit_page extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+        hand_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                student_sub_cancel.setVisibility(View.INVISIBLE);
+                ans_submit.setVisibility(View.GONE);
+                hand_in.setEnabled(false);
+                is_handed_in="true" ;
+                process_upload(student_answer_url,is_handed_in);
             }
         });
 
@@ -181,37 +223,60 @@ public class student_answer_submit_page extends AppCompatActivity {
         }
     }
 
-    private void process_upload(Uri student_answer_url) {
+    private void process_upload(Uri student_answer_url,String Is_handed_in) {
+           ProgressDialog pd = new ProgressDialog(this);
+        if(Is_handed_in=="false") {
+            pd.setTitle("File uploading ...");
+            pd.show();
+            StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
+            reference.putFile(student_answer_url)
+                    .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        Answer_Url = Objects.requireNonNull(uri).toString() ;
+                        unique_answer_upload = student_username + student_course_code + assignment_topic ;
 
-        ProgressDialog pd = new ProgressDialog(this) ;
-        pd.setTitle("File uploading ...");
-        pd.show() ;
+                        HashMap<String, String> hashMap = new HashMap<>() ;
+                        hashMap.put("Student_answer_url",Answer_Url) ;
 
-        StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
-        reference.putFile(student_answer_url)
-                .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    String Answer_Url = Objects.requireNonNull(uri).toString() ;
-                    String unique_answer_upload = student_username + student_course_code + assignment_topic ;
-                    HashMap<String, String> hashMap = new HashMap<>() ;
-                    hashMap.put("Student_answer_url",Answer_Url) ;
+                        hashMap.put("pdf_file_name",unique_answer_upload);
 
-                    hashMap.put("pdf_file_name",unique_answer_upload);
+                        hashMap.put("is_handed_in",Is_handed_in);
 
-                    databaseReference.child(unique_answer_upload).setValue(hashMap);
+                        databaseReference.child(unique_answer_upload).setValue(hashMap);
 
-                    pd.dismiss();
-                    Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
 
-                    //  student_sub_cancel.setVisibility(View.VISIBLE);
-                      student_ans_pdf.setVisibility(View.VISIBLE);
-                      ans_submit.setEnabled(false);
+                        student_sub_cancel.setVisibility(View.VISIBLE);
+                        student_ans_pdf.setVisibility(View.VISIBLE);
+                        hand_in.setVisibility(View.VISIBLE);
+
+
+
 //                    student_browse_pdf.setVisibility(View.INVISIBLE);
-                }))
-                .addOnProgressListener(tasksnapshot -> {
-                  float percent = 100*tasksnapshot.getBytesTransferred()/tasksnapshot.getTotalByteCount() ;
-                  pd.setMessage("Uploaded :" + (int)percent +"%");
+                    }))
+                    .addOnProgressListener(tasksnapshot -> {
+                        if(is_handed_in=="false") {
+                            float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
+                            pd.setMessage("Uploaded :" + (int) percent + "%");
+                        }
 
-                });
+                    });
+        }
+        else
+        {
+
+            HashMap<String, String> hashMap = new HashMap<>() ;
+            hashMap.put("is_handed_in",Is_handed_in);
+            hashMap.put("Student_answer_url",node) ;
+            hashMap.put("pdf_file_name",pdf_file_name) ;
+
+
+            databaseReference.child(unique_answer_upload).setValue(hashMap);
+            pd.setTitle("File submitting ...");
+            pd.show();
+            pd.dismiss();
+        }
+
     }
 
 }
