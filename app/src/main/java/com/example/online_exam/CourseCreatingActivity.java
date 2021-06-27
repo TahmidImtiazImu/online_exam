@@ -1,5 +1,6 @@
 package com.example.online_exam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,8 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.online_exam.course_helper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -24,9 +31,11 @@ public class CourseCreatingActivity extends AppCompatActivity {
     private String course_code;
     private boolean isCreated = false;
     String teacher_username;
+    Boolean is_there_course = false;
 
     FirebaseDatabase CourseRootNode;
     DatabaseReference CourseReference;
+    //DatabaseReference retrieved_courseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +82,36 @@ public class CourseCreatingActivity extends AppCompatActivity {
             CourseRootNode = FirebaseDatabase.getInstance();
             CourseReference = CourseRootNode.getReference("courses");
 
-            course_helper courseHelper = new course_helper(course_name,course_code,teacher_username);
+            Query checked_query = CourseReference.orderByChild("courseCode").equalTo(course_code);
 
-            CourseReference.child(course_code).setValue(courseHelper);
+            checked_query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-            Toast.makeText(this, "New course has been created", Toast.LENGTH_SHORT).show();
+                    if (snapshot.exists()) {
 
-            startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
+                        courseCode.setError("This course code has been used");
+                        Toast.makeText(getApplicationContext(), "Try another course Code", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+
+                        course_helper courseHelper = new course_helper(course_name,course_code,teacher_username);
+
+                        CourseReference.child(course_code).setValue(courseHelper);
+
+                        Toast.makeText(getApplicationContext(), "New course has been created", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
 
         }
     }
