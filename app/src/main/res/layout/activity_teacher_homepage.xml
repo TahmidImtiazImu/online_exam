@@ -23,7 +23,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
