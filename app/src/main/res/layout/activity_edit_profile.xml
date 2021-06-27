@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:backgroundTintMode="screen"
     tools:context=".EditProfile">
+<RelativeLayout
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,8 +72,9 @@
             android:layout_height="wrap_content"
             android:text="Email"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             >
         </TextView>
@@ -78,10 +84,11 @@
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:hint="ds.partho1998@gmail.com"
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textAlignment="textStart"
             android:gravity="start">
 
@@ -92,9 +99,10 @@
             android:layout_height="24dp"
             android:text="Username"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             >
         </TextView>
 
@@ -103,12 +111,13 @@
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:hint="Partho_34"
             android:textSize="18sp"
             android:textAlignment="textStart"
-            android:gravity="start">
+            android:gravity="start"
+            android:textColor="@color/black">
 
         </EditText>
 
@@ -117,9 +126,10 @@
             android:layout_height="24dp"
             android:text="Full Name"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             >
         </TextView>
 
@@ -128,56 +138,61 @@
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:hint="Partho Sarker"
             android:textSize="18sp"
             android:textAlignment="textStart"
-            android:gravity="start">
+            android:gravity="start"
+            android:textColor="@color/black">
 
         </EditText>
 
         <TextView
             android:layout_width="350dp"
             android:layout_height="24dp"
-            android:text="Password"
+            android:text="Institution"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             >
         </TextView>
 
         <EditText
+            android:id="@+id/editIns"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:hint="947298374"
             android:textSize="18sp"
             android:textAlignment="textStart"
-            android:gravity="start">
+            android:gravity="start"
+            android:textColor="@color/black">
 
         </EditText>
 
         <TextView
             android:layout_width="350dp"
             android:layout_height="24dp"
-            android:text="Confirm Passoword"
+            android:text="Gender"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             >
         </TextView>
 
         <EditText
-            android:id="@+id/txtEditPass"
+            android:id="@+id/editGender"
             android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:hint="643871264"
             android:textSize="18sp"
@@ -186,6 +201,71 @@
 
         </EditText>
 
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="24dp"
+            android:text="Role"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            >
+        </TextView>
+
+        <EditText
+            android:id="@+id/editRole"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:hint="Teacher"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            >
+
+        </EditText>
+
+<!--        <TextView-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:text="Change Password"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textStyle="bold"-->
+<!--            >-->
+<!--        </TextView>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/editPass"-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:background="@null"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:hint="*******"-->
+<!--            android:gravity="start"-->
+<!--            android:textColor="@color/black"/>-->
+
+
+        <Button
+            android:id="@+id/btnChangePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Change Password"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_bg">
+
+        </Button>
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
@@ -204,3 +284,5 @@
 
 
 </RelativeLayout>
+
+</ScrollView>

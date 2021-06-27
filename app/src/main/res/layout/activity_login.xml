@@ -130,6 +130,22 @@
             android:indeterminateTint="@color/blue"
             />
 
+        <Button
+            android:id="@+id/resend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Resend"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/round_bg"
+            android:visibility="invisible">
+
+        </Button>
+
     </LinearLayout>
 
 </ScrollView>

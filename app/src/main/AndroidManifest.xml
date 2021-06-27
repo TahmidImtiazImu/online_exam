@@ -8,17 +8,18 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
-        android:launchMode="standard"
-
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="standard"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
+        <activity android:name=".Home"/>
 
+        <activity android:name=".ForgetPassword"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,26 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".student_question_viewpdf"></activity>
+        <activity android:name=".student_question_viewpdf" />
         <activity android:name=".student_answer_submit_page" />
         <activity android:name=".student_assignment_page" />
         <activity android:name=".teacher_question_viewpdf" />
         <activity android:name=".teacher_assignment_pageview" />
-
-
-        <activity android:name=".JoinCourseActivity"
+        <activity
+            android:name=".JoinCourseActivity"
             android:parentActivityName=".student_homepage" />
-
-        <activity android:name=".EditProfile"></activity>
-
-
+        <activity android:name=".EditProfile" />
         <activity android:name=".SignUp" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
-
-
+        <activity android:name=".LoginActivity"></activity>
         <activity
             android:name=".InstructActivity"
             android:parentActivityName=".teacher_homepage" />
@@ -65,9 +57,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".student_homepage"/>
-
-
+        <activity android:name=".student_homepage" />
     </application>
 
 </manifest>

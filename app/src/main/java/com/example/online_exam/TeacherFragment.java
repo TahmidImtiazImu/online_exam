@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.LogDescriptor;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +37,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Objects;
+
+import io.perfmark.Tag;
+
+import static com.example.online_exam.Register.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,27 +151,6 @@ public class TeacherFragment extends Fragment {
         String male = maleBtn.getText().toString();
         String female = femaleBtn.getText().toString();
 
-//        if ((!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
-//            if (!pass.isEmpty()) {
-//                mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-//                        Toast.makeText( getContext(), "Registered Succesfully", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent( getContext(), LoginActivity.class));
-//                        getActivity().finish();
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull @NotNull Exception e) {
-//                        Toast.makeText(getContext(), "Registration Error", Toast.LENGTH_SHORT);
-//                    }
-//                });
-//            } else {
-//                regPass.setError("Empty Fields are not allowed");
-//            }
-//        } else if (email.isEmpty()) {
-//            regEmail.setError("Empty Fields are not allowed");
-//        }
 
         if(fullName.isEmpty()){
             regFullName.setError("FullName is Required");
@@ -216,6 +203,22 @@ public class TeacherFragment extends Fragment {
                 else{
                     mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
+                            //real email authentication + send verification mail
+
+                            FirebaseUser fUser = mAuth.getCurrentUser();
+                            fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getContext(), "Verification Email Sent!", Toast.LENGTH_LONG).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull @NotNull Exception e) {
+                                    Log.d( TAG, "onFailure:Email not Sent" + e.getMessage() );
+                                }
+                            });
+
                             Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
                             //userid = Objects.requireNonNull(fbase.getCurrentUser()).getUid() ;
                             HashMap<String,Object> usermap = new HashMap<>() ;

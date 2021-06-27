@@ -3,8 +3,10 @@
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -19,6 +21,8 @@ import android.widget.ImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,20 +49,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfile extends AppCompatActivity {
 
-    private Button saveBtn;
+    private Button saveBtn, changePassBtn;
     private ImageView chooseImg;
     private CircleImageView showImg;
     private Uri filePath;
-    private EditText fullNameEdit, emailEdit, userEdit;
+    private EditText fullNameEdit, emailEdit, userEdit, insEdit, genderEdit, passEdit, roleEdit;
     private final int PICK_IMAGE_REQUEST = 22;
 
     FirebaseStorage storage;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     SharedPreferences sp;
 
-    String _NAME, _EMAIL, _PASSWORD;
+    String _NAME, _EMAIL, _PASSWORD, _FULLNAME, _INSTITUTION, _GENDER, _ROLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,14 @@ public class EditProfile extends AppCompatActivity {
         fullNameEdit = findViewById(R.id.editFullName);
         emailEdit = findViewById(R.id.editEmail);
         userEdit = findViewById(R.id.editUser);
+        insEdit = findViewById(R.id.editIns);
+        genderEdit = findViewById(R.id.editGender);
+        //passEdit = findViewById(R.id.editPass);
+        roleEdit = findViewById(R.id.editRole);
+        changePassBtn = findViewById(R.id.btnChangePass);
+
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         _NAME = sp.getString("UserName", "");
@@ -94,9 +108,51 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadImage();
-                updateName();
+                update();
             }
         });
+
+
+        changePassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText resetPass = new EditText(v.getContext());
+
+                final AlertDialog.Builder passResetDialog = new AlertDialog.Builder(v.getContext());
+                passResetDialog.setTitle("Update Password?");
+                passResetDialog.setMessage("Enter New Password here");
+                passResetDialog.setView(resetPass);
+
+                passResetDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // extract the email and send reset link
+                        String newPassword = resetPass.getText().toString();
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(EditProfile.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditProfile.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passResetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close
+                    }
+                });
+
+                passResetDialog.create().show();
+            }
+        });
+
     }
 
     private void showAllUserData() {
@@ -104,14 +160,19 @@ public class EditProfile extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String showName = snapshot.child("Enter_name").getValue(String.class);
-                String showEmail = snapshot.child("Email").getValue(String.class);
-                //String showGender = snapshot.child("Gender").getValue(String.class);
-                String loadURL = snapshot.child("Picture URL").getValue(String.class);
+                 _FULLNAME = snapshot.child("Enter_name").getValue(String.class);
+                 _EMAIL = snapshot.child("Email").getValue(String.class);
+                 _GENDER = snapshot.child("Gender").getValue(String.class);
+                 _INSTITUTION = snapshot.child("Institution").getValue(String.class);
+                 _ROLE = snapshot.child("Role").getValue(String.class);
+                 String loadURL = snapshot.child("Picture URL").getValue(String.class);
 
-                fullNameEdit.setText(showName);
-                emailEdit.setText(showEmail);
+                fullNameEdit.setText(_FULLNAME);
+                emailEdit.setText(_EMAIL);
                 userEdit.setText(_NAME);
+                genderEdit.setText(_GENDER);
+                insEdit.setText(_INSTITUTION);
+                roleEdit.setText(_ROLE);
                 if(loadURL.length() > 1)
                     Picasso.get().load(loadURL).into(showImg);
             }
@@ -255,14 +316,34 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-    private void updateName(){
-        String fullName = fullNameEdit.getText().toString();
-
-        databaseReference.child("Enter_name").setValue(fullName); //change korsi
-        Toast.makeText(EditProfile.this, "Data has been updated", Toast.LENGTH_LONG).show();
+    private void update(){
+        //String fullName = fullNameEdit.getText().toString();
+        //databaseReference.child("Enter_name").setValue(fullName); //change korsi
+        if (isNameChanged() || isInsChanged() ){
+            Toast.makeText(EditProfile.this, "Data has been updated", Toast.LENGTH_LONG).show();
+        }
+        else
+            Toast.makeText(EditProfile.this, "Data is same and can not be updated", Toast.LENGTH_LONG).show();
     }
 
-//    private void uploadToFirebase(Uri uri){
-//        StorageReference fileRef = storageReference.
-//    }
+
+    private boolean isInsChanged() {
+        if(!_INSTITUTION.equals(insEdit.getText().toString())){
+            databaseReference.child("Institution").setValue(insEdit.getText().toString());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private boolean isNameChanged() {
+        if(!_NAME.equals(fullNameEdit.getText().toString())){
+            databaseReference.child("Enter_name").setValue(fullNameEdit.getText().toString());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

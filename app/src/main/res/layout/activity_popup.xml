@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="250dp"
+    android:padding="5dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_silver">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Not Verified!"
+        android:textSize="40sp"
+        android:textColor="#FF0000"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/btnResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_bg"
+        android:textStyle="bold"
+        android:text="Verify Now"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"/>
+
+</LinearLayout>
