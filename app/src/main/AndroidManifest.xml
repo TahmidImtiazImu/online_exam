@@ -17,14 +17,11 @@
         android:roundIcon="@drawable/ic_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-<<<<<<< HEAD
         <activity android:name=".Home"/>
 
-        <activity android:name=".ForgetPassword"></activity>
-=======
-        <activity android:name=".teacher_answer_view"></activity>
+        <activity android:name=".ForgetPassword"/>
+        <activity android:name=".teacher_answer_view"/>
         <activity android:name=".student_answer_view" />
->>>>>>> 3227346d53e595032cf1f0a50f2899a38e112fdb
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,11 +39,8 @@
             android:parentActivityName=".student_homepage" />
         <activity android:name=".EditProfile" />
         <activity android:name=".SignUp" />
-<<<<<<< HEAD
-        <activity android:name=".LoginActivity"></activity>
-=======
-        <activity android:name=".LoginActivity" />
->>>>>>> 3227346d53e595032cf1f0a50f2899a38e112fdb
+
+        <activity android:name=".LoginActivity"/>
         <activity
             android:name=".InstructActivity"
             android:parentActivityName=".teacher_homepage" />

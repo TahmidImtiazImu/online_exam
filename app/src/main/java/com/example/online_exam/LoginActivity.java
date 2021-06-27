@@ -138,30 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         usernameinput.setError(null);
                         usernameinput.setErrorEnabled(false);
-<<<<<<< HEAD
-=======
-                        String passdb = dataSnapshot.child(Userentername).child("Password").getValue(String.class) ;
-                        String name = dataSnapshot.child(Userentername).child("Enter_name").getValue(String.class);
-                        assert passdb != null;
-                        if(passdb.equals(UserenterPassword)){
 
-                            usernameinput.setError(null);
-                            usernameinput.setErrorEnabled(false);
-
-                            SharedPreferences.Editor editor = sp.edit();
-
-                            String Role = dataSnapshot.child(Userentername).child("Role").getValue(String.class) ;
-                            assert Role != null;
-                            if(Role.equals("Teacher"))    {
-                                usernameIntent = new Intent( LoginActivity.this,teacher_homepage.class);
-                                startActivity(usernameIntent);
-
-                                editor.putString("UserName", Userentername);
-                                editor.commit();
-                                //usernameIntent.putExtra("currentUsername",Userentername);
-
-                                Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
->>>>>>> 3227346d53e595032cf1f0a50f2899a38e112fdb
 
                         _EMAIL = dataSnapshot.child(Userentername).child("Email").getValue(String.class);
                         _PASSWORD = dataSnapshot.child(Userentername).child("Password").getValue(String.class);
@@ -169,9 +146,9 @@ public class LoginActivity extends AppCompatActivity {
                         fauth.signInWithEmailAndPassword(_EMAIL, UserenterPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     fUser = fauth.getCurrentUser();
-                                    if(fUser.isEmailVerified()){
+                                    if (fUser.isEmailVerified()) {
                                         SharedPreferences.Editor editor = sp.edit();
                                         String Role = dataSnapshot.child(Userentername).child("Role").getValue(String.class);
                                         assert Role != null;
@@ -198,22 +175,17 @@ public class LoginActivity extends AppCompatActivity {
                                             finish();
                                         }
 
-                                    }
-
-                                    else{
+                                    } else {
                                         usernameinput.setError("Verification Pending");
                                         usernameinput.requestFocus();
                                         ShowPopUp();
                                         progressBar.setVisibility(View.GONE);
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     password_input.setError("Wrong Password");
                                     progressBar.setVisibility(View.GONE);
                                 }
                             }
-<<<<<<< HEAD
                         });
 
 //                        fUser = fauth.getCurrentUser();
@@ -263,22 +235,6 @@ public class LoginActivity extends AppCompatActivity {
 //                                    Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 //
 //                                }
-=======
-                            else    {
-                                usernameIntent = new Intent( LoginActivity.this,student_homepage.class);
-                                startActivity(usernameIntent);
-
-                                editor.putString("UserName", Userentername);
-                                editor.commit();
-
-                                editor.putString("Student_name", name);
-                                editor.commit();
-                                //usernameIntent.putExtra("currentUsername",Userentername);
-
-                                Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-
->>>>>>> 3227346d53e595032cf1f0a50f2899a38e112fdb
-                            }
 //                    else {
 //                                password_input.setError("Wrong Password");
 //                            }
@@ -289,6 +245,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            progressBar.setVisibility(View.GONE);
 //                        }
 //                    }
+                    }
                     else
                     {
                         usernameinput.setError("No Such User Exist");
@@ -306,6 +263,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
     public void ShowPopUp(){
         System.out.println("showPopUp Called!");
         Button resendBtn;
