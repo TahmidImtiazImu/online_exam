@@ -2,6 +2,7 @@ package com.example.online_exam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,9 +62,12 @@ public class student_adapter_assignmentlist extends RecyclerView.Adapter<student
 
             Student_assignment_topic.setText(student_assignment_topic);
 
+
+
             single_assignment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent intent = new Intent(context,student_answer_submit_page.class) ;
                     intent.putExtra("Assignment_topic",student_assignment_topic) ;
                     intent.putExtra("Assignment_time",student_assignment_duration);
