@@ -26,6 +26,7 @@ import com.google.api.LogDescriptor;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -218,6 +219,20 @@ public class TeacherFragment extends Fragment {
                                     Log.d( TAG, "onFailure:Email not Sent" + e.getMessage() );
                                 }
                             });
+
+                            //UserSetName
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName("Teacher").build();
+
+                            fUser.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
 
                             Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
                             //userid = Objects.requireNonNull(fbase.getCurrentUser()).getUid() ;

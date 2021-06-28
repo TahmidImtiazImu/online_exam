@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -217,6 +218,11 @@ public class student_homepage extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
+            case R.id.profile_edit:
+                Toast.makeText(this, "Edit Profile selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), EditProfileStudent.class));
+                return true;
+
             case R.id.course_create:
                 Toast.makeText(this, "Join new course", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),JoinCourseActivity.class));
@@ -229,8 +235,13 @@ public class student_homepage extends AppCompatActivity {
 
             case R.id.log:
                 Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
-                student_username = "";
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                current_userName = "";
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
                 return true;
         }
 
