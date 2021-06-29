@@ -37,6 +37,8 @@ public class CourseCreatingActivity extends AppCompatActivity {
     //DatabaseReference retrieved_courseReference;
 
     Button createButton;
+    EditText courseName;
+    EditText courseCode ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,85 +53,83 @@ public class CourseCreatingActivity extends AppCompatActivity {
 
         createButton = findViewById(R.id.new_create);
 
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        courseName = (EditText) findViewById(R.id.Course_name);
+        courseCode = (EditText) findViewById(R.id.Course_code);
 
-                EditText courseName = (EditText) findViewById(R.id.Course_name);
-                EditText courseCode = (EditText) findViewById(R.id.Course_code);
+        createButton.setOnClickListener(v -> {
+            String CourseName = courseName.getText().toString();
+            String CourseCode = courseCode.getText().toString() ;
 
-                if( courseName.getText().toString().length() == 0 ) {
-                    courseName.setError("Course name is required!");
+            if(CourseName.isEmpty()) {
+                courseName.setError("Course name is required!");
+                return ;
+            }
+            if(CourseCode.length()< 10) {
+
+                if(CourseCode.isEmpty()) {
+
+                    courseCode.setError("Course code is required!");
                 }
-                else if(courseCode.getText().toString().length() < 10) {
 
-                    if (courseCode.getText().toString().length() == 0) {
-
-                        courseCode.setError("Course code is required!");
-                        Toast.makeText(getApplicationContext(), "Give a 10 digit code", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(courseCode.getText().toString().length() < 10) {
-
-                        courseCode.setError("Too short!");
-                        Toast.makeText(getApplicationContext(), "Give a 10 digit code", Toast.LENGTH_SHORT).show();
-                    }
-                }
 
                 else {
+                    courseCode.setError("Too short!");
+                }
+                Toast.makeText(getApplicationContext(), "Give a 10 digit code", Toast.LENGTH_SHORT).show();
+                return ;
+            }
 
-                    course_name = courseName.getText().toString();
-                    course_code = courseCode.getText().toString();
+//                course_name = courseName.getText().toString();
+//                course_code = courseCode.getText().toString();
 
-                    isCreated = true;
+            isCreated = true;
 
-                    Query checked_query = CourseReference.orderByChild("courseCode").equalTo(course_code);
+            Query checked_query = CourseReference.orderByChild("courseCode").equalTo(CourseCode);
 
-                    checked_query.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            checked_query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            if (snapshot.exists()) {
+                    if (snapshot.exists()) {
 
-                                courseCode.setError("This course code has been used");
-                                Toast.makeText(getApplicationContext(), "Try another course Code", Toast.LENGTH_SHORT).show();
+                        courseCode.setError("This course code has been used");
+                        Toast.makeText(getApplicationContext(), "Try another course Code", Toast.LENGTH_SHORT).show();
 
-                            }
-                            else {
+                    }
+                    else {
 
-                                //course_helper courseHelper = new course_helper(course_name,course_code,teacher_username);
+                        //course_helper courseHelper = new course_helper(course_name,course_code,teacher_username);
 
-                                HashMap<String, Object> hashMap;
+                        HashMap<String, Object> hashMap;
 
-                                hashMap = new HashMap<>();
-                                hashMap.put("courseCode",course_code);
-                                hashMap.put("courseName",course_name);
-                                hashMap.put("currentUser", teacher_username);
+                        hashMap = new HashMap<>();
+                        hashMap.put("courseCode",CourseCode);
+                        hashMap.put("courseName",CourseName);
+                        hashMap.put("currentUser", teacher_username);
 
-                                CourseReference.child(course_code).setValue(hashMap);
+                        CourseReference.child(CourseCode).setValue(hashMap);
 
-                                startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
+                        startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
 
 
-                                Toast.makeText(getApplicationContext(), "New course has been created", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "New course has been created", Toast.LENGTH_SHORT).show();
 
-                                //finish();
+                        //finish();
 
 //                                startActivity(new Intent(getApplicationContext(),teacher_homepage.class));
 
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                            Log.w("CHAT_LOG", "Failed to read value.", error.toException());
-                        }
-                    });
-
-
+                    }
                 }
-            }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                    Log.w("CHAT_LOG", "Failed to read value.", error.toException());
+                }
+            });
+
+
+
         });
 
     }

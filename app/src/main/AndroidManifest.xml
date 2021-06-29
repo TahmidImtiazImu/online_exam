@@ -18,15 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
 
-<<<<<<< HEAD
+
         <activity android:name=".teacher_edit_assignment"></activity>
 
         <activity android:name=".EditProfileStudent"></activity>
-=======
-        <activity android:name=".teacher_edit_assignment"/>
 
-        <activity android:name=".EditProfileStudent"/>
->>>>>>> 9103ffd4e06e6a1fb3bea08be4fbfb0cd72d60d5
+
         <activity android:name=".Home" />
         <activity android:name=".ForgetPassword" />
 
