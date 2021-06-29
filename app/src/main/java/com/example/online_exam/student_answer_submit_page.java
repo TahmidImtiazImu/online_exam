@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,9 +40,13 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static com.example.online_exam.Register.TAG;
 import static com.example.online_exam.student_adapter_assignmentlist.context;
 
 public class student_answer_submit_page extends AppCompatActivity {
@@ -62,6 +68,12 @@ public class student_answer_submit_page extends AppCompatActivity {
     public String node ;
     public String pdf_file_name ;
     public String Unique_answer_upload;
+    public String due_date ;
+    public String due_time ;
+    String date ;
+    Date date1;
+    Date date2 ;
+    String Unique_ques_upload ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,17 +103,71 @@ public class student_answer_submit_page extends AppCompatActivity {
         SharedPreferences user_sp =getApplicationContext().getSharedPreferences("UserPrefs",context.MODE_PRIVATE);
         student_username = user_sp.getString("UserName","");
 
+
         Unique_answer_upload = student_username + student_course_code + assignment_topic ;
 
+        Unique_ques_upload = student_course_code + assignment_topic ;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance() ;
+        DatabaseReference myref= database.getReference("teacher_uploadPdf").child(Unique_ques_upload);
+
+        myref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                Date today_date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                date = format.format(today_date);
+                System.out.println(date);
+
+                due_date = dataSnapshot.child("Due_date").getValue(String.class) ;
+                Log.d("TAG","Due date" + due_date) ;
+
+                SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy") ;
+                try {
+                    date1 = format1.parse(date) ;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    date2 = format1.parse(due_date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if(date1.compareTo(date2) < 0)
+                {
+                    hand_in.setVisibility(View.VISIBLE);
+
+                    hand_in.setEnabled(false);
+                    hand_in.setText("Gone");
+                    hand_in.setTextColor(0xFF00FF00);
+                }
+                else
+                {
+                    hand_in.setVisibility(View.VISIBLE);
+
+                    hand_in.setEnabled(false);
+                    hand_in.setText("Gone");
+                    hand_in.setTextColor(0xFF00FF00);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
         databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                    pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
-                   System.out.println(pdf_file_name);
+
                    if(Unique_answer_upload.equals(pdf_file_name)) {
+
                        node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
                        System.out.println(pdf_file_name);
                        System.out.println(node);
@@ -139,7 +205,7 @@ public class student_answer_submit_page extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 

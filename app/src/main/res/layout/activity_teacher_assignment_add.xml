@@ -78,10 +78,30 @@
 
     </EditText>
 
+    <EditText
+        android:id="@+id/pick_a_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:layout_below="@id/select_file"
+        android:layout_marginLeft="105dp"
+        android:hint="Enter Date" />
+
+    <EditText
+        android:id="@+id/enter_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:layout_below="@+id/pick_a_date"
+        android:hint="Enter Time" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_file"
+        android:layout_below="@+id/enter_time"
         android:layout_marginLeft="123dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/material_on_surface_stroke"
@@ -93,6 +113,10 @@
         >
 
     </Button>
+
+        />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

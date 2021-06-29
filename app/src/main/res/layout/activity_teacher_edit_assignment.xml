@@ -69,6 +69,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Upload"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:textColor="@color/blue"
+        android:id="@+id/edit_upload_text"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="You have unsaved changes"
         android:textSize="20dp"
         android:textStyle="italic"

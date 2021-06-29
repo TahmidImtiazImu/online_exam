@@ -17,13 +17,13 @@
         android:roundIcon="@drawable/ic_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-<<<<<<< HEAD
+
         <activity android:name=".teacher_edit_assignment"></activity>
-=======
+
         <activity android:name=".EditProfileStudent"></activity>
         <activity android:name=".Home" />
         <activity android:name=".ForgetPassword" />
->>>>>>> 76d8ebeb205e9b0cba21a58bd7936cc44ac817a5
+
         <activity android:name=".teacher_answer_view" />
         <activity android:name=".student_answer_view" />
         <activity android:name=".SplashScreen">

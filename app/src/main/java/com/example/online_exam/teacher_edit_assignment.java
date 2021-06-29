@@ -47,7 +47,7 @@ public class teacher_edit_assignment extends AppCompatActivity {
     String edited_topic,edited_time,edited_url ;
     EditText assignment_topic,assignment_duration;
     ImageView assignment_ques,edit_ques ;
-    TextView unsaved_changes ;
+    TextView unsaved_changes , edit_upload;
     Button save_changes ;
     public String course_code,pdf_file_name;
     Uri edited_ques_uri ;
@@ -66,6 +66,7 @@ public class teacher_edit_assignment extends AppCompatActivity {
         unsaved_changes = findViewById(R.id.you_have_unsaved_changes) ;
         save_changes = findViewById(R.id.save_changes) ;
         edit_ques = findViewById(R.id.edit_view) ;
+        edit_upload = findViewById(R.id.edit_upload_text);
 
 
 
@@ -149,57 +150,63 @@ public class teacher_edit_assignment extends AppCompatActivity {
                             }
                         }).check());
 
-                save_changes.setOnClickListener(v -> {
+                edit_upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProgressDialog pd = new ProgressDialog(getApplicationContext());
+                        pd.setTitle("File uploading ...");
+                        pd.show();
 
-                    ProgressDialog pd = new ProgressDialog(getApplicationContext());
-                    pd.setTitle("File uploading ...");
-                    pd.show();
+                        StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
+                        reference.putFile(edited_ques_uri)
+                                .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                    StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
-                    reference.putFile(edited_ques_uri)
-                            .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
-                                edited_topic = assignment_topic.getText().toString() ;
-                                edited_time = assignment_duration.getText().toString() ;
+                                    edited_url = Objects.requireNonNull(uri).toString() ;
 
-                                if(edited_time.isEmpty()){
-                                    assignment_topic.setError("Topic is required");
-                                    Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-                                }
-                                if(edited_time.isEmpty()){
-                                    assignment_duration.setError("Duration is required");
-                                    Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-                                }
-                                edited_url = Objects.requireNonNull(uri).toString() ;
-                                unique_assignment = course_code + edited_topic ;
-                                System.out.println("EDITE URL "+edited_url) ;
-                                System.out.println("UNIQUE "+unique_assignment);
-                                HashMap<String,Object> hashMap = new HashMap<>() ;
-                                hashMap.put("Assignment_time",edited_time) ;
-                                hashMap.put("Assignment_topic",edited_topic) ;
-                                hashMap.put("Course_code",course_code) ;
-                                hashMap.put("pdf_file_name",pdf_file_name) ;
-                                hashMap.put("pdf_file_url",edited_url) ;
-                                fb.child(unique_assignment).updateChildren(hashMap) ;
-                                hashMap.put("Assignment_time","") ;
-                                hashMap.put("Assignment_topic","") ;
-                                hashMap.put("Course_code","") ;
-                                hashMap.put("pdf_file_name","") ;
-                                hashMap.put("pdf_file_url","") ;
-                                firebaseDatabase.updateChildren(hashMap) ;
-
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
 
 
 
 //                    student_browse_pdf.setVisibility(View.INVISIBLE);
-                            }))
-                            .addOnProgressListener(tasksnapshot -> {
+                                }))
+                                .addOnProgressListener(tasksnapshot -> {
 
-                                float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
-                                pd.setMessage("Uploaded :" + (int) percent + "%");
+                                    float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
+                                    pd.setMessage("Uploaded :" + (int) percent + "%");
 
-                            });
+                                });
+                    }
+                });
+                save_changes.setOnClickListener(v -> {
+
+                    edited_topic = assignment_topic.getText().toString() ;
+                    edited_time = assignment_duration.getText().toString() ;
+
+                    if(edited_time.isEmpty()){
+                        assignment_topic.setError("Topic is required");
+                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+                    }
+                    if(edited_time.isEmpty()){
+                        assignment_duration.setError("Duration is required");
+                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+                    }
+                    unique_assignment = course_code + edited_topic ;
+                    System.out.println("EDITE URL "+edited_url) ;
+                    System.out.println("UNIQUE "+unique_assignment);
+                    HashMap<String,Object> hashMap = new HashMap<>() ;
+                    hashMap.put("Assignment_time",edited_time) ;
+                    hashMap.put("Assignment_topic",edited_topic) ;
+                    hashMap.put("Course_code",course_code) ;
+                    hashMap.put("pdf_file_name",pdf_file_name) ;
+                    hashMap.put("pdf_file_url",edited_url) ;
+                    fb.child(unique_assignment).updateChildren(hashMap) ;
+                    hashMap.put("Assignment_time","") ;
+                    hashMap.put("Assignment_topic","") ;
+                    hashMap.put("Course_code","") ;
+                    hashMap.put("pdf_file_name","") ;
+                    hashMap.put("pdf_file_url","") ;
+                    firebaseDatabase.updateChildren(hashMap) ;
 
                     Toast.makeText(getApplicationContext(),"Saved successfully", Toast.LENGTH_SHORT).show() ;
 
