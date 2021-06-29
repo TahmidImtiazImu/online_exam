@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
 
     <application
         android:allowBackup="true"
@@ -17,13 +17,13 @@
         android:roundIcon="@drawable/ic_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-<<<<<<< HEAD
-        <activity android:name=".teacher_edit_assignment"></activity>
-=======
-        <activity android:name=".EditProfileStudent"></activity>
+
+        <activity android:name=".teacher_edit_assignment"/>
+
+        <activity android:name=".EditProfileStudent"/>
         <activity android:name=".Home" />
         <activity android:name=".ForgetPassword" />
->>>>>>> 76d8ebeb205e9b0cba21a58bd7936cc44ac817a5
+
         <activity android:name=".teacher_answer_view" />
         <activity android:name=".student_answer_view" />
         <activity android:name=".SplashScreen">
