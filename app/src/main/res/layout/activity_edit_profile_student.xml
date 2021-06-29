@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTintMode="screen"
+    tools:context=".EditProfile">
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradv2">
+
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/circle_border">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgDP"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="15dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <ImageView
+                    android:id="@+id/imgChooseDP"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/edit_pen"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true">
+                </ImageView>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--1. email(Fixed)
+            2. Username(fixed)
+            3. Name
+            4. Password
+            5. Confirm password
+            6. Phone no.(Optional)
+            7. Save Button
+
+            #Back button at top left corner
+           -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/bg_silver"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="ds.partho1998@gmail.com"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"
+                android:gravity="start">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Username"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editUser"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="Partho_34"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Full Name"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editFullName"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="Partho Sarker"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Institution"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editIns"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="947298374"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Gender"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editGender"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="643871264"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Role"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editRole"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="Teacher"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                >
+
+            </EditText>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Batch"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editBatch"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="947298374"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Academic Year"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editAcYear"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="947298374"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="24dp"
+                android:text="Current Semester"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editSemester"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:hint="947298374"
+                android:textSize="18sp"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/black"/>
+
+            <!--        <TextView-->
+            <!--            android:layout_width="350dp"-->
+            <!--            android:layout_height="24dp"-->
+            <!--            android:text="Change Password"-->
+            <!--            android:layout_marginTop="20dp"-->
+            <!--            android:layout_marginLeft="20dp"-->
+            <!--            android:textSize="20sp"-->
+            <!--            android:textColor="@color/black"-->
+            <!--            android:textStyle="bold"-->
+            <!--            >-->
+            <!--        </TextView>-->
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/editPass"-->
+            <!--            android:layout_width="350dp"-->
+            <!--            android:layout_height="45dp"-->
+            <!--            android:background="@null"-->
+            <!--            android:layout_marginLeft="20dp"-->
+            <!--            android:layout_marginTop="0dp"-->
+            <!--            android:textSize="18sp"-->
+            <!--            android:textAlignment="textStart"-->
+            <!--            android:hint="*******"-->
+            <!--            android:gravity="start"-->
+            <!--            android:textColor="@color/black"/>-->
+
+
+            <Button
+                android:id="@+id/btnChangePass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Change Password"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_bg">
+
+            </Button>
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="save"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_bg">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>

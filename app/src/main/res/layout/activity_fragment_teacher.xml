@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="Type your Email"
-            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="5dp"
             android:inputType="textEmailAddress">
 

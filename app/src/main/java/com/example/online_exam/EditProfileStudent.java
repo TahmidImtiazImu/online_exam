@@ -1,4 +1,4 @@
- package com.example.online_exam;
+package com.example.online_exam;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,13 +47,13 @@ import java.util.jar.Attributes;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfileStudent extends AppCompatActivity {
 
     private Button saveBtn, changePassBtn;
     private ImageView chooseImg;
     private CircleImageView showImg;
     private Uri filePath;
-    private EditText fullNameEdit, emailEdit, userEdit, insEdit, genderEdit, passEdit, roleEdit;
+    private EditText fullNameEdit, emailEdit, userEdit, insEdit, genderEdit, passEdit, roleEdit, batchEdit, semEdit, acEdit;
     private final int PICK_IMAGE_REQUEST = 22;
 
     FirebaseStorage storage;
@@ -64,12 +64,12 @@ public class EditProfile extends AppCompatActivity {
 
     SharedPreferences sp;
 
-    String _NAME, _EMAIL, _PASSWORD, _FULLNAME, _INSTITUTION, _GENDER, _ROLE;
+    String _NAME, _EMAIL, _PASSWORD, _FULLNAME, _INSTITUTION, _GENDER, _ROLE, _BATCH, _ACYEAR, _CURRSEM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_edit_profile_student);
         getSupportActionBar().hide();
 
         saveBtn = findViewById(R.id.btnSave);
@@ -83,6 +83,9 @@ public class EditProfile extends AppCompatActivity {
         //passEdit = findViewById(R.id.editPass);
         roleEdit = findViewById(R.id.editRole);
         changePassBtn = findViewById(R.id.btnChangePass);
+        batchEdit= findViewById(R.id.editBatch);
+        semEdit = findViewById(R.id.editSemester);
+        acEdit = findViewById(R.id.editAcYear);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -131,12 +134,12 @@ public class EditProfile extends AppCompatActivity {
                         user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(EditProfile.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileStudent.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(EditProfile.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileStudent.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -160,12 +163,15 @@ public class EditProfile extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                 _FULLNAME = snapshot.child("Enter_name").getValue(String.class);
-                 _EMAIL = snapshot.child("Email").getValue(String.class);
-                 _GENDER = snapshot.child("Gender").getValue(String.class);
-                 _INSTITUTION = snapshot.child("Institution").getValue(String.class);
-                 _ROLE = snapshot.child("Role").getValue(String.class);
-                 String loadURL = snapshot.child("Picture URL").getValue(String.class);
+                _FULLNAME = snapshot.child("Enter_name").getValue(String.class);
+                _EMAIL = snapshot.child("Email").getValue(String.class);
+                _GENDER = snapshot.child("Gender").getValue(String.class);
+                _INSTITUTION = snapshot.child("Institution").getValue(String.class);
+                _ROLE = snapshot.child("Role").getValue(String.class);
+                _BATCH = snapshot.child("Batch").getValue(String.class);
+                _ACYEAR = snapshot.child("Academic Year").getValue(String.class);
+                _CURRSEM = snapshot.child("Current Semester").getValue(String.class);
+                String loadURL = snapshot.child("Picture URL").getValue(String.class);
 
                 fullNameEdit.setText(_FULLNAME);
                 emailEdit.setText(_EMAIL);
@@ -173,6 +179,9 @@ public class EditProfile extends AppCompatActivity {
                 genderEdit.setText(_GENDER);
                 insEdit.setText(_INSTITUTION);
                 roleEdit.setText(_ROLE);
+                batchEdit.setText(_BATCH);
+                acEdit.setText(_ACYEAR);
+                semEdit.setText(_CURRSEM);
                 if(loadURL.length() > 1)
                     Picasso.get().load(loadURL).into(showImg);
             }
@@ -272,7 +281,7 @@ public class EditProfile extends AppCompatActivity {
                                 // Dismiss dialog
                                 progressDialog.dismiss();
                                 Toast
-                                        .makeText(EditProfile.this,
+                                        .makeText(EditProfileStudent.this,
                                                 "Image Uploaded!!",
                                                 Toast.LENGTH_SHORT)
                                         .show();
@@ -297,7 +306,7 @@ public class EditProfile extends AppCompatActivity {
                             // Error, Image not uploaded
                             progressDialog.dismiss();
                             Toast
-                                    .makeText(EditProfile.this,
+                                    .makeText(EditProfileStudent.this,
                                             "Failed " + e.getMessage(),
                                             Toast.LENGTH_SHORT)
                                     .show();
@@ -317,13 +326,42 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void update(){
-        //String fullName = fullNameEdit.getText().toString();
-        //databaseReference.child("Enter_name").setValue(fullName); //change korsi
-        if (isNameChanged() || isInsChanged() ){
-            Toast.makeText(EditProfile.this, "Data has been updated", Toast.LENGTH_LONG).show();
+
+        if (isNameChanged() || isInsChanged() || isBatchChanged() || isSemChanged() || isAcChanged()){
+            Toast.makeText(EditProfileStudent.this, "Data has been updated", Toast.LENGTH_LONG).show();
         }
         else
-            Toast.makeText(EditProfile.this, "Data is same and can not be updated", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditProfileStudent.this, "Data is same and can not be updated", Toast.LENGTH_LONG).show();
+    }
+
+    private boolean isAcChanged() {
+        if(!_ACYEAR.equals(acEdit.getText().toString())){
+            databaseReference.child("Academic Year").setValue(acEdit.getText().toString());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private boolean isSemChanged() {
+        if(!_CURRSEM.equals(semEdit.getText().toString())){
+            databaseReference.child("Current Semester").setValue(semEdit.getText().toString());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private boolean isBatchChanged() {
+        if(!_BATCH.equals(batchEdit.getText().toString())){
+            databaseReference.child("Batch").setValue(batchEdit.getText().toString());
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

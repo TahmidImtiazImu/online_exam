@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -178,7 +179,12 @@ public class teacher_homepage extends AppCompatActivity {
             case R.id.log:
                 Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
                 current_userName = "";
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
                 return true;
         }
 

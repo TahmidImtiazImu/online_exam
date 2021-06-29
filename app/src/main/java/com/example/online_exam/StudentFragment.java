@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +37,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Objects;
+
+import static com.example.online_exam.Register.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -204,6 +210,37 @@ public class StudentFragment extends Fragment {
                 else{
                     mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
+                            //authentication
+                            FirebaseUser fUser = mAuth.getCurrentUser();
+                            fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getContext(), "Verification Email Sent!", Toast.LENGTH_LONG).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull @NotNull Exception e) {
+                                    Log.d( TAG, "onFailure:Email not Sent" + e.getMessage() );
+                                }
+                            });
+
+                            //Set User Display Name
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName("Student").build();
+
+                            fUser.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
+
+
+
                             Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
                             //userid = Objects.requireNonNull(fbase.getCurrentUser()).getUid() ;
                             HashMap<String,Object> usermap = new HashMap<>() ;
