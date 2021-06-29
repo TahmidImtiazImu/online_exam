@@ -47,11 +47,15 @@ public class teacher_assignment_page extends AppCompatActivity {
     String teacher_assignment_topic;
     String teacher_assignment_duration;
     String name_merge ;
+
+
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_page);
+
+        super.onResume();
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -128,6 +132,9 @@ public class teacher_assignment_page extends AppCompatActivity {
 
                     String course_code = dataSnapshot.child("Course_code").getValue(String.class);
 
+                    assert course_code != null;
+                   // if(course_code.equals("IMU")) dataSnapshot.getRef().setValue(null);
+
                     if(course_code.equals(current_course_code)) {
 
                         teacher_assignment_topic = dataSnapshot.child("Assignment_topic").getValue(String.class);
@@ -139,6 +146,8 @@ public class teacher_assignment_page extends AppCompatActivity {
 
                 }
                 adapter.notifyDataSetChanged();
+
+
             }
 
             @Override

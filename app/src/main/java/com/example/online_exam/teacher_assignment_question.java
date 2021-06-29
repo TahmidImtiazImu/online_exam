@@ -12,13 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import static com.example.online_exam.teacher_adapter_assignmentlist.context;
@@ -45,9 +49,10 @@ public class teacher_assignment_question extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     ImageView pdf_logo ;
+    ImageView edit_menu;
     TextView ass_topic,ass_time,cour_code,pdf_url;
     SharedPreferences course_code_sp ,assignemnt_topic_sp;
-
+    DatabaseReference fb ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -101,8 +106,9 @@ public class teacher_assignment_question extends Fragment {
         ass_topic = view.findViewById(R.id.ques_assignment_topic) ;
         cour_code = view.findViewById(R.id.ques_course_code) ;
         pdf_url = view.findViewById(R.id.ques_pdf_file_url) ;
+        edit_menu = view.findViewById(R.id.edit_and_delete) ;
 
-        DatabaseReference fb ;
+
 
         course_code_sp = getApplicationContext().getSharedPreferences("course_code_prefs", Context.MODE_PRIVATE);
         String course_code = course_code_sp.getString("Teacher_Course_Code","");
@@ -138,6 +144,49 @@ public class teacher_assignment_question extends Fragment {
                     startActivity(intent);
 
                 });
+                edit_menu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PopupMenu popupMenu = new PopupMenu(context,v) ;
+                        popupMenu.getMenuInflater().inflate(R.menu.edit_menu,popupMenu.getMenu());
+                        popupMenu.show();
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @SuppressLint("NonConstantResourceId")
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId())
+                                {
+                                    case R.id.Edit_item:
+                                        Intent intent = new Intent(context,teacher_edit_assignment.class);
+                                        intent.putExtra("Unique_assignment",name_merge);
+                                        context.startActivity(intent);
+                                        break;
+                                    case R.id.delete_item:
+                                        HashMap<String,Object> data = new HashMap<>();
+
+                                        data.put("Assignment_topic","");
+                                        data.put("Assignment_time","");
+                                        data.put("Course_code","IMU");
+                                        data.put("pdf_file_name","");
+                                        data.put("pdf_file_url","");
+                                        fb.updateChildren(data) ;
+
+                                        //myRef.child(user.getUser_id()).updateChildren(data);
+
+
+                                        Intent intent2 = new Intent(context,teacher_assignment_page.class);
+                                        context.startActivity(intent2);
+
+
+
+                                }
+                                return true ;
+                            }
+                        });
+
+                    }
+                });
+
 
             }
 
