@@ -1,6 +1,7 @@
 package com.example.online_exam;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,8 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 import java.util.List;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -49,6 +55,8 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
         String course_code = coursesList.get(position).getIndividual_course_Code();
 
         holder.setData(course_name,course_code);
+
+
 
     }
 
@@ -107,7 +115,59 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
                     //
                 }
             });
+
+            single_course.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    delete_message(course_code);
+
+                    Toast.makeText(context, "Long Pressed", Toast.LENGTH_SHORT).show();
+
+                    return true;
+                }
+            });
+
         }
 
+    }
+
+    private void delete_message(String course_code) {
+
+        DatabaseReference rf = FirebaseDatabase.getInstance().getReference("courses");
+
+        AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+        dialog.setMessage("Are you sure you want to delete this course?");
+        dialog.setTitle("Warning!");
+        dialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        HashMap<String, Object> hashMap;
+
+//                        hashMap = new HashMap<>();
+//                        hashMap.put("courseCode","");
+//                        hashMap.put("courseName","");
+//                        hashMap.put("currentUser", "");
+
+//                        rf.child(course_code).updateChildren(hashMap);
+                        rf.child(course_code).removeValue();
+//                        rf.child(course_code).child("currentUser").updateChildren(hashMap);
+
+                        notifyDataSetChanged();
+
+                        context.startActivity(new Intent(context,teacher_homepage.class));
+
+                        Toast.makeText(context,"Course has been deleted",Toast.LENGTH_LONG).show();
+                    }
+                });
+        dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context,"canceled",Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 }

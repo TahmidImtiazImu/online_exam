@@ -89,8 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Create"
-        android:background="@drawable/rounded_button"
-        android:onClick="create_button_clicked"/>
+        android:background="@drawable/rounded_button" />
 
 
 
