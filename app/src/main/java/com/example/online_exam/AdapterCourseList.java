@@ -18,8 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +38,7 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
 
     private final List<ModelCourseList>coursesList;
     private Context context;
+    DatabaseReference rf ;
 
     public AdapterCourseList(List<ModelCourseList>coursesList, Context context) {
 
@@ -134,7 +140,7 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
 
     private void delete_message(String course_code) {
 
-        DatabaseReference rf = FirebaseDatabase.getInstance().getReference("courses");
+        rf = FirebaseDatabase.getInstance().getReference("courses");
 
         AlertDialog.Builder dialog=new AlertDialog.Builder(context);
         dialog.setMessage("Are you sure you want to delete this course?");
@@ -151,10 +157,22 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
 //                        hashMap.put("currentUser", "");
 
 //                        rf.child(course_code).updateChildren(hashMap);
-                        rf.child(course_code).removeValue();
+                        rf.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                rf.child(course_code).removeValue();
+                                notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
 //                        rf.child(course_code).child("currentUser").updateChildren(hashMap);
 
-                        notifyDataSetChanged();
+                        //notifyDataSetChanged();
+
 
                         context.startActivity(new Intent(context,teacher_homepage.class));
 
