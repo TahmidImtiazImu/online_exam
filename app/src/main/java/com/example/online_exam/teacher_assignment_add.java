@@ -28,6 +28,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static com.example.online_exam.teacher_adapter_assignmentlist.context;
+
 public class teacher_assignment_add extends AppCompatActivity {
 
 
@@ -148,6 +150,7 @@ public class teacher_assignment_add extends AppCompatActivity {
                     hashMap.put("Course_code",current_course_code) ;
                     databaseReference.child(unique_assignment).setValue(hashMap);
                     Toast.makeText(teacher_assignment_add.this,"File uploaded",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(context,teacher_assignment_page.class));
                     progressDialog.dismiss();
 
                 }).addOnProgressListener(snapshot -> {

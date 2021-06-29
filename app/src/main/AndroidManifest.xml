@@ -17,7 +17,8 @@
         android:roundIcon="@drawable/ic_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
-        <activity android:name=".teacher_answer_view"></activity>
+        <activity android:name=".teacher_edit_assignment"></activity>
+        <activity android:name=".teacher_answer_view" />
         <activity android:name=".student_answer_view" />
         <activity android:name=".SplashScreen">
             <intent-filter>
