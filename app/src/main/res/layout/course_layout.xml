@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/single_course_display"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp"
