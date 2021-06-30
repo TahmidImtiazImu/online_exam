@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.example.online_exam.teacher_adapter_assignmentlist.context;
 
@@ -155,7 +156,7 @@ public class teacher_assignment_add extends AppCompatActivity {
     }
         private void selectPdf() {
         Intent intent = new Intent() ;
-        intent.setType("application/pdf") ;
+        intent.setType("application/pdf/*") ;
         intent.setAction(Intent.ACTION_GET_CONTENT) ;
         startActivityForResult(Intent.createChooser(intent,"PDF FILE SELECTED"),12);
 
@@ -178,7 +179,7 @@ public class teacher_assignment_add extends AppCompatActivity {
         progressDialog.setTitle("File is loading....");
         progressDialog.show() ;
 
-        StorageReference reference = storageReference.child("upload/"+System.currentTimeMillis()+".pdf");
+        StorageReference reference = storageReference.child("upload/"+ UUID.randomUUID().toString());
         reference.putFile(data)
                 .addOnSuccessListener(taskSnapshot -> {
 

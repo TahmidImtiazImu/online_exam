@@ -40,6 +40,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -73,6 +74,8 @@ public class student_answer_submit_page extends AppCompatActivity {
     String date ;
     Date date1;
     Date date2 ;
+    Date time1;
+    Date time2;
     String Unique_ques_upload ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         DatabaseReference myref= database.getReference("teacher_uploadPdf").child(Unique_ques_upload);
 
         myref.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 Date today_date = new Date();
@@ -119,10 +123,30 @@ public class student_answer_submit_page extends AppCompatActivity {
                 date = format.format(today_date);
                 System.out.println(date);
 
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                String time = sdf.format(new Date());
+
                 due_date = dataSnapshot.child("Due_date").getValue(String.class) ;
-                Log.d("TAG","Due date" + due_date) ;
+                due_time = dataSnapshot.child("Due_time").getValue(String.class) ;
+
+
 
                 SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy") ;
+                SimpleDateFormat format2 = new SimpleDateFormat("HH:mm") ;
+
+                try {
+                    time1 = format2.parse(time) ;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    time2 = format2.parse(due_time) ;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Log.d("TAG","Due date" + due_time) ;
+                Log.d("TAG","real date" + time) ;
+
                 try {
                     date1 = format1.parse(date) ;
                 } catch (ParseException e) {
@@ -134,22 +158,24 @@ public class student_answer_submit_page extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(date1.compareTo(date2) < 0)
+                if(date1.compareTo(date2) > 0)
                 {
                     hand_in.setVisibility(View.VISIBLE);
-
+                    ans_submit.setVisibility(View.GONE);
                     hand_in.setEnabled(false);
-                    hand_in.setText("Gone");
-                    hand_in.setTextColor(0xFF00FF00);
+                    hand_in.setText("Time out");
+                    hand_in.setTextColor(0xFFFF0000);
                 }
-                else
-                {
-                    hand_in.setVisibility(View.VISIBLE);
+                else if(date1.compareTo(date2)==0){
+                    if(time1.compareTo(time2)>0) {
+                        hand_in.setVisibility(View.VISIBLE);
+                        ans_submit.setVisibility(View.GONE);
+                        hand_in.setEnabled(false);
+                        hand_in.setText("Time out");
+                        hand_in.setTextColor(0xFFFF0000);
+                    }
+                }
 
-                    hand_in.setEnabled(false);
-                    hand_in.setText("Gone");
-                    hand_in.setTextColor(0xFF00FF00);
-                }
             }
 
             @Override
@@ -157,7 +183,7 @@ public class student_answer_submit_page extends AppCompatActivity {
 
             }
         });
-
+        ans_submit.setEnabled(false);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
             @Override
@@ -219,7 +245,7 @@ public class student_answer_submit_page extends AppCompatActivity {
             student_sub_cancel.setVisibility(View.INVISIBLE);
             student_ans_pdf.setVisibility(View.INVISIBLE);
             student_browse_pdf.setVisibility(View.VISIBLE);
-            ans_submit.setEnabled(true);
+            ans_submit.setEnabled(false);
         });
 
         student_browse_pdf.setOnClickListener(v ->
@@ -232,6 +258,7 @@ public class student_answer_submit_page extends AppCompatActivity {
                         intent.setType("application/pdf") ;
                         intent.setAction(Intent.ACTION_GET_CONTENT) ;
                         startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
+                        ans_submit.setEnabled(true);
                     }
 
                     @Override
