@@ -151,13 +151,17 @@ public class LoginActivity extends AppCompatActivity {
                                     if (fUser.isEmailVerified()) {
                                         SharedPreferences.Editor editor = sp.edit();
                                         String Role = dataSnapshot.child(Userentername).child("Role").getValue(String.class);
+                                        String name = dataSnapshot.child(Userentername).child("Enter_name").getValue(String.class);
+                                        System.out.println("retrieved name : " + name);
                                         assert Role != null;
                                         if (Role.equals("Teacher")) {
                                             usernameIntent = new Intent(LoginActivity.this, teacher_homepage.class);
                                             startActivity(usernameIntent);
 
                                             editor.putString("UserName", Userentername);
-                                            editor.commit();
+                                            editor.apply();
+                                            editor.putString("Student_name", name);
+                                            editor.apply();
                                             //usernameIntent.putExtra("currentUsername",Userentername);
 
                                             Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
@@ -168,7 +172,9 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(usernameIntent);
 
                                             editor.putString("UserName", Userentername);
-                                            editor.commit();
+                                            editor.apply();
+                                            editor.putString("Student_name", name);
+                                            editor.apply();
                                             //usernameIntent.putExtra("currentUsername",Userentername);
 
                                             Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();

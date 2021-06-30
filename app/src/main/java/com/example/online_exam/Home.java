@@ -33,10 +33,19 @@ public class Home extends android.app.Activity {
         {
             String showUser  = fUser.getDisplayName();
             System.out.println("\nDisplay Name=\n"+showUser);
-           if(showUser.equals("Teacher"))
-                startActivity(new Intent(Home.this, teacher_homepage.class));
-           else
-               startActivity(new Intent(Home.this, student_homepage.class));
+           if(showUser.equals("Teacher")) {
+
+               Intent intent = new Intent(Home.this, teacher_homepage.class);
+               intent.putExtra("logging_check", "teacher_LoggedIn");
+
+                startActivity(intent);
+           }
+           else {
+               Intent intent = new Intent(Home.this, student_homepage.class);
+               intent.putExtra("logging_check", "student_LoggedIn");
+
+               startActivity(intent);
+           }
         }
         else
         {

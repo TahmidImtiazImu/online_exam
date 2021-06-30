@@ -18,12 +18,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 //import java.util.ArrayList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,7 +76,6 @@ public class student_homepage extends AppCompatActivity {
 
         //initData();
         initRecyclerView();
-        list_show();
         //adapter.notifyDataSetChanged();
 
     }
@@ -146,12 +147,39 @@ public class student_homepage extends AppCompatActivity {
 
                         joined_course_code = dataSnapshot.child("courseCode").getValue(String.class);
 
-                        courseCodeArray[size] = joined_course_code;
-                        size++;
+                        Query checked_query = new_root.orderByChild("courseCode").equalTo(joined_course_code);
+
+                        Course_code = dataSnapshot.child("courseCode").getValue(String.class);
+                        Course_name = dataSnapshot.child("courseName").getValue(String.class);
+
+                        if(joined_course_code.equals(Course_code)) {
+
+                            coursesList.add(new ModelCourseList(Course_name, Course_code));
+
+                        }
+
+//                        checked_query.addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//                                if(snapshot.exists()) {
+//
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                            }
+//                        });
+
+                        //courseCodeArray[size] = joined_course_code;
+                        //size++;
                     }
+                    adapter.notifyDataSetChanged();
 
                 }
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -166,44 +194,6 @@ public class student_homepage extends AppCompatActivity {
         //coursesList.add(new ModelCourseList("CSE", "12346753"));
         //adapter.notifyDataSetChanged();
 
-    }
-
-    private void list_show() {
-
-        new_root.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                int count = 0;
-
-                while (count < size) {
-
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                        //current_userName = dataSnapshot.child("currentUser").getValue(String.class);
-                        Course_code = dataSnapshot.child("courseCode").getValue(String.class);
-
-                        if(courseCodeArray[count].equals(Course_code)) {
-
-                            Course_name = dataSnapshot.child("courseName").getValue(String.class);
-                            coursesList.add(new ModelCourseList(Course_name, Course_code));
-
-                            break;
-                        }
-                    }
-
-                    count++;
-                }
-
-                adapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
     }
 
     @Override
