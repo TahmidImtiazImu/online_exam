@@ -77,11 +77,15 @@ public class EditProfile extends AppCompatActivity {
         chooseImg = findViewById(R.id.imgChooseDP);
         fullNameEdit = findViewById(R.id.editFullName);
         emailEdit = findViewById(R.id.editEmail);
+        emailEdit.setEnabled(false);
         userEdit = findViewById(R.id.editUser);
+        userEdit.setEnabled(false);
         insEdit = findViewById(R.id.editIns);
         genderEdit = findViewById(R.id.editGender);
+        genderEdit.setEnabled(false);
         //passEdit = findViewById(R.id.editPass);
         roleEdit = findViewById(R.id.editRole);
+        roleEdit.setEnabled(false);
         changePassBtn = findViewById(R.id.btnChangePass);
 
         mAuth = FirebaseAuth.getInstance();
@@ -346,4 +350,5 @@ public class EditProfile extends AppCompatActivity {
             return false;
         }
     }
+
 }
