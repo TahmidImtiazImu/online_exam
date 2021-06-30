@@ -151,7 +151,7 @@ public class student_homepage extends AppCompatActivity {
                     }
 
                 }
-                //adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -170,7 +170,7 @@ public class student_homepage extends AppCompatActivity {
 
     private void list_show() {
 
-        new_root.addValueEventListener(new ValueEventListener() {
+        new_root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 

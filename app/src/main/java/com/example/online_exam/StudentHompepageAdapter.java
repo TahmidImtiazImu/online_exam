@@ -1,6 +1,7 @@
 package com.example.online_exam;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -12,8 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -23,6 +34,10 @@ class StudentHompepageAdapter extends RecyclerView.Adapter<StudentHompepageAdapt
 
     private List<ModelCourseList>coursesList;
     private Context context;
+
+    String student_username;
+
+    DatabaseReference rf;
 
     public StudentHompepageAdapter(List<ModelCourseList>coursesList, Context context) {
 
@@ -103,7 +118,60 @@ class StudentHompepageAdapter extends RecyclerView.Adapter<StudentHompepageAdapt
                     //
                 }
             });
+
+            single_course.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    delete_message(course_code);
+                    return true;
+                }
+            });
         }
 
+    }
+
+    private void delete_message(String course_code) {
+
+        rf = FirebaseDatabase.getInstance().getReference("joined_courses");
+
+        SharedPreferences sp = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        student_username = sp.getString("UserName", "");
+
+        String merge_node = student_username + course_code;
+
+        AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+        dialog.setMessage("Are you sure you want to remove this course?");
+        dialog.setTitle("Warning!");
+        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                rf.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        rf.child(merge_node).removeValue();
+                        notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+                context.startActivity(new Intent(context,student_homepage.class));
+                Toast.makeText(context, "Removed Course", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context,"canceled",Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 }

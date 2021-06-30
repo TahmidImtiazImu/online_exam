@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class JoinCourseActivity extends AppCompatActivity {
@@ -50,7 +51,8 @@ public class JoinCourseActivity extends AppCompatActivity {
 
         Name = sp.getString("Student_name", "");
 
-        System.out.println(Name);
+        System.out.println("Testing user : "+student_username);
+        System.out.println("Testing name : "+Name);
 
         CourseCode = (EditText) findViewById(R.id.requested_code);
 
@@ -88,9 +90,16 @@ public class JoinCourseActivity extends AppCompatActivity {
                         CourseRootNode = FirebaseDatabase.getInstance();
                         CourseReference = CourseRootNode.getReference("joined_courses");
 
-                        student_helper courseHelper = new student_helper(course_code,student_username, Name);
+                        //student_helper courseHelper = new student_helper(course_code,student_username, Name);
 
-                        CourseReference.child(merged_key).setValue(courseHelper);
+                        HashMap<String, Object> hashMap;
+
+                        hashMap = new HashMap<>();
+                        hashMap.put("courseCode",course_code);
+                        hashMap.put("currentUser",student_username);
+                        hashMap.put("student_name", Name);
+
+                        CourseReference.child(merged_key).setValue(hashMap);
 
                         Toast.makeText(getApplicationContext(),"Joined successfully" ,Toast.LENGTH_SHORT).show();
 
