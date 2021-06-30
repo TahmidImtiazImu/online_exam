@@ -10,7 +10,7 @@
    <com.google.android.material.textfield.TextInputLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_marginTop="30dp"
+       android:layout_marginTop="20dp"
        android:padding="20dp"
        app:boxBackgroundColor="@android:color/transparent"
        android:background="@android:color/transparent">
@@ -27,7 +27,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:padding="20dp"
         app:boxBackgroundColor="@android:color/transparent"
         android:background="@android:color/transparent">
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/pdf_img"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/edit_ques_pdf">
 
     </ImageView>
@@ -79,6 +79,24 @@
         >
 
     </TextView>
+    <EditText
+        android:id="@+id/edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+
+        android:layout_marginLeft="105dp"
+        android:hint="Enter Date" />
+
+    <EditText
+        android:id="@+id/edit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Enter Time" />
 
     <TextView
         android:layout_width="wrap_content"

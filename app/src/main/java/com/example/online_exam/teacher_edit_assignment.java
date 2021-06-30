@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,9 +15,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,15 +40,17 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 public class teacher_edit_assignment extends AppCompatActivity {
 
     String unique_assignment ;
     DatabaseReference firebaseDatabase ,fb;
     public String old_assignment_topic, old_assignment_time,old_ques_url ;
-    String edited_topic,edited_time,edited_url ;
+    String edited_topic,edited_time,edited_url,Edit_date,Edit_time ;
     EditText assignment_topic,assignment_duration;
     ImageView assignment_ques,edit_ques ;
     TextView unsaved_changes , edit_upload;
@@ -52,6 +58,9 @@ public class teacher_edit_assignment extends AppCompatActivity {
     public String course_code,pdf_file_name;
     Uri edited_ques_uri ;
     StorageReference storageReference ;
+    EditText edit_time,edit_date ;
+    DatePickerDialog picker;
+    TimePickerDialog Picker;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,8 @@ public class teacher_edit_assignment extends AppCompatActivity {
         save_changes = findViewById(R.id.save_changes) ;
         edit_ques = findViewById(R.id.edit_view) ;
         edit_upload = findViewById(R.id.edit_upload_text);
+        edit_date = findViewById(R.id.edit_date) ;
+        edit_time = findViewById(R.id.edit_time) ;
 
 
 
@@ -89,14 +100,81 @@ public class teacher_edit_assignment extends AppCompatActivity {
 
                 assignment_topic.setText(old_assignment_topic);
                 assignment_duration.setText(old_assignment_time);
+
                 assignment_ques.setOnClickListener(v -> {
                     Intent intent  =new Intent(teacher_edit_assignment.this,teacher_question_viewpdf.class) ;
                     intent.putExtra("pdf_file_url",old_ques_url) ;
                     startActivity(intent);
                 });
 
+                edit_date.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar cldr = Calendar.getInstance();
+                        int day = cldr.get(Calendar.DAY_OF_MONTH);
+                        int month = cldr.get(Calendar.MONTH);
+                        int year = cldr.get(Calendar.YEAR);
+                        // date picker dialog
+                        picker = new DatePickerDialog(teacher_edit_assignment.this,
+                                new DatePickerDialog.OnDateSetListener() {
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                        edit_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                    }
+                                }, year, month, day);
+                        picker.show();
+                    }
 
+                });
+                edit_time.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar cldr = Calendar.getInstance();
+                        int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                        int minutes = cldr.get(Calendar.MINUTE);
+                        // time picker dialog
+                        Picker = new TimePickerDialog(teacher_edit_assignment.this,
+                                new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+                                        edit_time.setText(sHour + ":" + sMinute);
+                                    }
+                                }, hour, minutes, true);
+                        Picker.show();
+                    }
+                });
+                edit_time.addTextChangedListener(new TextWatcher() {
 
+                    public void afterTextChanged(Editable s) {
+                    }
+
+                    public void beforeTextChanged(CharSequence s, int start,
+                                                  int count, int after) {
+                    }
+
+                    public void onTextChanged(CharSequence s, int start,
+                                              int before, int count) {
+                        unsaved_changes.setVisibility(View.VISIBLE);
+                        save_changes.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                edit_date.addTextChangedListener(new TextWatcher() {
+
+                    public void afterTextChanged(Editable s) {
+                    }
+
+                    public void beforeTextChanged(CharSequence s, int start,
+                                                  int count, int after) {
+                    }
+
+                    public void onTextChanged(CharSequence s, int start,
+                                              int before, int count) {
+                        unsaved_changes.setVisibility(View.VISIBLE);
+                        save_changes.setVisibility(View.VISIBLE);
+                    }
+                });
                 assignment_topic.addTextChangedListener(new TextWatcher() {
 
                     public void afterTextChanged(Editable s) {
@@ -127,14 +205,15 @@ public class teacher_edit_assignment extends AppCompatActivity {
                         save_changes.setVisibility(View.VISIBLE);
                     }
                 });
-
-                edit_ques.setOnClickListener(v -> Dexter.withContext(getApplicationContext())
+                edit_upload.setEnabled(false);
+                edit_ques.setOnClickListener(v ->
+                         Dexter.withContext(getApplicationContext())
                         .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                         .withListener(new PermissionListener() {
                             @Override
                             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                                 Intent intent = new Intent() ;
-                                intent.setType("application/pdf") ;
+                                intent.setType("application/pdf/*") ;
                                 intent.setAction(Intent.ACTION_GET_CONTENT) ;
                                 startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
                             }
@@ -148,64 +227,49 @@ public class teacher_edit_assignment extends AppCompatActivity {
                             public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
                                 permissionToken.continuePermissionRequest();
                             }
-                        }).check());
+                        }).check()
+                );
 
-                edit_upload.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ProgressDialog pd = new ProgressDialog(getApplicationContext());
-                        pd.setTitle("File uploading ...");
-                        pd.show();
-
-                        StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
-                        reference.putFile(edited_ques_uri)
-                                .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
-
-                                    edited_url = Objects.requireNonNull(uri).toString() ;
-
-                                    pd.dismiss();
-                                    Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
-
-
-
-//                    student_browse_pdf.setVisibility(View.INVISIBLE);
-                                }))
-                                .addOnProgressListener(tasksnapshot -> {
-
-                                    float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
-                                    pd.setMessage("Uploaded :" + (int) percent + "%");
-
-                                });
-                    }
+                edit_upload.setOnClickListener(v -> {
+                    System.out.println("hello2");
+                    process_upload(edited_ques_uri);
                 });
+
                 save_changes.setOnClickListener(v -> {
 
-                    edited_topic = assignment_topic.getText().toString() ;
-                    edited_time = assignment_duration.getText().toString() ;
-
-                    if(edited_time.isEmpty()){
-                        assignment_topic.setError("Topic is required");
-                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-                    }
-                    if(edited_time.isEmpty()){
-                        assignment_duration.setError("Duration is required");
-                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-                    }
-                    unique_assignment = course_code + edited_topic ;
-                    System.out.println("EDITE URL "+edited_url) ;
-                    System.out.println("UNIQUE "+unique_assignment);
+//                    edited_topic = assignment_topic.getText().toString() ;
+//                    edited_time = assignment_duration.getText().toString() ;
+//                    Edit_date = edit_date.getText().toString();
+//                    Edit_time = edit_time.getText().toString();
+//
+//                    if(edited_time.isEmpty()){
+//                        assignment_topic.setError("Topic is required");
+//                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+//                    }
+//                    if(edited_time.isEmpty()){
+//                        assignment_duration.setError("Duration is required");
+//                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+//                    }
+//                    unique_assignment = course_code + edited_topic ;
+//                    System.out.println("EDITE URL "+edited_url) ;
+//                    System.out.println("UNIQUE "+unique_assignment);
+//                    HashMap<String,Object> hashMap = new HashMap<>() ;
+//                    hashMap.put("Assignment_time",edited_time) ;
+//                    hashMap.put("Assignment_topic",edited_topic) ;
+//                    hashMap.put("Course_code",course_code) ;
+//                    hashMap.put("pdf_file_name",pdf_file_name) ;
+//                    hashMap.put("pdf_file_url",edited_url) ;
+//                    hashMap.put("Due_date",Edit_date) ;
+//                    hashMap.put("Due_time",Edit_time);
+//                    fb.child(unique_assignment).updateChildren(hashMap) ;
                     HashMap<String,Object> hashMap = new HashMap<>() ;
-                    hashMap.put("Assignment_time",edited_time) ;
-                    hashMap.put("Assignment_topic",edited_topic) ;
-                    hashMap.put("Course_code",course_code) ;
-                    hashMap.put("pdf_file_name",pdf_file_name) ;
-                    hashMap.put("pdf_file_url",edited_url) ;
-                    fb.child(unique_assignment).updateChildren(hashMap) ;
                     hashMap.put("Assignment_time","") ;
                     hashMap.put("Assignment_topic","") ;
                     hashMap.put("Course_code","") ;
                     hashMap.put("pdf_file_name","") ;
                     hashMap.put("pdf_file_url","") ;
+                    hashMap.put("Due_date","") ;
+                    hashMap.put("Due_time","");
                     firebaseDatabase.updateChildren(hashMap) ;
 
                     Toast.makeText(getApplicationContext(),"Saved successfully", Toast.LENGTH_SHORT).show() ;
@@ -225,64 +289,65 @@ public class teacher_edit_assignment extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==12 && resultCode==RESULT_OK)
+        if(requestCode==12 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
         {
             assert data != null;
+            System.out.println("hello1");
             edited_ques_uri = data.getData() ;
+            edit_upload.setEnabled(true);
+            System.out.println("url"+edited_ques_uri);
 
         }
     }
-    private void process_upload(Uri edited_ques_uri) {
-//        ProgressDialog pd = new ProgressDialog(this);
-//            pd.setTitle("File uploading ...");
-//            pd.show();
-//
-//            StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
-//            reference.putFile(edited_ques_uri)
-//                    .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
-//                        edited_topic = assignment_topic.getText().toString() ;
-//                        edited_time = assignment_duration.getText().toString() ;
-//
-//                        if(edited_time.isEmpty()){
-//                            assignment_topic.setError("Topic is required");
-//                            Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-//                        }
-//                        if(edited_time.isEmpty()){
-//                            assignment_duration.setError("Duration is required");
-//                            Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
-//                        }
-//                        edited_url = Objects.requireNonNull(uri).toString() ;
-//                        unique_assignment = course_code + edited_topic ;
-//                        System.out.println("EDITE URL "+edited_url) ;
-//                        System.out.println("UNIQUE "+unique_assignment);;
-//                        HashMap<String,Object> hashMap = new HashMap<>() ;
-//                        hashMap.put("Assignment_time",edited_time) ;
-//                        hashMap.put("Assignment_topic",edited_topic) ;
-//                        hashMap.put("Course_code",course_code) ;
-//                        hashMap.put("pdf_file_name",pdf_file_name) ;
-//                        hashMap.put("pdf_file_url",edited_url) ;
-//                        fb.child(unique_assignment).updateChildren(hashMap) ;
-//                        hashMap.put("Assignment_time","") ;
-//                        hashMap.put("Assignment_topic","") ;
-//                        hashMap.put("Course_code","") ;
-//                        hashMap.put("pdf_file_name","") ;
-//                        hashMap.put("pdf_file_url","") ;
-//                        firebaseDatabase.updateChildren(hashMap) ;
-//
-//                        pd.dismiss();
-//                        Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
-//
-//
-//
-////                    student_browse_pdf.setVisibility(View.INVISIBLE);
-//                    }))
-//                    .addOnProgressListener(tasksnapshot -> {
-//
-//                            float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
-//                            pd.setMessage("Uploaded :" + (int) percent + "%");
-//
-//                    });
+    private void process_upload(Uri Edited_ques_uri) {
+        ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("File uploading ...");
+        pd.show();
 
+        StorageReference reference = storageReference.child("upload/"+ UUID.randomUUID().toString()) ;
+        reference.putFile(Edited_ques_uri)
+                .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
+
+                    edited_url = Objects.requireNonNull(uri).toString() ;
+                    edited_topic = assignment_topic.getText().toString() ;
+                    edited_time = assignment_duration.getText().toString() ;
+                    Edit_date = edit_date.getText().toString();
+                    Edit_time = edit_time.getText().toString();
+
+                    if(edited_time.isEmpty()){
+                        assignment_topic.setError("Topic is required");
+                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+                    }
+                    if(edited_time.isEmpty()){
+                        assignment_duration.setError("Duration is required");
+                        Toast.makeText(getApplicationContext(),"Topic can not be empty",Toast.LENGTH_SHORT).show() ;
+                    }
+                    unique_assignment = course_code + edited_topic ;
+                    System.out.println("EDITE URL "+edited_url) ;
+                    System.out.println("UNIQUE "+unique_assignment);
+                    HashMap<String,Object> hashMap = new HashMap<>() ;
+                    hashMap.put("Assignment_time",edited_time) ;
+                    hashMap.put("Assignment_topic",edited_topic) ;
+                    hashMap.put("Course_code",course_code) ;
+                    hashMap.put("pdf_file_name",pdf_file_name) ;
+                    hashMap.put("pdf_file_url",edited_url) ;
+                    hashMap.put("Due_date",Edit_date) ;
+                    hashMap.put("Due_time",Edit_time);
+                    fb.child(unique_assignment).updateChildren(hashMap) ;
+
+                    pd.dismiss();
+                    Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
+
+
+
+//                    student_browse_pdf.setVisibility(View.INVISIBLE);
+                }))
+                .addOnProgressListener(tasksnapshot -> {
+
+                    float percent = 100 * tasksnapshot.getBytesTransferred() / tasksnapshot.getTotalByteCount();
+                    pd.setMessage("Uploaded :" + (int) percent + "%");
+
+                });
     }
 
 
