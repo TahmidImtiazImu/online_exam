@@ -46,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.example.online_exam.Register.TAG;
 import static com.example.online_exam.student_adapter_assignmentlist.context;
@@ -255,7 +256,7 @@ public class student_answer_submit_page extends AppCompatActivity {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         Intent intent = new Intent() ;
-                        intent.setType("application/pdf") ;
+                        intent.setType("application/pdf/*") ;
                         intent.setAction(Intent.ACTION_GET_CONTENT) ;
                         startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
                         ans_submit.setEnabled(true);
@@ -340,7 +341,7 @@ public class student_answer_submit_page extends AppCompatActivity {
           if(Is_handed_in.equals("false")) {
             pd.setTitle("File uploading ...");
             pd.show();
-            StorageReference reference = storageReference.child("Ans_upload/"+System.currentTimeMillis()+".pdf") ;
+            StorageReference reference = storageReference.child("Ans_upload/"+ UUID.randomUUID().toString()) ;
             reference.putFile(student_answer_url)
                     .addOnSuccessListener(taskSnapshot -> reference.getDownloadUrl().addOnSuccessListener(uri -> {
                         Answer_Url = Objects.requireNonNull(uri).toString() ;
