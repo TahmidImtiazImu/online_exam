@@ -149,7 +149,7 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        HashMap<String, Object> hashMap;
+//                        HashMap<String, Object> hashMap;
 
 //                        hashMap = new HashMap<>();
 //                        hashMap.put("courseCode","");

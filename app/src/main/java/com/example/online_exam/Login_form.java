@@ -43,6 +43,8 @@ import java.util.Objects;
 
     SharedPreferences sp;
 
+    String user_name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,10 @@ import java.util.Objects;
 
                                 editor.putString("UserName", Userentername);
                                 editor.commit();
+
+                                user_name = dataSnapshot.child("Enter_name").getValue().toString();
+
+                                editor.putString("Student_name", user_name);
                                 //usernameIntent.putExtra("currentUsername",Userentername);
 
                                 Toast.makeText(Login_form.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
