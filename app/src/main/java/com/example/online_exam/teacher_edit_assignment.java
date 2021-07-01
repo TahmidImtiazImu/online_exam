@@ -216,37 +216,37 @@ public class teacher_edit_assignment extends AppCompatActivity {
                 });
                 edit_upload.setEnabled(false);
                 edit_ques.setOnClickListener(v ->
-                         Dexter.withContext(getApplicationContext())
-                        .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                Intent intent = new Intent() ;
-                                intent.setType("application/pdf/*") ;
-                                intent.setAction(Intent.ACTION_GET_CONTENT) ;
-                                startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
-                            }
+                        Dexter.withContext(getApplicationContext())
+                                .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                                .withListener(new PermissionListener() {
+                                    @Override
+                                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                        Intent intent = new Intent() ;
+                                        intent.setType("application/pdf/*") ;
+                                        intent.setAction(Intent.ACTION_GET_CONTENT) ;
+                                        startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                                    @Override
+                                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
 
-                            }
+                                    }
 
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                permissionToken.continuePermissionRequest();
-                            }
-                        }).check()
+                                    @Override
+                                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                        permissionToken.continuePermissionRequest();
+                                    }
+                                }).check()
                 );
                 System.out.println("url" + edited_ques_uri);
-               edit_upload.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       System.out.println("hii") ;
-                       System.out.println(edited_ques_uri);
-                       process_upload(edited_ques_uri);
-                   }
-               });
+                edit_upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("hii") ;
+                        System.out.println(edited_ques_uri);
+                        process_upload(edited_ques_uri);
+                    }
+                });
                 save_changes.setOnClickListener(v -> {
 
                     edited_topic = assignment_topic.getText().toString() ;
@@ -284,7 +284,7 @@ public class teacher_edit_assignment extends AppCompatActivity {
 //                        hashMap.put("Due_date", "");
 //                        hashMap.put("Due_time", "");
 //                        firebaseDatabase.updateChildren(hashMap);
-                          firebase.child(Unique_assignment).removeValue();
+                        firebase.child(Unique_assignment).removeValue();
                     }
 
                     Toast.makeText(getApplicationContext(),"Saved successfully", Toast.LENGTH_SHORT).show() ;
