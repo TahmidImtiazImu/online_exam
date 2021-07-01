@@ -142,6 +142,8 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
 
         rf = FirebaseDatabase.getInstance().getReference("courses");
 
+        DatabaseReference joined_ref = FirebaseDatabase.getInstance().getReference("joined_courses");
+
         AlertDialog.Builder dialog=new AlertDialog.Builder(context);
         dialog.setMessage("Are you sure you want to delete this course?");
         dialog.setTitle("Warning!");
@@ -162,6 +164,27 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 rf.child(course_code).removeValue();
                                 notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+
+                        joined_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                                    String code = dataSnapshot.child("courseCode").getValue(String.class);
+
+                                    if (code.equals(course_code)) {
+
+                                        dataSnapshot.getRef().removeValue();
+                                    }
+                                }
                             }
 
                             @Override

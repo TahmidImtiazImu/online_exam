@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -30,6 +32,7 @@ public class CourseCreatingActivity extends AppCompatActivity {
     private String course_code;
     private boolean isCreated = false;
     String teacher_username;
+    String teacher_name;
     Boolean is_there_course = false;
 
     FirebaseDatabase CourseRootNode = FirebaseDatabase.getInstance();
@@ -50,6 +53,23 @@ public class CourseCreatingActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         teacher_username = sp.getString("UserName", "");
+
+        DatabaseReference new_ref = FirebaseDatabase.getInstance().getReference("users");
+//        teacher_name = new_ref.child(teacher_username).getRef().toString();
+
+        new_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                teacher_name = snapshot.child(teacher_username).child("Enter_name").getValue(String.class);
+
+                //System.out.println("test name : " + teacher_name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
         createButton = findViewById(R.id.new_create);
 
@@ -106,6 +126,7 @@ public class CourseCreatingActivity extends AppCompatActivity {
                         hashMap.put("courseCode",CourseCode);
                         hashMap.put("courseName",CourseName);
                         hashMap.put("currentUser", teacher_username);
+                        hashMap.put("teacherEnter_name", teacher_name);
 
                         CourseReference.child(CourseCode).setValue(hashMap);
 
