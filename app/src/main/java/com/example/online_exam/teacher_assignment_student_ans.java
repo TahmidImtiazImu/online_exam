@@ -110,7 +110,7 @@ public class teacher_assignment_student_ans extends Fragment {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                int count = 1;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     course_code = dataSnapshot.child("courseCode").getValue(String.class);
@@ -124,7 +124,8 @@ public class teacher_assignment_student_ans extends Fragment {
 
 //                        System.out.println(current_user);
 //                        System.out.println(student_name);
-                        ans_List.add(new teacher_assignment_student_anslist( student_name,current_user));
+                        ans_List.add(new teacher_assignment_student_anslist( student_name,current_user,String.valueOf(count)));
+                        count++;
                     }
 
                 }

@@ -43,8 +43,9 @@ public class teacher_assignment_student_ans_adapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull @NotNull teacher_assignment_student_ans_adapter.ViewHolder holder, int position) {
         String student_name = ans_List.get(position).getAns_student_name() ;
         String student_username= ans_List.get(position).getAns_student_username() ;
+        String student_ans_count = ans_List.get(position).getStudent_ans_count() ;
 
-        holder.setData(student_name,student_username) ;
+        holder.setData(student_name,student_username,student_ans_count) ;
     }
 
     @Override
@@ -54,19 +55,22 @@ public class teacher_assignment_student_ans_adapter extends RecyclerView.Adapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView show_student_name ;
+        TextView show_number_of_student ;
         LinearLayout single_student_answer ;
 
         public ViewHolder(@NonNull  View itemView) {
             super(itemView);
             show_student_name = itemView.findViewById(R.id.student_answer_name) ;
             single_student_answer = itemView.findViewById(R.id.single_student_answer) ;
+            show_number_of_student = itemView.findViewById(R.id.student_answer_count) ;
             //linearLayout = itemView.findViewById(R.id.single_student_answer) ;
 
         }
 
-        public void setData(String student_name, String student_username) {
+        public void setData(String student_name, String student_username,String student_ans_count) {
              System.out.println("student name"+ student_name);
              show_student_name.setText(student_name);
+             show_number_of_student.setText(student_ans_count);
 
             @SuppressLint("RestrictedApi")
             SharedPreferences course_sp =getApplicationContext().getSharedPreferences("course_code_prefs",context.MODE_PRIVATE);
