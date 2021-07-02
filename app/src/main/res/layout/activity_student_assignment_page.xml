@@ -24,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/student_assignment_recycleview"
-        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

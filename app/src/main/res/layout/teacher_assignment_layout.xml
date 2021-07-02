@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/gradv2"
-        android:padding="8dp"
+        android:padding="30dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"

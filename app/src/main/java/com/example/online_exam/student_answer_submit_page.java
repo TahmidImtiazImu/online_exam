@@ -2,6 +2,7 @@ package com.example.online_exam;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -9,8 +10,12 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.net.UrlQuerySanitizer;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +51,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -78,10 +85,14 @@ public class student_answer_submit_page extends AppCompatActivity {
     Date time1;
     Date time2;
     String Unique_ques_upload ;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_answer_submit_page);
+        this.setTitle("Answer submit");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         assignment_topic = getIntent().getStringExtra("Assignment_topic");
         String assignment_duration = getIntent().getStringExtra("Assignment_time");
@@ -117,7 +128,8 @@ public class student_answer_submit_page extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance() ;
         DatabaseReference myref= database.getReference("teacher_uploadPdf").child(Unique_ques_upload);
 
-        myref.addValueEventListener(new ValueEventListener() {
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
@@ -167,7 +179,8 @@ public class student_answer_submit_page extends AppCompatActivity {
                     ans_submit.setVisibility(View.GONE);
                     hand_in.setEnabled(false);
                     hand_in.setText("Time out");
-                    hand_in.setTextColor(0xFFFF0000);
+                    hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+                    hand_in.setTextColor(Color.parseColor("#FFFFFF"));
                 }
                 else if(date1.compareTo(date2)==0){
                     if(time1.compareTo(time2)>0) {
@@ -175,7 +188,8 @@ public class student_answer_submit_page extends AppCompatActivity {
                         ans_submit.setVisibility(View.GONE);
                         hand_in.setEnabled(false);
                         hand_in.setText("Time out");
-                        hand_in.setTextColor(0xFFFF0000);
+                        hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+                        hand_in.setTextColor(0xFFFFFF);
                     }
                 }
 
@@ -187,7 +201,8 @@ public class student_answer_submit_page extends AppCompatActivity {
             }
         });
         ans_submit.setEnabled(false);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @SuppressLint({"SimpleDateFormat", "SetTextI18n", "ResourceAsColor"})
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -211,9 +226,8 @@ public class student_answer_submit_page extends AppCompatActivity {
 
                             hand_in.setEnabled(false);
                             hand_in.setText("Handed In");
-//                            hand_in.setBackgroundResource(R.drawable.round_bg);
-//                            hand_in.setBackgroundColor(R.color.black);
-                            hand_in.setTextColor(0xFF00FF00);
+                            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BFFF00")));
+                           hand_in.setTextColor(Color.parseColor("#FFFFFF"));
                         }
                         else{
                             student_sub_cancel.setVisibility(View.VISIBLE);
@@ -282,7 +296,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         student_ans_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -308,18 +322,26 @@ public class student_answer_submit_page extends AppCompatActivity {
         hand_in.setOnClickListener(v -> {
             student_sub_cancel.setVisibility(View.INVISIBLE);
             ans_submit.setVisibility(View.GONE);
-            hand_in.setText("Submitted");
-            hand_in.setEnabled(false);
+
+
             is_handed_in="true" ;
-
-            HashMap<String, String> hashMap = new HashMap<>() ;
-
+            DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("student_upload_answer");
+           HashMap<String, String> hashMap = new HashMap<>() ;
+          //  Map<String, Object> hashMap = new HashMap<String,Object>();
             hashMap.put("Student_answer_url",node) ;
             hashMap.put("pdf_file_name",pdf_file_name) ;
             hashMap.put("is_handed_in",is_handed_in);
+            System.out.println("handed in"+is_handed_in);
+            System.out.println("imu"+pdf_file_name);
+            //databaseReference2.child(pdf_file_name).removeValue() ;
+            databaseReference2.child(pdf_file_name).setValue(hashMap);
+
+            hand_in.setEnabled(false);
+            hand_in.setText("Submitted");
+            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BFFF00")));
+            hand_in.setTextColor(Color.parseColor("#FFFFFF"));
 
 
-            databaseReference.child(pdf_file_name).setValue(hashMap);
 
 
         });
@@ -381,18 +403,18 @@ public class student_answer_submit_page extends AppCompatActivity {
         }
         else
         {
-            String is_handed_in = "true" ;
-            HashMap<String, String> hashMap = new HashMap<>() ;
-
-            hashMap.put("Student_answer_url",node) ;
-            hashMap.put("pdf_file_name",pdf_file_name) ;
-            hashMap.put("is_handed_in",is_handed_in);
-
-
-            databaseReference.child(unique_answer_upload).setValue(hashMap);
-            pd.setTitle("File submitting ...");
-            pd.show();
-            pd.dismiss();
+//            String is_handed_in = "true" ;
+//            HashMap<String, String> hashMap = new HashMap<>() ;
+//
+//            hashMap.put("Student_answer_url",node) ;
+//            hashMap.put("pdf_file_name",pdf_file_name) ;
+//            hashMap.put("is_handed_in",is_handed_in);
+//
+//
+//            databaseReference.child(unique_answer_upload).setValue(hashMap);
+//            pd.setTitle("File submitting ...");
+//            pd.show();
+//            pd.dismiss();
         }
 
     }

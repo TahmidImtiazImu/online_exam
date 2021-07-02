@@ -14,6 +14,7 @@
         android:layout_marginLeft="15dp"
         android:textSize="25dp"
         android:text="Assignment 1"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:id="@+id/student_assignment_topic_name2"
         >
@@ -41,6 +42,7 @@
         android:layout_marginLeft="15dp"
         android:textSize="25dp"
         android:text="Question :"
+        android:textColor="@color/black"
         android:textStyle="bold">
 
     </TextView>
@@ -63,6 +65,7 @@
         android:layout_marginLeft="15dp"
         android:textSize="25dp"
         android:text="My answer : "
+        android:textColor="@color/black"
         android:textStyle="bold">
 
     </TextView>
@@ -110,10 +113,10 @@
 
     </RelativeLayout>
     <TextView
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:text="upload your fucking answer"
+        android:layout_gravity="center"
+        android:text="upload your answer"
         android:id="@+id/ans_sub_button"
         android:textSize="20dp"
         android:textStyle="italic"
@@ -124,12 +127,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:text="Submit"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20dp"
         android:backgroundTint="@color/black"
+        android:background="@drawable/rounded_button"
         android:id="@+id/hand_in"
         android:visibility="invisible"
         >

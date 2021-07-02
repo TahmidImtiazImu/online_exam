@@ -3,6 +3,7 @@ package com.example.online_exam;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -17,6 +18,8 @@ public class student_answer_view extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_answer_view);
+        this.setTitle("My Answer");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
 
         String answer_pdf_url = getIntent().getStringExtra("my_answer");
         try {
