@@ -76,11 +76,11 @@ public class EditProfile extends AppCompatActivity {
         showImg = findViewById(R.id.imgDP);
         chooseImg = findViewById(R.id.imgChooseDP);
         fullNameEdit = findViewById(R.id.editFullName);
+        insEdit = findViewById(R.id.editIns);
         emailEdit = findViewById(R.id.editEmail);
         emailEdit.setEnabled(false);
         userEdit = findViewById(R.id.editUser);
         userEdit.setEnabled(false);
-        insEdit = findViewById(R.id.editIns);
         genderEdit = findViewById(R.id.editGender);
         genderEdit.setEnabled(false);
         //passEdit = findViewById(R.id.editPass);
@@ -327,7 +327,7 @@ public class EditProfile extends AppCompatActivity {
             Toast.makeText(EditProfile.this, "Data has been updated", Toast.LENGTH_LONG).show();
         }
         else
-            Toast.makeText(EditProfile.this, "Data is same and can not be updated", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditProfile.this, "Data is same", Toast.LENGTH_LONG).show();
     }
 
 

@@ -77,11 +77,15 @@ public class EditProfileStudent extends AppCompatActivity {
         chooseImg = findViewById(R.id.imgChooseDP);
         fullNameEdit = findViewById(R.id.editFullName);
         emailEdit = findViewById(R.id.editEmail);
+        emailEdit.setEnabled(false);
         userEdit = findViewById(R.id.editUser);
+        userEdit.setEnabled(false);
         insEdit = findViewById(R.id.editIns);
         genderEdit = findViewById(R.id.editGender);
+        genderEdit.setEnabled(false);
         //passEdit = findViewById(R.id.editPass);
         roleEdit = findViewById(R.id.editRole);
+        roleEdit.setEnabled(false);
         changePassBtn = findViewById(R.id.btnChangePass);
         batchEdit= findViewById(R.id.editBatch);
         semEdit = findViewById(R.id.editSemester);
@@ -325,13 +329,18 @@ public class EditProfileStudent extends AppCompatActivity {
         }
     }
 
-    private void update(){
+    public void update(){
 
+        isNameChanged();
+        isInsChanged();
+        isBatchChanged();
+        isSemChanged();
+        isAcChanged();
         if (isNameChanged() || isInsChanged() || isBatchChanged() || isSemChanged() || isAcChanged()){
             Toast.makeText(EditProfileStudent.this, "Data has been updated", Toast.LENGTH_LONG).show();
         }
         else
-            Toast.makeText(EditProfileStudent.this, "Data is same and can not be updated", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditProfileStudent.this, "Data is same", Toast.LENGTH_LONG).show();
     }
 
     private boolean isAcChanged() {
@@ -366,7 +375,7 @@ public class EditProfileStudent extends AppCompatActivity {
 
 
     private boolean isInsChanged() {
-        if(!_INSTITUTION.equals(insEdit.getText().toString())){
+        if(! _INSTITUTION.equals(insEdit.getText().toString())){
             databaseReference.child("Institution").setValue(insEdit.getText().toString());
             return true;
         }
@@ -376,7 +385,7 @@ public class EditProfileStudent extends AppCompatActivity {
     }
 
     private boolean isNameChanged() {
-        if(!_NAME.equals(fullNameEdit.getText().toString())){
+        if(!_FULLNAME.equals(fullNameEdit.getText().toString())){
             databaseReference.child("Enter_name").setValue(fullNameEdit.getText().toString());
             return true;
         }

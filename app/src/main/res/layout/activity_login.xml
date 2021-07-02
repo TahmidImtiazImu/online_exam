@@ -20,12 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:background="@drawable/ic_wave_grad"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="90dp"
+            android:fontFamily="serif-monospace"
             android:text="Hello there, \nWelcome back"
-            android:textSize="33sp"
             android:textColor="@color/black"
+            android:textSize="33sp"
             android:textStyle="bold">
 
         </TextView>
