@@ -18,6 +18,7 @@
 
     <item android:title="Log Out"
         android:id="@+id/log"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="logging_out"/>
 
 </menu>

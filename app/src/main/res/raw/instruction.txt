@@ -1,2 +1,25 @@
-Online Exam
 
+How to use this app?
+
+1) For a teacher account, to create a new course click on the plus icon at the top right corner.
+
+2) For a student account, there is the same plus icon at the same spot to join an existing course.
+   If you don't have any existing code, ask for a code from your teacher.
+
+3) To edit profile, click on the profile icon at the right side of the plus icon.
+
+4) Log out option is located in the menu option at the most top right corner indicated with a
+   vertical ellipses.
+
+5) For a teacher you can create as many course as you want and you can navigate your courses through
+   the list shown in the homepage.
+
+6) Teacher can create assignment with particular time duration that can be customized at any time
+   from the assignment edit option.
+
+7) The uploaded file format must has to be PDF for both student and teacher.
+
+8) After the time limit of an assignment is over, student will not be able to submit their answer.
+
+9) A running assignment is indicated with green color where an ended assignment is shown with black
+   color.
