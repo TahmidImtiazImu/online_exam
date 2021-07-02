@@ -13,10 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="10dp"
-
-        android:background="@color/common_google_signin_btn_text_dark_disabled"
+        android:background="@drawable/gradv2"
         android:padding="8dp"
         >
         <RelativeLayout
@@ -46,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Topic :"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="20dp" />
 
@@ -57,7 +54,7 @@
                 android:layout_marginLeft="8dp"
                 android:text=" Assignment 1"
                 android:textStyle="italic"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
 
 
@@ -98,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Duration :"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="20dp"/>
 
@@ -109,7 +106,7 @@
                 android:layout_marginLeft="8dp"
                 android:text=" 1 hour 30 minutes"
                 android:textStyle="italic"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20dp"/>
 
         </LinearLayout>

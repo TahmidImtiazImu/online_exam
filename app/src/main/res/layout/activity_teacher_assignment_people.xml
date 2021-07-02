@@ -13,7 +13,8 @@
         android:layout_marginTop="20dp"
         android:text="Teacher"
         android:textSize="30dp"
-        android:textColor="@color/purple_500"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:id="@+id/Teacher"
         >
     </TextView>
@@ -38,7 +39,8 @@
         android:layout_marginTop="20dp"
         android:text="Student"
         android:textSize="30dp"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:id="@+id/Student"
         android:layout_below="@+id/teacher_name"
         >

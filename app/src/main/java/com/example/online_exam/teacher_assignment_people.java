@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -57,6 +58,8 @@ public class teacher_assignment_people extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_people);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+
 
         teacher_name  = findViewById(R.id.teacher_name) ;
 

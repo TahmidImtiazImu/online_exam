@@ -132,10 +132,10 @@ public class teacher_assignment_question extends Fragment {
                 String course_code = Objects.requireNonNull(datasnapshot.child("Course_code").getValue()).toString() ;
                 String Pdf_url = Objects.requireNonNull(datasnapshot.child("pdf_file_url").getValue()).toString() ;
 
-                ass_time.setText(assignment_time) ;
+                //ass_time.setText(assignment_time) ;
                 ass_topic.setText(assignment_topic) ;
-                cour_code.setText(course_code) ;
-                pdf_url.setText(Pdf_url) ;
+                //cour_code.setText(course_code) ;
+                //pdf_url.setText(Pdf_url) ;
 
                 pdf_logo.setOnClickListener(v -> {
 

@@ -13,7 +13,8 @@
         android:layout_marginTop="20dp"
         android:text="Create New Assignment"
         android:textSize="20dp"
-        android:textColor="@color/purple_500"
+        android:textStyle="italic"
+        android:textColor="@color/black"
         android:id="@+id/create_assignment"
         >
     </TextView>
@@ -22,7 +23,6 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:textColorHint="@color/material_on_background_disabled"
         android:layout_margin="10dp"
         android:layout_below="@+id/create_assignment"
         android:id="@+id/assignment_topic_input"
@@ -46,7 +46,6 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:textColorHint="@color/material_on_background_disabled"
         android:layout_margin="10dp"
         android:layout_below="@+id/assignment_topic_input"
         android:id="@+id/time_duration_input"
@@ -102,14 +101,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/enter_time"
-        android:layout_marginLeft="123dp"
+        android:layout_centerInParent="true"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/material_on_surface_stroke"
-        android:text="Upload File"
+        android:backgroundTint="@color/black"
+        android:text="CREATE"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:textColor="@color/white"
         android:id="@+id/upload_file"
+        android:background="@drawable/rounded_button"
         >
 
     </Button>

@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Adapter;
@@ -58,6 +59,8 @@ public class teacher_assignment_page extends AppCompatActivity {
         super.onResume();
         Objects.requireNonNull(getSupportActionBar()).setTitle("Assignment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+
 
         //recyclebview
        // initData() ;

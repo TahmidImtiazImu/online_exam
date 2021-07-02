@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class teacher_assignment_pageview extends AppCompatActivity {
 
@@ -17,6 +20,9 @@ public class teacher_assignment_pageview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_assignment_pageview);
+        this.setTitle("NOISE");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         tabLayout = findViewById(R.id.tab_layout1) ;
         viewPager2 = findViewById(R.id.view_pager2) ;

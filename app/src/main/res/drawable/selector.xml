@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_selected="true"
-        android:color="@color/common_google_signin_btn_text_dark_disabled"/>
+        android:color="@color/black"/>
     <item
         android:state_selected="false"
-        android:color="@android:color/black"/>
+        android:color="@android:color/holo_blue_bright"/>
 
 </selector>

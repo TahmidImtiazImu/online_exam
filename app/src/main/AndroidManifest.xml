@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Online_Exam">
 
 
-        <activity android:name=".teacher_edit_assignment"></activity>
+
 
         <activity android:name=".EditProfileStudent"></activity>
 
@@ -42,7 +42,12 @@
         <activity android:name=".student_assignment_page"
             android:parentActivityName=".student_homepage"/>
         <activity android:name=".teacher_question_viewpdf" />
-        <activity android:name=".teacher_assignment_pageview" />
+        <activity android:name=".teacher_assignment_pageview"
+            android:parentActivityName=".student_assignment_page"
+            />
+        <activity android:name=".teacher_edit_assignment"
+            android:parentActivityName=".teacher_assignment_pageview"
+            ></activity>
         <activity
             android:name=".JoinCourseActivity"
             android:parentActivityName=".student_homepage" />

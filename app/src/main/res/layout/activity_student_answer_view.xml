@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".student_answer_view">
+    tools:context=".student_answer_view"
+
+    >
 
     <WebView
         android:id="@+id/student_ans_view_pdf"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        android:visibility="gone"
+        >
 
     </WebView>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/no_submission"-->
+<!--        android:text="No Submission yet"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        >-->
 
-</LinearLayout>
+<!--    </TextView>-->
+
+</RelativeLayout>
