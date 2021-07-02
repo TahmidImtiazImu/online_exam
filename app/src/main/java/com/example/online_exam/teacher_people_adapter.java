@@ -37,8 +37,8 @@ public class teacher_people_adapter extends RecyclerView.Adapter<teacher_people_
     public void onBindViewHolder(@NonNull  teacher_people_adapter.ViewHolder holder, int position) {
         String Student_name = student_nameList.get(position).getStudent_name();
         String Student_user_name= student_nameList.get(position).getStudent_user_name();
-
-        holder.setData(Student_name,Student_user_name);
+        String Student_count = student_nameList.get(position).getName_count();
+        holder.setData(Student_name,Student_user_name,Student_count);
     }
 
     @Override
@@ -56,8 +56,9 @@ public class teacher_people_adapter extends RecyclerView.Adapter<teacher_people_
             student_count = itemView.findViewById(R.id.student_count) ;
         }
 
-        public void setData(String Student_name, String Student_user_name) {
+        public void setData(String Student_name, String Student_user_name,String Student_count) {
             student_name.setText(Student_name);
+            student_count.setText(Student_count);
 
         }
     }

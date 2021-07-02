@@ -37,8 +37,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".student_question_viewpdf" />
-        <activity android:name=".student_answer_submit_page" />
-        <activity android:name=".student_assignment_page" />
+        <activity android:name=".student_answer_submit_page"
+            android:parentActivityName=".student_assignment_page"/>
+        <activity android:name=".student_assignment_page"
+            android:parentActivityName=".student_homepage"/>
         <activity android:name=".teacher_question_viewpdf" />
         <activity android:name=".teacher_assignment_pageview" />
         <activity
