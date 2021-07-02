@@ -276,17 +276,17 @@ public class teacher_edit_assignment extends AppCompatActivity {
                     fb.child(unique_assignment).updateChildren(hashMap) ;
 
                     if(!old_assignment_topic.equals(edited_topic)) {
-//                        hashMap.put("Assignment_time", "");
-//                        hashMap.put("Assignment_topic", "");
-//                        hashMap.put("Course_code", "");
-//                        hashMap.put("pdf_file_name", "");
-//                        hashMap.put("pdf_file_url", "");
-//                        hashMap.put("Due_date", "");
-//                        hashMap.put("Due_time", "");
-//                        firebaseDatabase.updateChildren(hashMap);
-                        firebase.child(Unique_assignment).removeValue();
+                        hashMap.put("Assignment_time", "");
+                        hashMap.put("Assignment_topic", "");
+                        hashMap.put("Course_code", "");
+                        hashMap.put("pdf_file_name", "");
+                        hashMap.put("pdf_file_url", "");
+                        hashMap.put("Due_date", "");
+                        hashMap.put("Due_time", "");
+                        firebaseDatabase.updateChildren(hashMap);
+                        //firebase.child(Unique_assignment).removeValue();
                     }
-
+                    startActivity(new Intent(teacher_edit_assignment.this,teacher_assignment_page.class));
                     Toast.makeText(getApplicationContext(),"Saved successfully", Toast.LENGTH_SHORT).show() ;
 
                 });

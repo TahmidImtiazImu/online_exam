@@ -45,6 +45,7 @@ public class teacher_assignment_people extends AppCompatActivity {
     public List<teacher_people_student_namelist> student_nameList;
     teacher_people_adapter adapter;
     //Button logout ;
+    String student_count ;
 
     //Intent userIntent = getIntent();
     //Intent intent;
@@ -125,10 +126,12 @@ public class teacher_assignment_people extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter= new teacher_people_adapter(student_nameList, this);
         recyclerView.setAdapter(adapter);
+
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int count = 1 ;
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String Student_course_code = dataSnapshot.child("courseCode").getValue(String.class);
                     System.out.println(Course_code);
@@ -137,8 +140,8 @@ public class teacher_assignment_people extends AppCompatActivity {
                         Student_user_name = dataSnapshot.child("currentUser").getValue(String.class) ;
                         String student_name = dataSnapshot.child("student_name").getValue(String.class) ;
 
-                        student_nameList.add(new teacher_people_student_namelist(student_name,Student_user_name)) ;
-
+                        student_nameList.add(new teacher_people_student_namelist(student_name,Student_user_name,String.valueOf(count)+")")) ;
+                        count++;
 
                     }
                 }

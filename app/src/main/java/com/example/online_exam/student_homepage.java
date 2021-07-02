@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.online_exam.student_adapter_assignmentlist.context;
+
 public class student_homepage extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -50,7 +53,6 @@ public class student_homepage extends AppCompatActivity {
     String student_username;
     String current_userName;
     String joined_course_code;
-    String[] courseCodeArray = new String[99999];
 
 
     int size = 0;
@@ -63,7 +65,9 @@ public class student_homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_homepage);
-        // this.setTitle("Homepage");
+        this.setTitle("Homepage");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+
         //Objects.requireNonNull(getSupportActionBar()).setTitle("Teacher Homepage");
         //logout = (Button)findViewById(R.id.logout) ;
         //teacher_username = userIntent.getStringExtra("currentUsername");
@@ -142,6 +146,8 @@ public class student_homepage extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     current_userName = dataSnapshot.child("currentUser").getValue(String.class);
+                    Course_code = dataSnapshot.child("courseCode").getValue(String.class);
+
 
                     if (current_userName.equals(student_username)) {
 
@@ -149,10 +155,11 @@ public class student_homepage extends AppCompatActivity {
 
                         Query checked_query = new_root.orderByChild("courseCode").equalTo(joined_course_code);
 
-                        Course_code = dataSnapshot.child("courseCode").getValue(String.class);
+
                         Course_name = dataSnapshot.child("courseName").getValue(String.class);
 
                         if(joined_course_code.equals(Course_code)) {
+
 
                             coursesList.add(new ModelCourseList(Course_name, Course_code));
 

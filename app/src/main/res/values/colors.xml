@@ -5,11 +5,11 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="gray">#808080</color>
+    <color name="black">#000000</color>
+    <color name="gray">#DCDCDC</color>
     <color name="dark_gray">#A9A9A9</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimaryDark">#65DCE5</color>
+    <color name="colorPrimaryDark">#9BE6EC</color>
 
     <color name="address">#2F7092</color>
     <color name="followers">#0D5D98</color>
@@ -21,7 +21,7 @@
     <color name="followersBg">#65DCE5</color>
     <color name="followingBg">#49BEFF</color>
     <color name="grey">#E5E5E5</color>
-    <color name="blue">#0099ff</color>
+    <color name="blue">#75C8FF</color>
     <color name="myblue">#002BDC</color>
     <color name="mypurple">#FF00FF</color>
 </resources>

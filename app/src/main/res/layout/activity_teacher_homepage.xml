@@ -5,27 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray"
     tools:context=".teacher_homepage">
-    <!--        android:layout_marginTop="200dp"-->
-    <!--        android:layout_marginLeft="150dp"-->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="courses"
-        android:textSize="32dp"
-        android:layout_marginLeft="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:nestedScrollingEnabled="true"/>
 </LinearLayout>
