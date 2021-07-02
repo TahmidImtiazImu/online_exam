@@ -128,7 +128,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance() ;
         DatabaseReference myref= database.getReference("teacher_uploadPdf").child(Unique_ques_upload);
 
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myref.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @SuppressLint("SetTextI18n")
             @Override
@@ -201,7 +201,7 @@ public class student_answer_submit_page extends AppCompatActivity {
             }
         });
         ans_submit.setEnabled(false);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @SuppressLint({"SimpleDateFormat", "SetTextI18n", "ResourceAsColor"})
             @Override
@@ -296,7 +296,7 @@ public class student_answer_submit_page extends AppCompatActivity {
         student_ans_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
