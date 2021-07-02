@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.example.online_exam.student_adapter_assignmentlist.context;
 
@@ -33,11 +36,17 @@ public class student_assignment_page extends AppCompatActivity {
     String student_assignment_duration;
     String ques_pdf_url;
     String name_merge ;
+    String student_course_code;
+    TextView course_name;
+    String student_course_name ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_assignment_page);
-
+        course_name = findViewById(R.id.student_current_courseName) ;
+        this.setTitle("Assignments");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         initRecycleview() ;
     }
 
@@ -50,12 +59,16 @@ public class student_assignment_page extends AppCompatActivity {
         adapter = new student_adapter_assignmentlist(assignment_lists,this) ;
         recyclerView.setAdapter(adapter);
 
+
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 SharedPreferences sp =getApplicationContext().getSharedPreferences("student_course_prefs",context.MODE_PRIVATE);
-                String student_course_code = sp.getString("Student_Course_Code","");
+                student_course_code = sp.getString("Student_Course_Code","");
+                student_course_name = sp.getString("Student_Course_Name","");
+                course_name.setText(student_course_name);
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                        String course_code = dataSnapshot.child("Course_code").getValue(String.class);
@@ -65,7 +78,8 @@ public class student_assignment_page extends AppCompatActivity {
                             student_assignment_duration = dataSnapshot.child("Assignment_time").getValue(String.class);
                             ques_pdf_url = dataSnapshot.child("pdf_file_url").getValue(String.class);
 
-                            assignment_lists.add(new student_model_assignmentlist(student_assignment_topic, student_assignment_duration, ques_pdf_url));
+
+                            assignment_lists.add(new student_model_assignmentlist(student_assignment_topic, student_assignment_duration, ques_pdf_url,student_course_code));
 
                         }
                 }

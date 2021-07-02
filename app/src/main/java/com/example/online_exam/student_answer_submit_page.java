@@ -98,6 +98,8 @@ public class student_answer_submit_page extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("student_upload_answer") ;
 
+        hand_in.setBackgroundResource(R.drawable.round_bg);
+
         student_assignment_topic.setText(assignment_topic);
         student_assignment_duration.setText(assignment_duration);
 
@@ -186,48 +188,50 @@ public class student_answer_submit_page extends AppCompatActivity {
         });
         ans_submit.setEnabled(false);
         databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
+            @SuppressLint({"SimpleDateFormat", "SetTextI18n", "ResourceAsColor"})
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                   pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
+                    pdf_file_name = dataSnapshot.child("pdf_file_name").getValue(String.class) ;
 
-                   if(Unique_answer_upload.equals(pdf_file_name)) {
+                    if(Unique_answer_upload.equals(pdf_file_name)) {
 
-                       node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
-                       System.out.println(pdf_file_name);
-                       System.out.println(node);
-                       String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
-                       System.out.println(handed);
-                       assert handed != null;
-                       if(handed.equals("true")){
-                           student_sub_cancel.setVisibility(View.INVISIBLE);
-                           student_ans_pdf.setVisibility(View.VISIBLE);
-                           ans_submit.setVisibility(View.GONE);
-                           hand_in.setVisibility(View.VISIBLE);
+                        node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
+                        System.out.println(pdf_file_name);
+                        System.out.println(node);
+                        String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
+                        System.out.println(handed);
+                        assert handed != null;
+                        if(handed.equals("true")){
+                            student_sub_cancel.setVisibility(View.INVISIBLE);
+                            student_ans_pdf.setVisibility(View.VISIBLE);
+                            ans_submit.setVisibility(View.GONE);
+                            hand_in.setVisibility(View.VISIBLE);
 
-                           hand_in.setEnabled(false);
-                           hand_in.setText("Done");
-                           hand_in.setTextColor(0xFF00FF00);
-                       }
-                       else{
-                           student_sub_cancel.setVisibility(View.VISIBLE);
-                           ans_submit.setVisibility(View.VISIBLE);
-                           student_ans_pdf.setVisibility(View.VISIBLE);
-                           student_browse_pdf.setVisibility(View.INVISIBLE);
-                           ans_submit.setEnabled(false);
-                           hand_in.setVisibility(View.VISIBLE);
-                           hand_in.setEnabled(true);
-                       }
+                            hand_in.setEnabled(false);
+                            hand_in.setText("Handed In");
+//                            hand_in.setBackgroundResource(R.drawable.round_bg);
+//                            hand_in.setBackgroundColor(R.color.black);
+                            hand_in.setTextColor(0xFF00FF00);
+                        }
+                        else{
+                            student_sub_cancel.setVisibility(View.VISIBLE);
+                            ans_submit.setVisibility(View.VISIBLE);
+                            student_ans_pdf.setVisibility(View.VISIBLE);
+                            student_browse_pdf.setVisibility(View.INVISIBLE);
+                            ans_submit.setEnabled(false);
+                            hand_in.setVisibility(View.VISIBLE);
+                            hand_in.setEnabled(true);
+                        }
 //                       student_sub_cancel.setVisibility(View.INVISIBLE);
 //                       student_ans_pdf.setVisibility(View.VISIBLE);
 //                       ans_submit.setEnabled(false);
 //                       student_browse_pdf.setVisibility(View.INVISIBLE);
 //                       hand_in.setVisibility(View.VISIBLE);
 //                       hand_in.setEnabled(false);
-                   }
-               }
+                    }
+                }
             }
 
             @Override
@@ -250,28 +254,28 @@ public class student_answer_submit_page extends AppCompatActivity {
         });
 
         student_browse_pdf.setOnClickListener(v ->
-                 Dexter.withContext(getApplicationContext())
-                .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Intent intent = new Intent() ;
-                        intent.setType("application/pdf/*") ;
-                        intent.setAction(Intent.ACTION_GET_CONTENT) ;
-                        startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
-                        ans_submit.setEnabled(true);
-                    }
+                Dexter.withContext(getApplicationContext())
+                        .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                Intent intent = new Intent() ;
+                                intent.setType("application/pdf/*") ;
+                                intent.setAction(Intent.ACTION_GET_CONTENT) ;
+                                startActivityForResult(Intent.createChooser(intent,"Select a file"),12);
+                                ans_submit.setEnabled(true);
+                            }
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
 
-                    }
+                            }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                    }
-                }).check()
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+                            }
+                        }).check()
         );
         ans_submit.setOnClickListener(v -> process_upload(student_answer_url,is_handed_in));
 
@@ -337,8 +341,8 @@ public class student_answer_submit_page extends AppCompatActivity {
     }
 
     private void process_upload(Uri student_answer_url,String Is_handed_in) {
-           ProgressDialog pd = new ProgressDialog(this);
-          if(Is_handed_in.equals("false")) {
+        ProgressDialog pd = new ProgressDialog(this);
+        if(Is_handed_in.equals("false")) {
             pd.setTitle("File uploading ...");
             pd.show();
             StorageReference reference = storageReference.child("Ans_upload/"+ UUID.randomUUID().toString()) ;
