@@ -340,6 +340,7 @@
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:layout_margin="20dp"
+                android:textColor="@color/white"
                 android:background="@drawable/round_bg">
 
             </Button>
@@ -352,6 +353,7 @@
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:layout_margin="20dp"
+                android:textColor="@color/white"
                 android:background="@drawable/round_bg">
 
             </Button>
