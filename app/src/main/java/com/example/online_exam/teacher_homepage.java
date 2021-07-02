@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class teacher_homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_homepage);
         this.setTitle("Courses");
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
         //Objects.requireNonNull(getSupportActionBar()).setTitle("Teacher Homepage");
         //logout = (Button)findViewById(R.id.logout) ;
         //teacher_username = userIntent.getStringExtra("currentUsername");

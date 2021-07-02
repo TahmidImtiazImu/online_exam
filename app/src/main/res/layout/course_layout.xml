@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/blue"
+        android:background="@color/white"
         android:padding="20dp"
         android:onClick="single_course_clicked"
         android:clickable="true">

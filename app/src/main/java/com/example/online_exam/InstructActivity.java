@@ -2,6 +2,7 @@ package com.example.online_exam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class InstructActivity extends AppCompatActivity {
         setContentView(R.layout.instruction);
         this.setTitle("Instruction");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
 
         textView = findViewById(R.id.instruction_show);
 

@@ -53,7 +53,6 @@ public class student_homepage extends AppCompatActivity {
     String student_username;
     String current_userName;
     String joined_course_code;
-    String[] courseCodeArray = new String[99999];
 
 
     int size = 0;
