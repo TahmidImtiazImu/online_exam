@@ -47,8 +47,7 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:text="Topic"
-        android:textColor="@color/white"
-        android:background="@drawable/gradv2"
+        android:textColor="@color/black"
         android:layout_marginTop="10dp" >
 
     </TextView>

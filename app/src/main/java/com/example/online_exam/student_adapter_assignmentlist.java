@@ -148,12 +148,12 @@ public class student_adapter_assignmentlist extends RecyclerView.Adapter<student
                    assert date1 != null;
                    if(date1.compareTo(date2) < 0)
                    {
-                       single_assignment.setBackgroundColor(Color.parseColor("#0000FF"));
+                       single_assignment.setBackgroundColor(Color.parseColor("#046307"));
                    }
                    else if(date1.compareTo(date2)==0){
                        assert time1 != null;
                        if(time1.compareTo(time2)<=0) {
-                           single_assignment.setBackgroundColor(Color.parseColor("#0000FF"));
+                           single_assignment.setBackgroundColor(Color.parseColor("#046307"));
 
                        }
                    }

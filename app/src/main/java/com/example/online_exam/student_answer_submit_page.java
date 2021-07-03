@@ -188,8 +188,8 @@ public class student_answer_submit_page extends AppCompatActivity {
                         ans_submit.setVisibility(View.GONE);
                         hand_in.setEnabled(false);
                         hand_in.setText("Time out");
-                        hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
-                        hand_in.setTextColor(0xFFFFFF);
+                        hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+                        hand_in.setTextColor(Color.parseColor("#FFFFFF"));
                     }
                 }
 
@@ -226,7 +226,7 @@ public class student_answer_submit_page extends AppCompatActivity {
 
                             hand_in.setEnabled(false);
                             hand_in.setText("Handed In");
-                            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BFFF00")));
+                            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#046307")));
                            hand_in.setTextColor(Color.parseColor("#FFFFFF"));
                         }
                         else{

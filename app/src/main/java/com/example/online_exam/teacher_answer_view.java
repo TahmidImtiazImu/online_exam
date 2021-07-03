@@ -35,6 +35,7 @@ public class teacher_answer_view extends AppCompatActivity {
     DatabaseReference fb;
     String header,data ;
     TextView no_submission ;
+    String handed_in ;
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +67,34 @@ public class teacher_answer_view extends AppCompatActivity {
 //               no_submission = findViewById(R.id.no_submission) ;
                System.out.println("pdf_name "+ pdf_file_name);
                answer_Pdf_url = datasnapshot.child("Student_answer_url").getValue(String.class);
-               System.out.println("Answer url  " +answer_Pdf_url);
-               if(answer_Pdf_url==null) {
+               handed_in = datasnapshot.child("is_handed_in").getValue(String.class) ;
+               System.out.println("hand in" + handed_in);
+
+
+               if(answer_Pdf_url==null ) {
                    System.out.println("Answer url check " +answer_Pdf_url);
                    //no_submission.setText("No submission yet");
-                  // ans_view.setVisibility(View.GONE);
+                   // ans_view.setVisibility(View.GONE);
                    Toast.makeText(getApplicationContext(),"No Submission Yet",Toast.LENGTH_SHORT).show();
                    System.out.println("Answer url check2" + answer_Pdf_url);
-                   return;
+                   return ;
 
                }
+
+               if(handed_in.equals("false")) answer_Pdf_url = null;
+
+               System.out.println("Answer url  " +answer_Pdf_url);
+
+               if(handed_in.equals("false")) {
+                   //no_submission.setText("No submission yet");
+                   // ans_view.setVisibility(View.GONE);
+                   System.out.println("Answer url check2" + answer_Pdf_url);
+                   Toast.makeText(getApplicationContext(),"No Submission Yet",Toast.LENGTH_SHORT).show();
+
+                   return ;
+
+               }
+
                else{
            try {
 
@@ -93,7 +112,9 @@ public class teacher_answer_view extends AppCompatActivity {
 
 
                //  no_submission.setVisibility(View.GONE);
-                 ans_view.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + answer_Pdf_url);}
+                 ans_view.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + answer_Pdf_url);
+
+               }
            }
 
            @Override
