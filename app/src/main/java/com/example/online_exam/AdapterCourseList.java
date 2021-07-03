@@ -1,5 +1,6 @@
 package com.example.online_exam;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,6 +43,8 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
     private Context context;
     DatabaseReference rf ;
 
+    public int lastposition = -1;
+
     public AdapterCourseList(List<ModelCourseList>coursesList, Context context) {
 
         this.coursesList=coursesList;
@@ -62,8 +67,16 @@ public class AdapterCourseList extends RecyclerView.Adapter<AdapterCourseList.Vi
 
         holder.setData(course_name,course_code);
 
+        popping_animation(holder.itemView, position);
 
+    }
 
+    private void popping_animation(View itemView, int position) {
+
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+
+        itemView.setAnimation(animation);
+        lastposition = position;
     }
 
     @Override

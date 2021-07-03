@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,8 @@ class StudentHompepageAdapter extends RecyclerView.Adapter<StudentHompepageAdapt
     private List<ModelCourseList>coursesList;
     private Context context;
 
+    public int lastposition = -1;
+
     String student_username;
 
     DatabaseReference rf;
@@ -61,6 +65,15 @@ class StudentHompepageAdapter extends RecyclerView.Adapter<StudentHompepageAdapt
 
         holder.setData(course_name,course_code);
 
+        popping_animation(holder.itemView, position);
+    }
+
+    private void popping_animation(View itemView, int position) {
+
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+
+        itemView.setAnimation(animation);
+        lastposition = position;
     }
 
     @Override
