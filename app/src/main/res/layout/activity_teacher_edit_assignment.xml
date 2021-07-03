@@ -108,7 +108,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:id="@+id/you_have_unsaved_changes"
-        android:visibility="visible"
+        android:visibility="invisible"
         >
 
     </TextView>
@@ -122,7 +122,7 @@
         android:text="Save"
         android:textColor="@color/white"
         android:background="@drawable/rounded_button"
-        android:visibility="visible"
+        android:visibility="invisible"
         >
 
     </Button>

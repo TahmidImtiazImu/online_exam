@@ -241,13 +241,14 @@ public class teacher_edit_assignment extends AppCompatActivity {
                                         permissionToken.continuePermissionRequest();
                                     }
                                 }).check()
+
                 );
                 System.out.println("url" + edited_ques_uri);
                 edit_upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("hii") ;
-                        System.out.println(edited_ques_uri);
+                        unsaved_changes.setVisibility(View.VISIBLE);
+                        save_changes.setVisibility(View.VISIBLE);
                         process_upload(edited_ques_uri);
                     }
                 });
