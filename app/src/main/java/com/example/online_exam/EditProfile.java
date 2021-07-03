@@ -323,6 +323,8 @@ public class EditProfile extends AppCompatActivity {
     private void update(){
         //String fullName = fullNameEdit.getText().toString();
         //databaseReference.child("Enter_name").setValue(fullName); //change korsi
+        isNameChanged();
+        isInsChanged();
         if (isNameChanged() || isInsChanged() ){
             Toast.makeText(EditProfile.this, "Data has been updated", Toast.LENGTH_LONG).show();
         }
