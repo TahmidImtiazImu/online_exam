@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,29 +13,22 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.net.UrlQuerySanitizer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -46,12 +38,10 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -67,7 +57,7 @@ public class student_answer_submit_page extends AppCompatActivity {
     StorageReference storageReference ;
     DatabaseReference databaseReference ;
     Uri student_answer_url ;
-    Button  hand_in;
+    Button  hand_in,submitted,time_out;
     public String student_course_code ;
     public String student_username ;
     public String assignment_topic ;
@@ -93,6 +83,8 @@ public class student_answer_submit_page extends AppCompatActivity {
         this.setTitle("Answer submit");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Intent intent1 = new Intent(getApplicationContext(), student_assignment_page.class);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         assignment_topic = getIntent().getStringExtra("Assignment_topic");
         String assignment_duration = getIntent().getStringExtra("Assignment_time");
@@ -106,6 +98,8 @@ public class student_answer_submit_page extends AppCompatActivity {
         student_sub_cancel = findViewById(R.id.cancel_icon);
         ans_submit = findViewById(R.id.ans_sub_button) ;
         hand_in = findViewById(R.id.hand_in) ;
+        submitted = findViewById(R.id.submitted) ;
+        time_out = findViewById(R.id.time_out) ;
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("student_upload_answer") ;
 
@@ -122,6 +116,10 @@ public class student_answer_submit_page extends AppCompatActivity {
 
 
         Unique_answer_upload = student_username + student_course_code + assignment_topic ;
+        System.out.println("student username  " + student_username);
+        System.out.println(" student course code " + student_course_code);
+        System.out.println(" topic " + assignment_topic);
+        System.out.println("unique node    "+Unique_answer_upload);
 
         Unique_ques_upload = student_course_code + assignment_topic ;
 
@@ -177,19 +175,18 @@ public class student_answer_submit_page extends AppCompatActivity {
                 {
                     hand_in.setVisibility(View.VISIBLE);
                     ans_submit.setVisibility(View.GONE);
-                    hand_in.setEnabled(false);
-                    hand_in.setText("Time out");
-                    hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
-                    hand_in.setTextColor(Color.parseColor("#FFFFFF"));
+                    hand_in.setVisibility(View.GONE);
+                    submitted.setVisibility(View.GONE);
+                    time_out.setVisibility(View.VISIBLE);
+
                 }
                 else if(date1.compareTo(date2)==0){
                     if(time1.compareTo(time2)>0) {
                         hand_in.setVisibility(View.VISIBLE);
                         ans_submit.setVisibility(View.GONE);
-                        hand_in.setEnabled(false);
-                        hand_in.setText("Time out");
-                        hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
-                        hand_in.setTextColor(Color.parseColor("#FFFFFF"));
+                        hand_in.setVisibility(View.GONE);
+                        submitted.setVisibility(View.GONE);
+                        time_out.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -213,8 +210,8 @@ public class student_answer_submit_page extends AppCompatActivity {
                     if(Unique_answer_upload.equals(pdf_file_name)) {
 
                         node = dataSnapshot.child("Student_answer_url").getValue(String.class) ;
-                        System.out.println(pdf_file_name);
-                        System.out.println(node);
+//                        System.out.println(pdf_file_name);
+//                        System.out.println(node);
                         String handed = dataSnapshot.child("is_handed_in").getValue(String.class) ;
                         System.out.println(handed);
                         assert handed != null;
@@ -222,12 +219,11 @@ public class student_answer_submit_page extends AppCompatActivity {
                             student_sub_cancel.setVisibility(View.INVISIBLE);
                             student_ans_pdf.setVisibility(View.VISIBLE);
                             ans_submit.setVisibility(View.GONE);
-                            hand_in.setVisibility(View.VISIBLE);
+                            hand_in.setVisibility(View.GONE);
+                            submitted.setVisibility(View.VISIBLE);
+                            time_out.setVisibility(View.GONE);
 
-                            hand_in.setEnabled(false);
-                            hand_in.setText("Handed In");
-                            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#046307")));
-                           hand_in.setTextColor(Color.parseColor("#FFFFFF"));
+                            return;
                         }
                         else{
                             student_sub_cancel.setVisibility(View.VISIBLE);
@@ -237,6 +233,7 @@ public class student_answer_submit_page extends AppCompatActivity {
                             ans_submit.setEnabled(false);
                             hand_in.setVisibility(View.VISIBLE);
                             hand_in.setEnabled(true);
+                            return;
                         }
 //                       student_sub_cancel.setVisibility(View.INVISIBLE);
 //                       student_ans_pdf.setVisibility(View.VISIBLE);
@@ -326,20 +323,23 @@ public class student_answer_submit_page extends AppCompatActivity {
 
             is_handed_in="true" ;
             DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("student_upload_answer");
-           HashMap<String, String> hashMap = new HashMap<>() ;
+            HashMap<Object, Object> hashMap = new HashMap<>() ;
           //  Map<String, Object> hashMap = new HashMap<String,Object>();
+            hashMap.put("Student_answer_url","") ;
+            hashMap.put("pdf_file_name","") ;
+            hashMap.put("is_handed_in","");
+            databaseReference2.child(pdf_file_name).setValue(hashMap) ;
             hashMap.put("Student_answer_url",node) ;
             hashMap.put("pdf_file_name",pdf_file_name) ;
             hashMap.put("is_handed_in",is_handed_in);
-            System.out.println("handed in"+is_handed_in);
-            System.out.println("imu"+pdf_file_name);
-            //databaseReference2.child(pdf_file_name).removeValue() ;
+//            System.out.println("handed in"+is_handed_in);
+//            System.out.println("imu"+pdf_file_name);
+
             databaseReference2.child(pdf_file_name).setValue(hashMap);
 
-            hand_in.setEnabled(false);
-            hand_in.setText("Submitted");
-            hand_in.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BFFF00")));
-            hand_in.setTextColor(Color.parseColor("#FFFFFF"));
+            hand_in.setVisibility(View.GONE);
+            submitted.setVisibility(View.VISIBLE);
+            time_out.setVisibility(View.GONE);
 
 
 

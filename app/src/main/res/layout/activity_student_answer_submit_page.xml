@@ -140,6 +140,39 @@
         >
 
     </Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Submitted"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:background="@drawable/rounded_button"
+        android:id="@+id/submitted"
+        android:visibility="invisible"
+        >
+
+    </Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="TIme out"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/rounded_button"
+        android:id="@+id/time_out"
+        android:visibility="invisible"
+        >
+
+    </Button>
+
 
 
 

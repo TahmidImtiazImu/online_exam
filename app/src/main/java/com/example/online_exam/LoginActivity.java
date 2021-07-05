@@ -159,9 +159,9 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(usernameIntent);
 
                                             editor.putString("UserName", Userentername);
-                                            editor.apply();
+                                            editor.commit();
                                             editor.putString("Student_name", name);
-                                            editor.apply();
+                                            editor.commit();
                                             //usernameIntent.putExtra("currentUsername",Userentername);
 
                                             Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
@@ -172,9 +172,9 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(usernameIntent);
 
                                             editor.putString("UserName", Userentername);
-                                            editor.apply();
+                                            editor.commit();
                                             editor.putString("Student_name", name);
-                                            editor.apply();
+                                            editor.commit();
                                             //usernameIntent.putExtra("currentUsername",Userentername);
 
                                             Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
