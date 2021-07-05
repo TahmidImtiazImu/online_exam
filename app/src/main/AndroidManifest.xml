@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:launchMode="standard"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@drawable/ic_splash"
+        android:roundIcon="@drawable/round_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Online_Exam">
 
