@@ -59,6 +59,7 @@ public class EditProfileStudent extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    DatabaseReference new_ref;
     FirebaseAuth mAuth;
     FirebaseUser user;
 
@@ -387,6 +388,31 @@ public class EditProfileStudent extends AppCompatActivity {
     private boolean isNameChanged() {
         if(!_FULLNAME.equals(fullNameEdit.getText().toString())){
             databaseReference.child("Enter_name").setValue(fullNameEdit.getText().toString());
+
+            new_ref = FirebaseDatabase.getInstance().getReference("joined_courses");
+
+            new_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                        String username = dataSnapshot.child("currentUser").getValue(String.class);
+
+                        if(_NAME.equals(username)) {
+
+                            dataSnapshot.child("student_name").getRef().setValue(fullNameEdit.getText().toString());
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
             return true;
         }
         else{
